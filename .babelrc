@@ -1,0 +1,28 @@
+{
+  "presets": ["@vue/babel-preset-jsx"],
+  "plugins": [
+    "lodash",
+    ["component", {
+      "libraryName": "element-ui",
+      "styleLibraryName": "theme-chalk"
+    }]
+  ],
+  "env": {
+    "utils": {
+      "presets": [
+        ["@babel/preset-env", {
+          "modules": "cjs"
+        }]
+      ],
+      "plugins": [
+        ["module-resolver", {
+          "root": ["./src"],
+          "alias": {
+            "^UE\/(.+)": "ui-extends/lib/\\1"
+          }
+        }],
+        "lodash",
+      ]
+    }
+  }
+}

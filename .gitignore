@@ -1,0 +1,9 @@
+*.log
+npm-debug.log*
+node_modules/
+.env.local
+.env.*.local
+.vscode
+.npm
+.eslintcache
+*.map

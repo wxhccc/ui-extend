@@ -1,0 +1,91 @@
+{
+  "name": "@wxhccc/ui-extends",
+  "version": "0.1.0",
+  "description": "a library contains some componets base on ohter ui library.",
+  "main": "lib/index.common.js",
+  "module": "src/index.js",
+  "unpkg": "lib/index.js",
+  "files": [
+    "lib",
+    "src",
+    "components"
+  ],
+  "scripts": {
+    "start": "npm run dev && npm run docs:dev",
+    "dev": "webpack --config webpack.dev.config.js",
+    "build:index": "webpack --config webpack.build.config.js",
+    "build:components": "webpack --config webpack.component.config.js",
+    "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js,src/ui-comps/**",
+    "build:tools": "webpack --config webpack.tools.config.js",
+    "build": "rimraf lib && npm run build:utils && npm run build:tools && npm run build:index && npm run build:components",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vuepress dev docs --debug --no-clear-screen",
+    "docs:build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/wxhccc/ui-extends.git"
+  },
+  "keywords": [
+    "ui-extends",
+    "vue",
+    "components",
+    "element-ui",
+    "utils"
+  ],
+  "author": "wxhccc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wxhccc/ui-extends/issues"
+  },
+  "homepage": "https://github.com/wxhccc/ui-extends#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-plugin-component": "^1.1.1",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "cropperjs": "^1.5.3",
+    "cross-env": "^5.2.0",
+    "element-ui": "^2.8.2",
+    "fecha": "^3.0.3",
+    "lodash": "^4.17.14",
+    "lodash-webpack-plugin": "^0.11.5",
+    "markdown-it-container": "^2.0.0",
+    "markdown-it-include": "^1.1.0",
+    "node-sass": "^4.12.0",
+    "numeral": "^2.0.6",
+    "rimraf": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "video.js": "^7.6.0",
+    "viewerjs": "^1.3.6",
+    "vue": "^2.6.10",
+    "vue-loader": "^15.7.0",
+    "vue-template-compiler": "^2.6.10",
+    "vuepress": "^1.0.3",
+    "vuepress-plugin-clean-urls": "^1.0.3",
+    "webpack": "^4.34.0",
+    "webpack-cli": "^3.3.4",
+    "webpack-merge": "^4.2.1",
+    "webpack-node-externals": "^1.7.2",
+    "webpackbar": "^3.2.0"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.0",
+    "element-ui": "2.8.2",
+    "lodash": "^4.17.14",
+    "cropperjs": "^1.5.3",
+    "video.js": "^7.6.0",
+    "viewerjs": "^1.3.6",
+    "numeral": "^2.0.6",
+    "fecha": "^3.0.3"
+  },
+  "dependencies": {
+    "store2": "^2.7.1"
+  },
+  "directories": {
+    "doc": "docs",
+    "lib": "lib"
+  }
+}

@@ -1,0 +1,11 @@
+*.log
+version-docs/
+npm-debug.log*
+node_modules/
+lib
+.env.local
+.env.*.local
+.vscode
+.npm
+.eslintcache
+*.map

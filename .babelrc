@@ -1,0 +1,15 @@
+{
+  "presets": ["@vue/babel-preset-jsx"],
+  "plugins": [
+    "lodash"
+  ],
+  "env": {
+    "utils": {
+      "presets": [
+        ["@babel/preset-env", {
+          "modules": "cjs"
+        }]
+      ]
+    }
+  }
+}

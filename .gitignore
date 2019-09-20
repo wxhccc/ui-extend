@@ -3,6 +3,7 @@ version-docs/
 npm-debug.log*
 node_modules/
 lib/
+docs/.vuepress/dist
 .env.local
 .env.*.local
 .vscode

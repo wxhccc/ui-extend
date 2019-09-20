@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[71],{434:function(s,e,t){"use strict";t.r(e);var a={data:()=>({isReady:!1,src:"https://oss.sw.wxhice.com/adm/oceans.mp4"})},c=t(1),n=Object(c.a)(a,function(){var s=this.$createElement,e=this._self._c||s;return e("div",[e("ue-video-player",{attrs:{src:this.src}})],1)},[],!1,null,null,null);e.default=n.exports}}]);

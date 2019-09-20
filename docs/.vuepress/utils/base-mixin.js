@@ -7,9 +7,6 @@ export default {
       }
     }
   },
-  mounted () {
-    this.UEGLOBAL.elemReady = true
-  },
   computed: {
     $componentName () {
       const { path } = this.$route

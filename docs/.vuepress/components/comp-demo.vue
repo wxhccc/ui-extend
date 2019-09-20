@@ -21,6 +21,11 @@ export default {
       default: 'Base'
     }
   },
+  created () {
+    !this.UEGLOBAL.elemReady && this.$ElemPromise.then(() => {
+      this.UEGLOBAL.elemReady = true
+    })
+  },
   computed: {
     componentName () {
       const { $componentName, name } = this

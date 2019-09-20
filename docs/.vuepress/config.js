@@ -4,12 +4,14 @@ const { updateVerFile, verNavCreator } = require('./utils/versions')
 const mdInclude = require('markdown-it-include')
 let base = '/ui-extend/'
 let dest = path.resolve(__dirname, 'dist')
+let needPrefetch = true
 // add version to base if build version docs
 if (process.env.PUB_VERSION) {
   const version = process.env.PUB_VERSION
   if (version.indexOf('.') > 0) {
     const docVersion = version.split('.').slice(0, 2).join('.')
     base = `/${docVersion}/`
+    needPrefetch = false
     dest = path.resolve(__dirname, '../../version-docs/dist/', docVersion)
     updateVerFile(docVersion, version)
   }
@@ -20,6 +22,9 @@ module.exports = {
   title: 'ui-extend',
   dest,
   description: '',
+  shouldPrefetch () {
+    return needPrefetch
+  },
   themeConfig: {
     sidebarDepth: 0,
     nav: [

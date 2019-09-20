@@ -13,7 +13,6 @@
 | pagination-events | object                      | Pagination组件上绑定的监听事件对象                                                                                   | --                     | --                           |
 | loading-props     | string / object             | Loading组件属性对象                                                                                                  | 见[Loading](./loading) | --                           |
 | refresh           | boolean                     | 是否重新发送请求，必须用.sync修饰符，值为true时重新发送请求，然后设置值为false。也可以用方法重新发起请求             | --                     | --                           |
-| refresh           | boolean                     | 是否重新发送请求，必须用.sync修饰符，值为true时重新发送请求，然后设置值为false。也可以用方法重新发起请求             | --                     | --                           |
 | fetch-access-key  | string/number               | 传入的请求时序控制值，只能为基础类型的值，组件内会默认使用当前时间戳，如果因为并发原因时间戳无法满足可手动传入值     | --                     | Date.now()                   |
 | --                | --                          | 以下属性为可选的高级功能，使用时可能需要多理解                                                                       | --                     | --                           |
 | need-store        | boolean                     | 是否需要在每次请求时在SessionStorage中保存分页数据和请求的params                                                     | --                     | --                           |

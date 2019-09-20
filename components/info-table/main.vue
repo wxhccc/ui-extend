@@ -150,7 +150,7 @@ $--color-primary: #409eff!default;
   .ue-info-table-field-item {
     width: 100%;
     margin: 0;
-    /deep/ .el-form-item__content {
+    .el-form-item__content {
       width: 100%;
       height: 100%;
       .ue-form-field, .ue-form-field input {

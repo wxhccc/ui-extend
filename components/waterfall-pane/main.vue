@@ -154,12 +154,12 @@ export default {
   }
   .pane-scroll {
     height: 100%;
-    /deep/ .el-scrollbar__wrap {
+    .el-scrollbar__wrap {
       overflow-x: hidden;
       overflow-y: auto;
       
     }
-    /deep/ .is-vertical {
+    .is-vertical {
       opacity: 1;
     }
   }

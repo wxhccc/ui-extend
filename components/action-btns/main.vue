@@ -7,7 +7,7 @@
       :type="propHanlde(item.btype, item)"
       @click="btnsClick(item)"
       :loading="loadingFlags[getLoadingKey(item, index)]"
-      :key="item.btnKey || index"
+      :key="item.key || index"
     >
       {{
         propHanlde(loadingFlags[getLoadingKey(item, index)] && item.loadingText ? item.loadingText : item.text, item)
@@ -46,7 +46,7 @@ export default {
   methods: {
     /** utils **/
     getLoadingKey (item, index) {
-      return item.loadingKey || item.btnKey || `__btn${index}loading`;
+      return item.loadingKey || item.key || `__btn${index}loading`;
     },
     propHanlde (prop, item) {
       return typeof prop === 'function' ? prop(this.data, item, ...this.extraArgs) : prop;

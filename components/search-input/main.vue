@@ -50,7 +50,7 @@ export default {
 
 <style lang="scss">
 .ue-search-input {
-  /deep/ .el-input-group__append {
+  .el-input-group__append {
     padding: 0 12px;
     text-align: center;
     overflow: hidden;

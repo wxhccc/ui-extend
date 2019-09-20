@@ -3,13 +3,11 @@ import 'element-ui/lib/theme-chalk/index.css'
 import { version } from 'element-ui/package.json'
 
 export default ({ Vue, options, siteData, isServer }) => {
-  if (!isServer) {
-    Promise.all([import('element-ui'), import('../../lib/index.docs')]).then(([Element, UiExtend]) => {
-      Vue.use(Element)
-      Vue.use(UiExtend)
-      Vue.prototype.$ueVersion = UiExtend.version
-    })
-  }
+  Promise.all([import('element-ui'), import('../../lib/index.docs')]).then(([Element, UiExtends]) => {
+    Vue.use(Element)
+    Vue.use(UiExtends)
+    Vue.prototype.$ueVersion = UiExtends.version
+  })
   Vue.prototype.$elVersion = version
   Vue.mixin(Mixin)
 }

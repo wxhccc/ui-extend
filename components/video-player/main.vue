@@ -91,7 +91,7 @@ export default {
     width: 100%;
     height: 100%;
   }
-  /deep/ .vjs-customized {
+  .vjs-customized {
     &:hover {
       .vjs-big-play-button {
         background-color: rgba(43, 51, 63, 0.7);

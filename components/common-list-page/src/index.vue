@@ -22,7 +22,7 @@
               v-if="Array.isArray(item.items)"
               ref="searchForms"
               v-bind="getSearchFormProps(item, item.name)"
-              :sending="loading"
+              :searching="loading"
               @search="formSearching"
             >
               <template v-if="item.defaultSlot">
@@ -38,7 +38,7 @@
           ref="searchForm"
           v-else-if="Array.isArray(searchForms.items)"
           v-bind="getSearchFormProps(searchForms)"
-          :sending="loading"
+          :searching="loading"
           @search="formSearching"
         >
           <template v-if="searchForms.defaultSlot">
@@ -89,7 +89,7 @@
   }
   .ue-search-form-tabs {
     background-color: #fff;
-    /deep/ .el-tabs__nav-wrap {
+    .el-tabs__nav-wrap {
       padding-left: 40px;
     }
   }

@@ -131,7 +131,7 @@ export default {
 </script>
 <style lang="scss">
 .ue-data-table {
-  /deep/ .action-btn {
+  .action-btn {
     margin: 4px 4px;
   }
 }

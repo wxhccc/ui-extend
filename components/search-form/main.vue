@@ -153,7 +153,7 @@ export default {
     padding: 16px 12px;
     background-color: #ffffff;
   }
-  /deep/ .ue-form-fields {
+  .ue-form-fields {
     .ue-form-field {
       width: 100%;
     }

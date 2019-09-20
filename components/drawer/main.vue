@@ -152,7 +152,7 @@ export default {
   @include full-absolute;
   &.is-fixed {
     position: fixed;
-    z-index: 3000;
+    z-index: 1000;
   }
   z-index: 10;
   .drawer-model {

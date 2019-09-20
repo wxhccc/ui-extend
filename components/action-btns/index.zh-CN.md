@@ -14,7 +14,7 @@
 | └ btype       | string / Function(data, btn, ...extraArgs)  | 当前按钮的type属性。也可通过`props`属性控制。                                                    | --     | --                     |
 | └ text        | string / Function(data, btn, ...extraArgs)  | 当前按钮的提示文字。                                                                             | --     | --                     |
 | └ loadingText | string / Function(data, btn, ...extraArgs)  | 当前按钮在loading状态时的提示文字。                                                              | --     | --                     |
-| └ btnKey      | string                                      | 当前按钮的唯一标示。在函数的btn中可用于确定按钮。也用在按钮的key属性上（缺省时会使用按钮索引值） | --     | --                     |
+| └ key      | string                                      | 当前按钮的唯一标示。在函数的btn参数中可用于确定按钮。也用在按钮的key属性上（缺省时会使用按钮索引值） | --     | --                     |
 | └ loadingKey  | string                                      | 当前按钮的loading状态标识值在`loading-flags`对象中的键名                                         | --     | `__btn${index}loading` |
 | └ click       | Function(data, btn, ...extraArgs)           | 按钮的点击事件函数                                                                               | --     | --                     |
 | └ isConfirm   | boolean                                     | 按钮点击后是否需要确认操作再执行`click`事件                                                      | --     | --                     |

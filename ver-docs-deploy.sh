@@ -16,12 +16,14 @@ then
 
   echo "Relaseing $VERSION ..."
 
+  echo "npm run build"
+  npm version $VERSION --message "[release] $VERSION"
+  
+  npm run build
+
   git add -A
   git commit -m "[build] $VERSION"
 
-  echo "npm run build"
-  npm version $VERSION --message "[release] $VERSION"
-  npm run build
   echo "Publish to npm ..."
   npm publish
 

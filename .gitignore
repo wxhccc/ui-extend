@@ -2,7 +2,7 @@
 version-docs/
 npm-debug.log*
 node_modules/
-lib
+lib/
 .env.local
 .env.*.local
 .vscode

@@ -1,0 +1,1 @@
+export { MessageBox as default } from 'ant-design-vue';

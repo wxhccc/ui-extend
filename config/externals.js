@@ -8,14 +8,14 @@ const base = {
     commonjs: 'vue',
     commonjs2: 'vue'
   },
-  'element-ui': {
-    root: 'ELEMENT',
-    commonjs: 'element-ui',
-    commonjs2: 'element-ui'
+  'ant-design-vue': {
+    root: 'AntdVue',
+    commonjs: 'ant-design-vue',
+    commonjs2: 'ant-design-vue'
   }
 }
 
-const elementRegex = /^element-ui\/.+$/i;
+const antdVueRegex = /^ant-design-vue\/.+$/i;
 
 const lodashRegex = /^lodash\/.+$/i;
 
@@ -23,11 +23,11 @@ const plugins = ['video.js', 'viewerjs', 'cropperjs', 'numeral', 'fecha']
 
 module.exports = {
   base,
-  elementRegex,
+  antdVueRegex,
   lodashRegex,
   plugins,
-  umdDefault: [base, elementRegex],
-  commonjs: [nodeExternals(), base, elementRegex, lodashRegex].concat(plugins),
+  umdDefault: [base, antdVueRegex],
+  commonjs: [nodeExternals(), base, antdVueRegex, lodashRegex].concat(plugins),
   componentUtils () {
     let externals = {}
     const utilsList = fs.readdirSync(path.resolve(__dirname, '../src/utils'));

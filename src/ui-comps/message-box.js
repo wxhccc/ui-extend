@@ -1,1 +1,0 @@
-export { MessageBox as default } from 'element-ui';

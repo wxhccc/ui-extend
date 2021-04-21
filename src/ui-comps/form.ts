@@ -1,0 +1,2 @@
+export { Form as default } from 'ant-design-vue';
+export const FormMethods = ['clearSelection', 'toggleRowSelection', 'toggleAllSelection', 'toggleRowExpansion', 'setCurrentRow', 'clearSort', 'clearFilter', 'doLayout', 'sort'];

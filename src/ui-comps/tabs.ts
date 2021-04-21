@@ -1,0 +1,1 @@
+export { Tabs as default, TabPane } from 'ant-design-vue';

@@ -1,14 +1,15 @@
 const path = require('path');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { VueLoaderPlugin }  = require('vue-loader');
 const WebpackBar = require('webpackbar');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { umdDefault } = require('./config/externals');
 
 module.exports = (elementNotSplit) => ({
   mode: 'production',
-  entry: './src/index.js',
+  entry: './src/index.ts',
   output: {
-    filename: 'index.js',
+    filename: 'index.min.js',
     path: path.resolve(__dirname, 'lib'),
     library: 'UIEXTEND',
     libraryTarget: 'umd',
@@ -21,29 +22,40 @@ module.exports = (elementNotSplit) => ({
         loader: 'vue-loader'
       },
       {
-        test: /\.(jsx?|babel|es6)$/,
-        use: {
-          loader: 'babel-loader',
-          options: !elementNotSplit ? {
-            plugins: [
-              ["babel-plugin-component", {
-                "libraryName": "element-ui",
-                "styleLibraryName": "theme-chalk"
-              }]
-            ]
-          } : {}
+        loader: 'ts-loader',
+        options: {
+          appendTsSuffixTo: ['\\.vue$'],
+          // transpileOnly: true
         },
-        exclude: '/node_modules/',
+        exclude: /node_modules/
+      },
+      
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+        options: !elementNotSplit ? {
+          plugins: [
+            [
+              'babel-plugin-import',
+              {
+                libraryName: 'ant-design-vue',
+                libraryDirectory: '', // default: lib
+                style: true,
+              }
+            ]
+          ]
+        } : {},
+        exclude: /node_modules/,
         sideEffects: false
       },
       {
         test: /\.(scss|css)$/,
-        loader: ['vue-style-loader', 'css-loader', 'sass-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       }
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.vue'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue', '.md', '.json'],
     alias: {
       'UE': path.resolve(__dirname, 'src/'),
       'Comps': path.resolve(__dirname, 'components/')
@@ -55,6 +67,7 @@ module.exports = (elementNotSplit) => ({
   performance: {
     hints: false
   },
+  externalsPresets: { node: true },
   externals: umdDefault,
   plugins: [new VueLoaderPlugin(), new WebpackBar(), new LodashModuleReplacementPlugin()]
 })

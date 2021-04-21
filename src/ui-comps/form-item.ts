@@ -1,0 +1,1 @@
+export { FormItem as default } from 'ant-design-vue';

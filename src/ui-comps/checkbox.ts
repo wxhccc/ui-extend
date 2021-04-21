@@ -1,0 +1,1 @@
+export { Checkbox as default, CheckboxGroup } from 'ant-design-vue';

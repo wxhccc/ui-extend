@@ -5,9 +5,9 @@ const merge = require('webpack-merge');
 module.exports = merge(common(), {
   mode: 'production',
   entry: {
-    'utils': './src/utils/index.js',
-    'mixins': './src/mixins/index.js',
-    'optional': './src/optionals/index.js'
+    'utils': './src/utils/index.ts',
+    'mixins': './src/mixins/index.ts',
+    'optional': './src/optionals/index.ts'
   },
   output: {
     path: path.resolve(__dirname, 'lib'),

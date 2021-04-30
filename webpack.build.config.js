@@ -11,21 +11,27 @@ module.exports = [
   merge(common(), {
     output: {
       filename: 'index.js',
-      libraryTarget: 'commonjs2'
+      library: {
+        type: 'commonjs2'
+      }
     },
     externals: commonjs,
   }),
   merge(common(), {
     output: {
       filename: 'index.es.js',
-      libraryTarget: 'module'
+      library: {
+        type: 'module'
+      }
     },
     externals: commonjs,
   }),
   merge(common(true), {
     output: {
       filename: 'index.docs.js',
-      libraryTarget: 'commonjs2'
+      library: {
+        type: 'commonjs2'
+      }
     },
     externals: commonjs
   })

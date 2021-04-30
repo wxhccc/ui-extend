@@ -11,9 +11,10 @@ module.exports = (elementNotSplit) => ({
   output: {
     filename: 'index.min.js',
     path: path.resolve(__dirname, 'lib'),
-    library: 'UIEXTEND',
-    libraryTarget: 'umd',
-    libraryExport: 'default'
+    library: {
+      type: 'umd',
+      export: 'default'
+    }
   },
   module: {
     rules: [

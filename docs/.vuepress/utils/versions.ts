@@ -1,4 +1,6 @@
-function versionCompare (origin, target) {
+import path from 'path'
+
+export function versionCompare (origin, target) {
   const oriVerNums = origin.split('.')
   const targVerNums = target.split('.')
   let result = 0
@@ -10,10 +12,8 @@ function versionCompare (origin, target) {
   })
   return result
 }
-module.exports.versionCompare = versionCompare
 
-module.exports.updateVerFile = function (main, version) {
-  const path = require('path')
+export function updateVerFile (main, version) {
   const filePath = path.resolve(__dirname, '../../../docs-versions.json')
   const versions = require(filePath) || []
   const match = versions.find(item => item.main === main)
@@ -23,7 +23,7 @@ module.exports.updateVerFile = function (main, version) {
   fs.writeFileSync(filePath, JSON.stringify(versions))
 }
 
-module.exports.verNavCreator = function () {
+export function  verNavCreator () {
   const versions = require('../../../docs-versions.json')
   return {
     text: versions[0].version,

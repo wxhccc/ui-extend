@@ -1,6 +1,6 @@
-const mdContainer = require('markdown-it-container');
+import mdContainer from 'markdown-it-container';
 
-module.exports = md => {
+export default md => {
   md.use(mdContainer, 'demo', {
     validate (params) {
       return params.trim().match(/^demo\s*(.*)$/);

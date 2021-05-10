@@ -1,11 +1,9 @@
+import { defineComponent } from 'vue'
 import { versionCompare } from './versions'
 
-export default {
+export default defineComponent({
   data () {
     return {
-      UEGLOBAL: {
-        elemReady: false
-      }
     }
   },
   computed: {
@@ -17,4 +15,4 @@ export default {
   methods: {
     versionCompare
   }
-}
+})

@@ -1,12 +1,14 @@
 import path from 'path'
 
-export function versionCompare (origin, target) {
+export function versionCompare (origin: string, target: string) {
   const oriVerNums = origin.split('.')
   const targVerNums = target.split('.')
   let result = 0
   oriVerNums.some((num, index) => {
-    if(num - targVerNums[index] !== 0) {
-      result = num - targVerNums[index] > 0 ? 1 : -1
+    const oNum = Number(num)
+    const tarNum = Number(targVerNums[index])
+    if(oNum - tarNum !== 0) {
+      result = oNum - tarNum > 0 ? 1 : -1
       return true
     }
   })

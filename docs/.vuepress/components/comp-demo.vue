@@ -1,5 +1,5 @@
 <template>
-  <demo-block v-if="UEGLOBAL.elemReady" :class="['component-demo-block', `${$componentName}-demo`]">
+  <demo-block :class="['component-demo-block', `${$componentName}-demo`]">
     <template v-if="componentName" #source>
       <component :is="componentName"></component>
     </template>
@@ -12,8 +12,9 @@
   </demo-block>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+export default defineComponent({
   name: 'CompDemo',
   props: {
     name: {
@@ -21,18 +22,20 @@ export default {
       default: 'Base'
     }
   },
-  created () {
-    !this.UEGLOBAL.elemReady && this.$ElemPromise.then(() => {
-      this.UEGLOBAL.elemReady = true
-    })
+  created() {
+    
   },
   computed: {
-    componentName () {
+    $componentName (): string {
+      const { path } = this.$route
+      return path.indexOf('/component/') >= 0 ? (path.split('/').pop() as string).split('.').shift() as string : ''
+    },
+    componentName (): string {
       const { $componentName, name } = this
       return `demo-${$componentName}-${name}`
     }
   }
-}
+})
 </script>
 
 <style lang="scss">

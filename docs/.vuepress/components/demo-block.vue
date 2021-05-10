@@ -183,9 +183,11 @@
 }
 </style>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import codeStrParse from '../utils/strip-code'
-export default {
+
+export default defineComponent({
   data() {
     return {
       codepen: {
@@ -203,7 +205,7 @@ export default {
 
   computed: {
     lang() {
-      return 'zh-CN';
+      return 'zh-CN'
     },
 
     langConfig() {
@@ -220,7 +222,7 @@ export default {
     },
 
     blockClass() {
-      return `demo-${ this.lang } demo-${ this.compNameClass }`;
+      return `demo-${this.lang} demo-${this.compNameClass}`;
     },
 
     iconClass() {
@@ -332,8 +334,8 @@ export default {
     },
 
     removeScrollHandler() {
-      this.scrollParent && this.scrollParent.removeEventListener('scroll', this.scrollHandler);
+      this.scrollParent && this.scrollParent.removeEventListener('scroll', this.scrollHandler)
     }
   }
-};
+})
 </script>

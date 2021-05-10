@@ -23,7 +23,7 @@
     }
   },
   "exclude": ["node_modules", "lib", "docs", "config"],
-  "include": ["./typings/*.ts", "src/index.ts"]
+  "include": ["./typings/*.ts", "src/index.ts", "**/.vuepress/**/*"],
   // "include": [
   //   "./typings/*.ts",
   //   "src/**/*.ts",

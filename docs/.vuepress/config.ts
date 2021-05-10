@@ -1,13 +1,13 @@
 
 import path from 'path'
-import containers from './utils/md-containers'
+import { defineUserConfig, DefaultThemeOptions } from 'vuepress'
+// import containers from './utils/md-containers'
 // import { updateVerFile, verNavCreator } from './utils/versions'
-import mdInclude from 'markdown-it-include'
-import { defineUserConfig } from 'vuepress'
-import type { DefaultThemeOptions } from 'vuepress'
+// import mdInclude from 'markdown-it-include'
+
 
 let base = '/ui-extend/'
-let dest = path.resolve(__dirname, 'dist')
+// let dest = path.resolve(__dirname, 'dist')
 let needPrefetch = true
 // add version to base if build version docs
 // if (process.env.PUB_VERSION) {
@@ -22,13 +22,12 @@ let needPrefetch = true
 // }
 
 export default defineUserConfig<DefaultThemeOptions>({
-  base,
+  // base,
   title: 'ui-extend',
-  dest,
+  lang: 'zh-CN',
+  // dest,
   description: '',
-  shouldPrefetch () {
-    return needPrefetch
-  },
+  shouldPrefetch: needPrefetch,
   themeConfig: {
     sidebarDepth: 0,
     nav: [
@@ -37,7 +36,7 @@ export default defineUserConfig<DefaultThemeOptions>({
       // verNavCreator()
     ],
     repo: 'wxhccc/ui-extend',
-    // sidebar: {
+    sidebar: {
     //   '/component/': [
     //     {
     //       text: '开发指南',
@@ -131,10 +130,10 @@ export default defineUserConfig<DefaultThemeOptions>({
     //   //   ['optionals/', 'Optionals'],
     //   //   ['data/', '数据结构']
     //   // ],
-    //   '/': [
-    //     ''
-    //   ]
-    // }
+      // '/': [
+      //   ''
+      // ]
+    }
   },
   markdown: {
     // extendMarkdown: md => {
@@ -142,5 +141,16 @@ export default defineUserConfig<DefaultThemeOptions>({
     //   containers(md);
     // }
   },
-  bundler: '@vuepress/vite'
+  bundler: '@vuepress/vite',
+  bundlerConfig: {
+
+  },
+  // plugins: [
+  //   [
+  //     '@vuepress/register-components',
+  //     {
+  //       componentsDir: path.resolve(__dirname, 'components')
+  //     },
+  //   ]
+  // ]
 })

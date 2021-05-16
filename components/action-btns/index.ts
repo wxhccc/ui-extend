@@ -1,4 +1,5 @@
-import { wrapperInstall } from 'UE/utils/component'
-import ActionBtns from './main';
+import { wrapperInstall } from '../utils/component'
+import ActionBtns from './main'
 
-export default wrapperInstall(ActionBtns);
+export * from './types'
+export default wrapperInstall(ActionBtns)

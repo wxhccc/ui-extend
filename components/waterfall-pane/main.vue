@@ -25,7 +25,7 @@
 
 <script>
 import { Scrollbar } from 'UE/ui-comps'
-import { debounce } from 'UE/utils/lodash';
+import { debounce } from 'UE/utils/lodash-es';
 
 const defaultTips = {
   loading: '数据加载中',

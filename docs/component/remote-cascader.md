@@ -5,7 +5,7 @@
 ### 基础用法
 
 :::demo Base
-<<< @/docs/.vuepress/components/demo/remote-cascader/Base.vue
+@[code vue](@demo/remote-cascader/Base.vue)
 :::
 
 ### 数据回填
@@ -13,7 +13,7 @@
 采用数据传入方式的组件回填时不会禁用组件，而resolve方式的为了避免回填时影响操作产生的数据将会暂时禁用组件
 
 :::demo set-values
-<<< @/docs/.vuepress/components/demo/remote-cascader/set-values.vue
+@[code vue](@demo/remote-cascader/set-values.vue)
 :::
 
 ::: tip 提示

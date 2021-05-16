@@ -5,19 +5,19 @@
 ### 基础用法
 
 ::: demo Base
-<<< @/docs/.vuepress/components/demo/viewer/Base.vue
+@[code vue](@demo/viewer/Base.vue)
 :::
 
 ### 非inline模式且使用插槽
 
 ::: demo uninline-viewer
-<<< @/docs/.vuepress/components/demo/viewer/uninline-viewer.vue
+@[code vue](@demo/viewer/uninline-viewer.vue)
 :::
 
 ### 动态修改配置
 
 ::: demo modify-props
-<<< @/docs/.vuepress/components/demo/viewer/modify-props.vue
+@[code vue](@demo/viewer/modify-props.vue)
 :::
 
 ::: tip 说明

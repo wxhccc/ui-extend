@@ -4,6 +4,8 @@ import json from '@rollup/plugin-json'
 import commonjs from '@rollup/plugin-commonjs'
 import typescript from 'rollup-plugin-typescript2'
 import vuePlugin from 'rollup-plugin-vue'
+import scss from 'rollup-plugin-scss'
+import css from 'rollup-plugin-css-only'
 import { terser } from 'rollup-plugin-terser'
 import pkg from './package.json'
 
@@ -24,6 +26,7 @@ export function createConfig(config, plugins) {
     {
       globals: {
         vue: 'Vue',
+        'element-plus': 'ElementPlus',
         'ant-design-vue': 'Antd'
       }
     },
@@ -31,13 +34,15 @@ export function createConfig(config, plugins) {
   )
   return Object.assign(
     {
-      input: 'src/index.ts'
+      input: 'components/index.ts'
     },
     config,
     {
       output,
       external: ['vue', 'ant-design-vue'],
-      plugins: [json(), resolve(), commonjs(), tsPlugin, vuePlugin()].concat(plugins)
+      plugins: [tsPlugin, json(), vuePlugin({ css: false }), resolve(), commonjs(), css(), , scss({
+        sass: require('sass'),
+      })].concat(plugins)
     }
   )
 }
@@ -61,7 +66,7 @@ function getConfig(env) {
         exports: 'named'
       },
       watch: {
-        include: 'src/**'
+        include: 'components/**'
       }
     },
     [babelPlugin]
@@ -73,7 +78,7 @@ function getConfig(env) {
     {
       output: {
         file: pkg.unpkg,
-        name: 'Smartfetch',
+        name: 'UiExtend',
         format: 'umd',
         exports: 'named'
       }

@@ -1,87 +1,88 @@
 <template>
   <div class="ue-video-palyer">
-    <video ref="video" class="video-js vjs-customized"></video>
+    <video ref="video" class="video-js vjs-customized">
+      <slot></slot>
+    </video>
   </div>
 </template>
 
-<script>
-import videojs from "video.js";
-import "video.js/dist/video-js.min.css";
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js/'
+import 'video.js/dist/video-js.css'
 
 const defOpts = {
   controls: true,
-  preload: "auto",
+  preload: 'auto',
   techCanOverridePoster: true
-};
+}
 
-export default {
-  name: "UeVideoPlayer",
+export default defineComponent({
+  name: 'UeVideoPlayer',
   components: {},
   props: {
     options: {
       type: Object,
       default: () => ({})
     },
-    src: String,
-    poster: String
+    src: {
+      type: String,
+      default: undefined
+    },
+    poster: {
+      type: String,
+      default: undefined
+    }
   },
-  data() {
-    return {
-      $player: {}
-    };
-  },
-  created () {},
-  mounted () {
-    this.$player = videojs(this.$refs.video, this.initOpts, function() {});
+  setup() {
+    const $_player = ref<VideoJsPlayer>()
+    return { $_player }
   },
   computed: {
-    size() {
-      const { offsetWidth: width, offsetHeight: height } = this.$el || {};
-      return { width, height };
+    size(): UE.Size {
+      const { offsetWidth: width, offsetHeight: height } = this.$el || {}
+      return { width, height }
     },
-    initAttrs() {
-      return Object.assign({}, defAttrs, this.$attrs);
-    },
-    initOpts() {
-      const { src } = this;
+    initOpts(): VideoJsPlayerOptions {
+      const { src, poster } = this
       const sources = [
         {
           src,
-          type: "video/mp4"
+          type: 'video/mp4'
         }
-      ];
-      const poster = this.poster || this.getVideoFrame();
+      ]
       return Object.assign(defOpts, this.options, this.size, {
         sources,
         poster
-      });
+      })
     }
   },
   watch: {
-    src () {
-      this.$player.src({ src: this.src });
+    src() {
+      this.$_player && this.$_player.src({ src: this.src })
     }
+  },
+  mounted() {
+    this.$_player = videojs(this.$refs.video, this.initOpts)
+  },
+  beforeUnmount() {
+    this.$_player && this.$_player.dispose()
   },
   methods: {
-    // utils
-    getVideoFrame () {
-      const video = this.$refs.video;
-      let canvas = document.createElement("canvas");
-      Object.assign(canvas, this.size);
-      if (canvas.getContext) {
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(video, 0, 0, this.size.width, this.size.height);
-        return canvas.toDataURL();
+    getVideoFrame() {
+      const video = this.$refs.video as HTMLVideoElement
+      let canvas = document.createElement('canvas')
+      Object.assign(canvas, this.size)
+      const ctx = canvas.getContext('2d')
+      if (ctx && video) {
+        ctx.drawImage(video, 0, 0, this.size.width, this.size.height)
+        return canvas.toDataURL()
       }
     }
-    // bussiness
-    // events
-  },
-  beforeDestroy () {
-    this.$player.dispose && this.$player.dispose();
   }
-};
+})
 </script>
+
 <style lang="scss">
 .ue-video-palyer {
   width: 100%;

@@ -3,7 +3,7 @@ import PagedTable from 'Comps/paged-table';
 import SearchForm from 'Comps/search-form';
 import storageMixin from 'UE/mixins/component-storage';
 import { getPublicMethodNames, getComponentFnProxy } from 'UE/utils/component';
-import { cloneDeep, omit, pick } from 'UE/utils/lodash';
+import { cloneDeep, omit, pick } from 'UE/utils/lodash-es';
 
 const ueMethods = getPublicMethodNames(PagedTable);
 

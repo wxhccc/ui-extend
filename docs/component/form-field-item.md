@@ -9,7 +9,7 @@
 ### 基础用法
 
 :::demo Base field对象的`isNumber`表现类似于v-model.number修饰符。一般对必填项且有类型判断规则有很好的类型转换作用。其他场景需要自己对数据进行处理。
-<<< @/docs/.vuepress/components/demo/form-field-item/Base.vue
+@[code vue](@demo/form-field-item/Base.vue)
 :::
 
 ### 纯文本展示
@@ -17,7 +17,7 @@
 通过设置`text`参数为boolean，function，(string/number)类型可以让表单域展示/隐藏，显示函数返回内容，显示给定内容。
 
 :::demo show-text
-<<< @/docs/.vuepress/components/demo/form-field-item/show-text.vue
+@[code vue](@demo/form-field-item/show-text.vue)
 :::
 
 ### 多表单域组件
@@ -29,7 +29,7 @@
 :::
 
 :::demo mult-fields
-<<< @/docs/.vuepress/components/demo/form-field-item/mult-fields.vue
+@[code vue](@demo/form-field-item/mult-fields.vue)
 :::
 
 ### 使用FormItem组件插槽
@@ -37,7 +37,7 @@
 组件支持设置`FormItem`组件的具名插槽和作用域插槽。具名插槽中的`default`不会覆盖表单域内容，而是作为额外内容放置于表单域区域。
 
 :::demo all-slots
-<<< @/docs/.vuepress/components/demo/form-field-item/all-slots.vue
+@[code vue](@demo/form-field-item/all-slots.vue)
 :::
 
 ### 调用FormItem组件上的方法
@@ -45,11 +45,11 @@
 组件代理了根层级的`FormItem`组件上的方法，对于子层级的`FormItem`组件，请使用`$refs`获取后调用
 
 :::demo call-method
-<<< @/docs/.vuepress/components/demo/form-field-item/call-method.vue
+@[code vue](@demo/form-field-item/call-method.vue)
 :::
 
 ::: tip 提示
-FormItem组件文档参照 <element-link component="FormItem"></element-link>
+FormItem组件文档参照 <ui-link component="FormItem"></ui-link>
 :::
 
 

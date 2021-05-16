@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { h, resolveComponent } from 'vue'
+
 export default {
   data () {
     return {
@@ -12,7 +14,7 @@ export default {
         age: ''
       },
       inputItem: {
-        prop: 'age',
+        name: 'age',
         props: {
           label: '年龄',
           rules: [
@@ -21,19 +23,10 @@ export default {
           ]
         },
         slots: {
-          label: {
-            component (h, vdo, slotName, { label }) {
-              return h('span', { style: 'color:red;', ...vdo }, label)
-            }
-          },
-          default: {
-            props: { icon: 'el-icon-plus' },
-            component: 'ElButton'
-          }
-        },
-        scopedSlots: {
+          label: () => h('span', { style: 'color:red;' }, '年龄'),
+          default: () => h(resolveComponent('ElButton'), { icon: 'el-icon-plus' }),
           error: ({error}) => {
-            return this.$createElement('ElAlert', { props: { type: 'error' } }, error)
+            return h(resolveComponent('ElAlert'), { type: 'error' }, error)
           }
         },
         field: {

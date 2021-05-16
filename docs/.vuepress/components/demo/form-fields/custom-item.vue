@@ -7,16 +7,20 @@
 </template>
 
 <script>
+import { h, resolveComponent } from 'vue'
+
 const CustomField = {
   props: {
     value: Array,
     formItemProps: Object,
     fieldProps: Object
   },
-  render (h) {
+  render () {
     const { formItemProps, fieldProps, value } = this;
-    return h('ElFormItem', { props: formItemProps }, [
-      h('UeTreeField', { props: { ...fieldProps, value }, on: this.$listeners })
+    const ElFormItem = resolveComponent('ElFormItem')
+    const UeTreeField = resolveComponent('UeTreeField')
+    return h(ElFormItem, formItemProps, [
+      h(UeTreeField, { ...fieldProps, value })
     ])
   }
 }
@@ -27,7 +31,7 @@ export default {
       formData: {},
       items: [
         {
-          prop: 'name',
+          name: 'name',
           props: {
             label: '活动名称',
             rules: [{ required: true, message: '请输入活动名称' }]
@@ -37,7 +41,7 @@ export default {
           }
         },
         {
-          prop: 'region',
+          name: 'region',
           props: {
             formItemProps: {
               label: '活动区域',

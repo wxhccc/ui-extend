@@ -1,3 +1,6 @@
+---
+title ActionBtns 操作按钮组
+---
 ## ActionBtns 操作按钮组
 
 用数据生成一组操作按钮。
@@ -11,11 +14,11 @@
 此示例包含各种情况下的按钮处理。
 
 ::: demo All
-<<< @/docs/.vuepress/components/demo/action-btns/All.vue
+@[code vue](@demo/action-btns/All.vue)
 :::
 
 ::: tip 提示
-Button组件文档参照 <element-link component="Button"></element-link>
+Button组件文档参照 <ui-link component="Button"></ui-link>
 :::
 
 

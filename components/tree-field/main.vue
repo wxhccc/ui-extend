@@ -15,7 +15,7 @@
 <script>
 import { Tree } from "UE/ui-comps";
 import refFnProxyMixin from 'UE/mixins/ref-fn-proxy';
-import { pickBy } from "UE/utils/lodash";
+import { pickBy } from "UE/utils/lodash-es";
 
 export default {
   name: "UeTreeField",

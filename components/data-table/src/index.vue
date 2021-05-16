@@ -22,7 +22,7 @@ import { Table } from 'UE/ui-comps';
 import { TableMethods } from 'UE/ui-comps/table';
 import refFnProxyMixin from 'UE/mixins/ref-fn-proxy';
 import UeDeepColumn from './deep-column';
-import { get, pick } from 'UE/utils/lodash'
+import { get, pick } from 'UE/utils/lodash-es'
 
 const defEmptyCell = (value) => ((value || value === 0) ? value : '--')
 

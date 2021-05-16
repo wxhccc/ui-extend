@@ -1,0 +1,1 @@
+export { Cascader as default } from 'element-plus';

@@ -1,13 +1,15 @@
-// <template>
-//   <span class="ue-ticker">
-//     {{text}}<slot></slot>
-//   </span>
-// </template>
-
-import { computed, defineComponent, h, mergeProps, onBeforeUnmount, onMounted, ref } from 'vue'
+import {
+  computed,
+  defineComponent,
+  h,
+  mergeProps,
+  onBeforeUnmount,
+  onMounted,
+  ref
+} from 'vue'
 
 export interface Props {
-  duration?: number,
+  duration?: number
   interval?: number
 }
 
@@ -28,14 +30,15 @@ export default defineComponent({
     let ticker = 0
     const durationMil = ref(props.duration > 0 ? props.duration * 1000 : 0)
 
-    const tickerInterval = computed(() => props.interval ? props.interval * 1000 : 1000)
+    const tickerInterval = computed(() =>
+      props.interval ? props.interval * 1000 : 1000
+    )
     const text = computed(() => {
       const duraSec = durationMil.value / 1000
       return `${durationMil.value % 1000 === 0 ? duraSec : duraSec.toFixed(1)}s`
     })
 
     const destroyTicker = () => clearInterval(ticker)
-
 
     onMounted(() => {
       ticker = window.setInterval(() => {
@@ -44,29 +47,15 @@ export default defineComponent({
           emit('on-timeout')
           destroyTicker()
         }
-      }, tickerInterval.value);
+      }, tickerInterval.value)
     })
 
     onBeforeUnmount(destroyTicker)
 
-    return () => h('span', mergeProps({ class: 'ue-ticker' }, attrs), [text.value, slots.default && slots?.default()])
+    return () =>
+      h('span', mergeProps({ class: 'ue-ticker' }, attrs), [
+        text.value,
+        slots.default && slots?.default()
+      ])
   }
 })
-
-//   computed: {
-
-//     tickerInterval () {
-//       return this.interval ? this.interval * 1000 : 1000;
-//     }
-//   },
-//   mounted () {
-//     this.$ticker = this.createTicker();
-//   },
-//   beforeDestroy () {
-//     this.destroyTicker();
-//   },
-//   methods: {
-
-
-//   }
-// })

@@ -1,1 +1,0 @@
-export { Alert as default } from 'ant-design-vue';

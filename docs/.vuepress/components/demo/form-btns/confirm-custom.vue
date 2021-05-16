@@ -1,14 +1,13 @@
 <template>
   <div>
-    <el-form ref="form1" :model="formData" size="small">
+    <el-form ref="form" :model="formData" size="small">
       <el-form-item required prop="value">
         <el-input v-model="formData.value"></el-input>
       </el-form-item>
     </el-form>
     <ue-form-btns
       :sending="sending"
-      :parent-refs="$refs"
-      ref-key="form1"
+      :form="form"
       submit-confirm
       :submit="submitHandler"
       :texts="texts"
@@ -18,6 +17,8 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+
 export default {
   data () {
     return {
@@ -31,6 +32,10 @@ export default {
         confirmWord: '保存后会覆盖之前数据，确认操作？'
       }
     }
+  },
+  setup() {
+    const form = ref()
+    return { form }
   },
   methods: {
     submitHandler () {

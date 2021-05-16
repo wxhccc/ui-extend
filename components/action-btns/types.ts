@@ -1,20 +1,21 @@
-import { VNodeTypes } from "vue";
-import Button from "UE/ui-comps/button";
-import { ConfirmConfig } from "UE/ui-comps/confirm";
+import { VNode } from 'vue'
+import { ButtonProps } from '../ui-comps/button'
+import { ConfirmConfig } from '../ui-comps/confirm'
+import { AnyFunction } from '../utils/types'
 
-export interface RowDataHandle<T = unknown, RT = unknown> {
+export interface RowDataHandle<T = unknown, RT = unknown>
+  extends AnyFunction<RT> {
   (data: T, item: ButtonItem, ...args: unknown[]): RT
 }
 
-type VNodeHandle<Data> = VNodeTypes | RowDataHandle<Data, string>
-
-export interface ButtonItem<Data = any> {
+export interface ButtonItem<Data = any, P extends ButtonProps = ButtonProps> {
   hide?: boolean | RowDataHandle<Data, boolean>
   key?: string
-  text?: VNodeHandle<Data>
-  loadingText?: VNodeHandle<Data>
-  props?: Button | RowDataHandle<Data, Button>
-  btype?: Button['type'] | RowDataHandle<Data, Button['type']>
+  text?:
+    | string
+    | ((loading: boolean, item: ButtonItem, data?: Data) => string | VNode)
+  props?: P | RowDataHandle<Data, P>
+  btype?: P['type'] | RowDataHandle<Data, P['type']>
   loadingKey?: string
   isConfirm?: boolean
   confirmConfig?: ConfirmConfig | RowDataHandle<Data, ConfirmConfig>

@@ -5,7 +5,7 @@
     </el-form-item>
     <el-form-item>
       <ue-form-btns
-        :parent-refs="$refs"
+        :form="formRef"
         is-validate
         :btn-keys="btnKeys"
         :submit="submitHandler"
@@ -19,11 +19,15 @@
 export default {
   data () {
     return {
+      formRef: null,
       formData: {
         value: ''
       },
       btnKeys: ['reset', 'submit']
     }
+  },
+  mounted() {
+    this.formRef = this.$refs.form
   },
   methods: {
     submitHandler () {

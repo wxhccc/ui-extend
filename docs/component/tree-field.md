@@ -9,7 +9,7 @@
 ### 基础用法
 
 :::demo Base
-<<< @/docs/.vuepress/components/demo/tree-field/Base.vue
+@[code vue](@demo/tree-field/Base.vue)
 :::
 
 ### 在Form中使用
@@ -17,13 +17,13 @@
 本例演示如何作为表单域使用，包括设置初始值，只读模式等。
 
 :::demo form-field
-<<< @/docs/.vuepress/components/demo/tree-field/form-field.vue
+@[code vue](@demo/tree-field/form-field.vue)
 :::
 
 ### 自定义节点内容
 
 :::demo scope-slot
-<<< @/docs/.vuepress/components/demo/tree-field/scope-slot.vue
+@[code vue](@demo/tree-field/scope-slot.vue)
 :::
 
 

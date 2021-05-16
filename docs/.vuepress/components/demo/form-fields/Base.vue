@@ -4,19 +4,24 @@
     <ue-form-fields :items="items" v-model="formData">
     </ue-form-fields>
     <el-form-item>
-      <ue-form-btns :parent-refs="$refs" is-validate></ue-form-btns>
+      <ue-form-btns :form="form" is-validate></ue-form-btns>
     </el-form-item>
   </el-form>
 </template>
 
 <script>
+import { ref } from 'vue'
 export default {
+  setup() {
+    const form = ref()
+    return { form }
+  },
   data () {
     return {
       formData: {},
       items: [
         {
-          prop: 'name',
+          name: 'name',
           props: {
             label: '活动名称',
             rules: [{ required: true, message: '请输入活动名称' }]
@@ -26,7 +31,7 @@ export default {
           }
         },
         {
-          prop: 'region',
+          name: 'region',
           props: {
             label: '活动区域',
             rules: [{ required: true, message: '请选择活动区域' }]
@@ -49,7 +54,7 @@ export default {
           },
           children: [
             {
-              prop: 'data',
+              name: 'data',
               props: {
                 type: 'date',
                 placeholder: '请选择日期'
@@ -59,7 +64,7 @@ export default {
               }
             },
             {
-              prop: 'time',
+              name: 'time',
               props: {
                 placeholder: '请选择时间'
               },
@@ -70,7 +75,7 @@ export default {
           ]
         },
         {
-          prop: 'delivery',
+          name: 'delivery',
           props: {
             label: '即时配送'
           },
@@ -79,7 +84,7 @@ export default {
           }
         },
         {
-          prop: 'type',
+          name: 'type',
           props: {
             label: '活动性质'
           },
@@ -94,7 +99,7 @@ export default {
           }
         },
         {
-          prop: 'resource',
+          name: 'resource',
           props: {
             label: '特殊资源'
           },
@@ -107,7 +112,7 @@ export default {
           }
         },
         {
-          prop: 'desc',
+          name: 'desc',
           props: {
             label: '活动形式'
           },

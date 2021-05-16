@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { h, mergeProps, resolveComponent } from 'vue'
 const CustomField = {
   props: {
     value: null,
@@ -38,11 +39,14 @@ const CustomField = {
       newValue !== oldValue && this.$emit('change', newValue)
     }
   },
-  render (h) {
+  render () {
     const { formItemProps, fieldProps, value, modelData } = this;
-    const optionNodes = modelData.map(item => h('ElOption', { props: item }))
-    return h('ElFormItem', { props: formItemProps }, [
-      h('ElSelect', { props: { value }, on: this.$listeners }, optionNodes)
+    const ElOption = resolveComponent('ElOption')
+    const ElFormItem = resolveComponent('ElFormItem')
+    const ElSelect = resolveComponent('ElSelect')
+    const optionNodes = modelData.map(item => h(ElOption, { props: item }))
+    return h(ElFormItem, formItemProps, [
+      h(ElSelect, mergeProps({ value }), optionNodes)
     ])
   }
 }

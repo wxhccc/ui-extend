@@ -24,7 +24,6 @@ let needPrefetch = true
 export default defineUserConfig<DefaultThemeOptions>({
   // base,
   title: 'ui-extend',
-  lang: 'zh-CN',
   // dest,
   description: '',
   shouldPrefetch: false,
@@ -52,58 +51,57 @@ export default defineUserConfig<DefaultThemeOptions>({
               isGroup: true,
               children: [
                 'action-btns.md',
-                'ticker.md',
-                'drawer.md'
+                'ticker.md'
               ]
             },
-            // {
-            //   text: 'Form',
-              
-            //   children: [
-            //     ['search-input', 'SearchInput 搜索输入框'],
-            //     ['tree-field', 'TreeField 树表单域'],
-            //     ['form-btns', 'FormBtns 表单操作按钮'],
-            //     ['common-field', 'CommonField 通用表单域'],
-            //     ['form-field-item', 'FormFieldItem 表单项'],
-            //     ['form-fields', 'FormFields 表单项组'],
-            //     ['remote-cascader', 'RemoteCascader 异步级联'],
-            //   ]
-            // },
-            // {
-            //   text: 'Data',
-              
-            //   children: [
-            //     ['data-table', 'DataTable 数据表格'],
-            //     ['info-table', 'InfoTable 信息表格'],
-            //     ['paged-list', 'PagedList 分页列表'],
-            //     ['paged-table', 'PagedTable 分页表格'],
-            //   ]
-            // },
-            // {
-            //   text: 'Notice',
-              
-            //   children: [
-            //     ['multi-alert', 'MultiAlert 多模块警告'],
-            //   ]
-            // },
-            // {
-            //   text: 'Plugins',
-              
-            //   children: [
-            //     ['cropper', 'Cropper 图片裁剪'],
-            //     ['viewer', 'Viewer 图片查看器'],
-            //     ['video-player', 'VideoPlayer 视频播放器']
-            //   ]
-            // },
-            // {
-            //   text: 'Higher',
-              
-            //   children: [
-            //     ['waterfall-pane', 'WaterfallPane 瀑布流容器'],
-            //     ['search-form', 'SearchForm 搜索表单'],
-            //     ['common-list-page', 'CommonListPage 通用列表页模版'],
-            //   ]
-            // }
+            {
+              text: 'Form',
+              isGroup: true,
+              children: [
+                'search-input.md',
+                'tree-field.md',
+                'form-btns.md',
+                'common-field.md',
+                'form-field-item.md',
+                'form-fields.md',
+                'remote-cascader.md'
+              ]
+            },
+            {
+              text: 'Data',
+              isGroup: true,
+              children: [
+                'data-table.md',
+                'info-table.md',
+                'paged-list.md',
+                'paged-table.md',
+              ]
+            },
+            {
+              text: 'Notice',
+              isGroup: true,
+              children: [
+                'multi-alert.md'
+              ]
+            },
+            {
+              text: 'Plugins',
+              isGroup: true,
+              children: [
+                'cropper.md',
+                'viewer.md',
+                'video-player.md'
+              ]
+            },
+            {
+              text: 'Higher',
+              isGroup: true,
+              children: [
+                'waterfall-pane.md',
+                'search-form.md',
+                'common-list-page.md'
+              ]
+            }
           ]
         }
       ],
@@ -133,7 +131,8 @@ export default defineUserConfig<DefaultThemeOptions>({
     [
       '@vuepress/register-components',
       {
-        componentsDir: path.resolve(__dirname, 'components')
+        componentsDir: path.resolve(__dirname, 'components'),
+        componentsPatterns: ['**/*.vue', '**/*.ts', '**/*.tsx']
       },
     ]
   ]

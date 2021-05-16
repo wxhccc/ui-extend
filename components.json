@@ -1,5 +1,5 @@
 {
-  "loading": "./src/ui-comps/loading/index.js",
+  "loading": "./components/ui-comps/loading/index.js",
   "action-btns": "./components/action-btns/index.js",
   "data-table": "./components/data-table/index.js",
   "cropper": "./components/cropper/index.js",

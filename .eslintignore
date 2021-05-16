@@ -1,2 +1,7 @@
 node_modules
 *.js
+types/
+lib/
+es/
+docs/.vuepress/.cache
+docs/.vuepress/.temp

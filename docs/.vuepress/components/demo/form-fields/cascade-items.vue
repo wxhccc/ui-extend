@@ -15,7 +15,7 @@ export default {
       },
       items: [
         {
-          prop: 'prov',
+          name: 'prov',
           props: {
             label: '省'
           },
@@ -31,11 +31,11 @@ export default {
           }
         },
         {
-          prop: 'city',
+          name: 'city',
           props: {
             label: '市'
           },
-          cascadeModel: 'prov',
+          dependencies: 'prov',
           cascadeData: {
             'zhejiang': [
               { value: 'hangzhou', label: '杭州' },
@@ -53,8 +53,8 @@ export default {
           }
         },
         {
-          prop: 'dist',
-          cascadeModel: 'city',
+          name: 'dist',
+          dependencies: 'city',
           cascadeData: {
             'hangzhou': [
               { value: 'xihu', label: '西湖区' },
@@ -77,12 +77,12 @@ export default {
           }
         },
         {
-          prop: 'special',
+          name: 'special',
           props: {
             style: 'width: 100%',
             label: '省特产'
           },
-          cascadeModel: 'prov',
+          dependencies: 'prov',
           cascadeData: {
             'zhejiang': [
               { value: '西湖藕粉', label: '西湖藕粉' },

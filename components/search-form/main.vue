@@ -22,7 +22,7 @@ import FormFields from 'Comps/form-fields';
 import { Form, FormItem, Button } from 'UE/ui-comps';
 import { FormMethods } from 'UE/ui-comps/form';
 import refFnProxyMixin from 'UE/mixins/ref-fn-proxy';
-import { cloneDeep, pick } from 'UE/utils/lodash';
+import { cloneDeep, pick } from 'UE/utils/lodash-es';
 import storageMixin from 'UE/mixins/component-storage';
 
 export const formDefProps = {

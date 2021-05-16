@@ -1,15 +1,11 @@
 import { defineClientAppEnhance } from '@vuepress/client'
-import Antd from 'ant-design-vue'
+import ElementUI from 'element-plus'
 import UiExtend from '../../es'
-import Mixin from './utils/base-mixin'
-import 'ant-design-vue/dist/antd.css'
-
+import 'element-plus/lib/theme-chalk/index.css'
 
 export default defineClientAppEnhance(({ app, siteData }) => {
-  console.log(app)
-  app.use(Antd)
+  app.use(ElementUI)
   app.use(UiExtend)
-  app.mixin(Mixin)
-  app.config.globalProperties.$uiVersion = UiExtend.version
-  // app.config.globalProperties.$uiVersion = version
+  app.config.globalProperties.$ueVersion = UiExtend.version
+  app.config.globalProperties.$uiVersion = ElementUI.version
 })

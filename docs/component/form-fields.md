@@ -11,7 +11,7 @@
 本例表单项组包含常见表单域，比如输入框，选择器，开关，单选，多选，时间选择器。
 
 :::demo Base
-<<< @/docs/.vuepress/components/demo/form-fields/Base.vue
+@[code vue](@demo/form-fields/Base.vue)
 :::
 
 ### 表单项之间级联
@@ -20,7 +20,7 @@
 级联可以一对一，也可以多对一。
 
 :::demo cascade-items 多个表单项的cascadeModel可以绑定到同一个表单项上。
-<<< @/docs/.vuepress/components/demo/form-fields/cascade-items.vue
+@[code vue](@demo/form-fields/cascade-items.vue)
 :::
 
 ### 使用自定义组件作为表单项
@@ -28,13 +28,13 @@
 自定义组件可以和使用`FormFieldItem`组件的表单项混用。自定义组件需要实现v-model/value+input数据绑定模式，传入值为数据项的props对应的值。
 
 :::demo custom-item 
-<<< @/docs/.vuepress/components/demo/form-fields/custom-item.vue
+@[code vue](@demo/form-fields/custom-item.vue)
 :::
 
 ### 调用表单项组件上的方法
 
 :::demo call-method
-<<< @/docs/.vuepress/components/demo/form-fields/call-method.vue
+@[code vue](@demo/form-fields/call-method.vue)
 :::
 
 ### 自定义组件表单项使用级联逻辑 <Badge text="高阶" type="warn"/>
@@ -44,7 +44,7 @@
 下面例子演示了自定义表单项如何即作为触发项，同时也作为被触发项。
 
 :::demo custom-item-cascade 
-<<< @/docs/.vuepress/components/demo/form-fields/custom-item-cascade.vue
+@[code vue](@demo/form-fields/custom-item-cascade.vue)
 :::
 
 ::: tip 级联工作原理说明

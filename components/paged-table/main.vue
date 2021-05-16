@@ -25,7 +25,7 @@ import PagedList from 'Comps/paged-list';
 import DataTable from 'Comps/data-table';
 import storageMixin from 'UE/mixins/component-storage';
 import { getPublicMethodNames, getComponentFnProxy } from 'UE/utils/component';
-import { pick } from 'UE/utils/lodash';
+import { pick } from 'UE/utils/lodash-es';
 
 const ueMethods = getPublicMethodNames(PagedList, DataTable);
 

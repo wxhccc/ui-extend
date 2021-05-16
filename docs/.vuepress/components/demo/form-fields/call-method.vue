@@ -14,7 +14,7 @@ export default {
       formData: {},
       items: [
         {
-          prop: 'name',
+          name: 'name',
           props: {
             label: '活动名称',
             rules: [{ required: true, message: '请输入活动名称' }]
@@ -28,6 +28,7 @@ export default {
   },
   methods: {
     clearFieldValidate () {
+      console.log(12312, this.$refs.formFields)
       this.$refs.formFields.callItemMethod('name', 'clearValidate');
     }
   }

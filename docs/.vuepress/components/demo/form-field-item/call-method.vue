@@ -14,7 +14,7 @@ export default {
         age: ''
       },
       inputItem: {
-        prop: 'age',
+        name: 'age',
         props: {
           label: '年龄',
           rules: [

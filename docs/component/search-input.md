@@ -5,7 +5,7 @@
 ### 基础用法
 
 :::demo Base
-<<< @/docs/.vuepress/components/demo/search-input/Base.vue
+@[code vue](@demo/search-input/Base.vue)
 :::
 
 ::: tip 提示

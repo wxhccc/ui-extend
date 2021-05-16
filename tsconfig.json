@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "declaration": true,
-    "declarationDir": "types",
     "noEmit": true,
 
     "target": "esnext",
@@ -16,17 +14,8 @@
     "esModuleInterop": true,
     "noImplicitThis": true,
     "lib": ["esnext", "dom"],
-
-    "paths": {
-      "Comps/*": ["./components/*"],
-      "UE/*": ["./src/*"]
-    }
+    "types": ["@vuepress/client", "node"]
   },
-  "exclude": ["node_modules", "lib", "docs", "config"],
-  "include": ["./typings/*.ts", "src/index.ts", "**/.vuepress/**/*"],
-  // "include": [
-  //   "./typings/*.ts",
-  //   "src/**/*.ts",
-  //   "components/**/*.ts"
-  // ]
+  "exclude": ["node_modules", "lib", "config"],
+  "include": ["typings/*.ts", "components/**/*"]
 }

@@ -1,7 +1,7 @@
 import { TableColumn } from 'UE/ui-comps';
 import ActionBtnsSlot from './action-btns';
 import SelectionSlot, { SelectionHeader } from './selection'
-import { omit } from 'UE/utils/lodash';
+import { omit } from 'UE/utils/lodash-es';
 
 export default {
   name: 'UeDeepColumn',

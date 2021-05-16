@@ -10,8 +10,8 @@
 
 <script>
 
-const createInputFormField = (prop, props, placeholder = '请输入', colProps) => ({
-  prop,
+const createInputFormField = (name, props, placeholder = '请输入', colProps) => ({
+  name,
   props: Array.isArray(props) ? { rules: props } : props,
   colProps,
   field: {

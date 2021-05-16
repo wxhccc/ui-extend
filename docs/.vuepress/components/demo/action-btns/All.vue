@@ -28,8 +28,10 @@ export default {
         {
           btype: 'primary',
           loadingKey: 'infoSend',
-          text: (data) => (!data.isEdit ? 'edit' : 'save'),
-          loadingText: 'saveing...',
+          text: (loading, item, data) => {
+            if (loading) return 'saveing...'
+            return !data.isEdit ? 'edit' : 'save'
+          },
           click: this.editHandle
         },
         {
@@ -54,7 +56,7 @@ export default {
         data.isEdit = !data.isEdit
       } else {
         // 模拟接口提交
-        this.$set(data, 'infoSend', true)
+        data.infoSend = true
         window.setTimeout(() => {
           // send
           data.infoSend = false

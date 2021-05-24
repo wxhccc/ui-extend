@@ -7,21 +7,24 @@
 </template>
 
 <script>
-import { h, resolveComponent } from 'vue'
+import { h, mergeProps, resolveComponent } from 'vue'
 
 const CustomField = {
   props: {
-    value: Array,
+    modelValue: Array,
     formItemProps: Object,
     fieldProps: Object
   },
   render () {
-    const { formItemProps, fieldProps, value } = this;
+    const { formItemProps, fieldProps, modelValue } = this;
     const ElFormItem = resolveComponent('ElFormItem')
     const UeTreeField = resolveComponent('UeTreeField')
-    return h(ElFormItem, formItemProps, [
-      h(UeTreeField, { ...fieldProps, value })
-    ])
+    const treeFieldProps = mergeProps(this.$attrs, fieldProps, {
+      modelValue
+    })
+    return h(ElFormItem, formItemProps, {
+      default: () => h(UeTreeField, treeFieldProps)
+    })
   }
 }
 

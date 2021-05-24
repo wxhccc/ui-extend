@@ -1,5 +1,5 @@
 ---
-title CommonField 通用表单域组件
+title: CommonField 通用表单域组件
 ---
 ## CommonField 通用表单域组件
 
@@ -31,6 +31,12 @@ ps: codepen可能不支持这部分的代码。
 
 ::: demo custom-child
 @[code vue](@demo/common-field/custom-child.vue)
+:::
+
+### 动态改变表单域的数据
+
+::: demo data-change
+@[code vue](@demo/common-field/data-change.vue)
 :::
 
 ### 使用表单域组件具名插槽

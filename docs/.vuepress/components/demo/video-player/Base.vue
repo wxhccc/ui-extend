@@ -5,12 +5,13 @@
 </template>
 
 <script>
+import video from './videos/oceans.mp4'
 export default {
   data () {
     return {
       isReady: false,
       message: '',
-      src: 'https://oss.sw.wxhice.com/adm/oceans.mp4'
+      src: video
     }
   },
   methods: {

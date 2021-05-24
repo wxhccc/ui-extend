@@ -1,5 +1,5 @@
 import { wrapperInstall } from '../utils/component'
-import FormFields from './main'
+import Viewer from './main.vue'
 
 export * from './types'
-export default wrapperInstall(FormFields)
+export default wrapperInstall(Viewer)

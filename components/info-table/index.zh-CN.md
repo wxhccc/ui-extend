@@ -11,20 +11,18 @@
 
 ### cell
 
-| 参数           | 类型                                 | 说明                                                                                                                                   | 可选值 | 默认值 |
-| :------------- | :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- | :----- | :----- |
-| hide           | boolean/function                     | 单元格是否隐藏（不渲染）。                                                                                                             | --     | --     |
-| props          | object/function                      | `Col`组绑定参数对象或返回对象的函数。                                                                                                  | --     | --     |
-| prop           | string/number                        | 单元格显示内容在`data`中对应的键名，或表单项绑定值在`value`中对应的键名。                                                              | --     | --     |
-| key            | string/number                        | 组件的`key`，缺省时使用`prop`属性。如果`prop`缺省时会使用数组索引，为了性能`prop`缺省时请设置`key`                                     | --     | --     |
-| label          | string/boolean                       | 单元格label区域显示内容，传入false可不显示label                                                                                        | --     | --     |
-| label          | string                               | 单元格label区域显示内容，传入空值可不显示label                                                                                         | --     | --     |
-| icon           | string                               | 单元格label区域图标，在文字左侧。                                                                                                      | --     | --     |
-| formatter      | Function(value, allData)             | 单元格内容区域显示内容的格式化函数。                                                                                                   | --     | --     |
-| labelComponent | string(ComponentName)<br/>/Component | 单元格label自定义组件。组件会传入cell对象和allData数据，下同。                                                                         | --     | --     |
-| valueComponent | string(ComponentName)<br/>/Component | 单元格内容区域自定义组件。                                                                                                             | --     | --     |
-| canEdit        | boolean                              | 当前单元格是否可编辑。                                                                                                                 | --     | --     |
-| fieldProps     | object                               | 单元格表单项组件的参数绑定对象，具体见[FormFieldItem](./form-field-item)。默认会合入单元格的`prop`作为表单项组件的`prop`属性，可覆盖。 | --     | --     |
+| 参数       | 类型                       | 说明                                                                                                                                   | 可选值                                                                                             | 默认值 |
+| :--------- | :------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- | :----- |
+| hide       | boolean                    | function                                                                                                                               | 单元格是否隐藏（不渲染）。                                                                         | --     | --                                              |
+| props      | object                     | function                                                                                                                               | `Col`组绑定参数对象或返回对象的函数。                                                              | --     | --                                              |
+| name       | string                     | number                                                                                                                                 | 单元格显示内容在`data`中对应的键名，或表单项绑定值在`value`中对应的键名。                          | --     | --                                              |
+| key        | string                     | number                                                                                                                                 | 组件的`key`，缺省时使用`prop`属性。如果`prop`缺省时会使用数组索引，为了性能`prop`缺省时请设置`key` | --     | --                                              |
+| label      | string                     | boolean                                                                                                                                | () => VNode                                                                                        | slot   | 单元格label区域显示内容，传入false可不显示label | -- | -- |
+| icon       | string                     | 单元格label区域图标，在文字左侧。                                                                                                      | --                                                                                                 | --     |
+| formatter  | (value, allData) => string | VNode                                                                                                                                  | 单元格内容区域显示内容的格式化函数。                                                               | --     | --                                              |
+| value      | slot                       | 单元格内容区域自定义插槽件。                                                                                                           | --                                                                                                 | --     |
+| canEdit    | boolean                    | 当前单元格是否可编辑。                                                                                                                 | --                                                                                                 | --     |
+| fieldProps | object                     | 单元格表单项组件的参数绑定对象，具体见[FormFieldItem](./form-field-item)。默认会合入单元格的`prop`作为表单项组件的`prop`属性，可覆盖。 | --                                                                                                 | --     |
 
 ### Events
 

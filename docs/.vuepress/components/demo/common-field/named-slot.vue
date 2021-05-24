@@ -1,11 +1,11 @@
 <template>
   <el-row :gutter="20">
     <el-col :span="8">
-      <ue-common-field :field="inputField" v-model="inputValue">
+      <ue-common-field v-bind="inputField" v-model="inputValue">
       </ue-common-field>
     </el-col>
     <el-col :span="12" :offset="4">
-      <ue-common-field :field="selectField" v-model="selectValue">
+      <ue-common-field v-bind="selectField" v-model="selectValue">
       </ue-common-field>
     </el-col>
   </el-row>

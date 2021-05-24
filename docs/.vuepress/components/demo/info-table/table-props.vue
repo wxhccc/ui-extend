@@ -7,17 +7,17 @@ export default {
   data () {
     return {
        cells: [
-        { prop: 'date', label: '备注日期', value: '2012-12-12', props: { lg: 12, sm: 24 } },
+        { name: 'date', label: '备注日期', value: '2012-12-12', props: { lg: 12, sm: 24 } },
         {
-          prop: 'name',
+          name: 'name',
           label: '姓名',
           props: { lg: 12, sm: 24 },
           formatter (value, data) {
             return value + '(' + data.prof + ')';
           }
         },
-        { prop: 'address', label: '地址', props: { lg: 8, sm: 24 } },
-        { prop: 'remark', label: '备注', props: { lg: 16, sm: 24 } }
+        { name: 'address', label: '地址', props: { lg: 8, sm: 24 } },
+        { name: 'remark', label: '备注', props: { lg: 16, sm: 24 } }
       ],
       data: {
         date: '2016-05-02',

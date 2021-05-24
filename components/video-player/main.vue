@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js/'
+import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js'
 import 'video.js/dist/video-js.css'
 
 const defOpts = {
@@ -35,8 +35,8 @@ export default defineComponent({
     }
   },
   setup() {
-    const $_player = ref<VideoJsPlayer>()
-    return { $_player }
+    const player = ref<VideoJsPlayer>()
+    return { player }
   },
   computed: {
     size(): UE.Size {
@@ -59,14 +59,14 @@ export default defineComponent({
   },
   watch: {
     src() {
-      this.$_player && this.$_player.src({ src: this.src })
+      this.player && this.player.src({ src: this.src })
     }
   },
   mounted() {
-    this.$_player = videojs(this.$refs.video, this.initOpts)
+    this.player = videojs(this.$refs.video, this.initOpts)
   },
   beforeUnmount() {
-    this.$_player && this.$_player.dispose()
+    this.player && this.player.dispose()
   },
   methods: {
     getVideoFrame() {

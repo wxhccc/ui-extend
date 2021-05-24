@@ -1,3 +1,6 @@
+---
+title: TreeField 树表单域
+---
 ## TreeField 树表单域
 
 基于Tree组件封装的表单域组件，可通过v-model绑定值。内置单向级联逻辑
@@ -28,7 +31,7 @@
 
 
 ::: tip 提示
-Tree组件文档参照 <element-link component="Tree"></element-link>
+Tree组件文档参照 <ui-link component="Tree"></ui-link>
 :::
 
 

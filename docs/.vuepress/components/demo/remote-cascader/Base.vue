@@ -1,16 +1,14 @@
 <template>
   <div>
-    <ue-remote-cascader v-model="values" :is-resolve="isResolve" :load="fetchLevelList" @on-change="getFullData" @change="getValue"></ue-remote-cascader>
+    <ue-remote-cascader v-model="values" :load="fetchLevelList" @on-change="getFullData" @change="getValue"></ue-remote-cascader>
     {{values}}
   </div>
 </template>
 
 <script>
-import { version } from 'element-ui'
 export default {
   data () {
     return {
-      isResolve: this.versionCompare(version, '2.8.2') === 1,
       values: [],
       data: []
     }

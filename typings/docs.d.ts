@@ -1,7 +1,7 @@
 import type { ComponentCustomProperties } from 'vue'
 
 declare module '@vue/runtime-core' {
-  export interface ComponentCustomProperties {
+  interface ComponentCustomProperties {
     $uiVersion: string
     $ueVersion: string
   }

@@ -1,119 +1,128 @@
 <template>
   <ue-tree
-    :class="{ 'ue-tree-field': true, 'inline-tree-field': inline }"
     ref="treeField"
+    :class="['ue-tree-field', { 'inline-tree-field': inline }]"
     v-bind="treeProps"
     :data="handledData"
     :show-checkbox="!readonly"
     @check="onValueChange"
   >
-    <template v-if="$scopedSlots.default" v-slot="scope">
+    <template v-if="$slots.default" #default="scope">
       <slot v-bind="scope"></slot>
     </template>
   </ue-tree>
 </template>
-<script>
-import { Tree } from "UE/ui-comps";
-import refFnProxyMixin from 'UE/mixins/ref-fn-proxy';
-import { pickBy } from "UE/utils/lodash-es";
+<script lang="ts">
+import { computed, defineComponent, mergeProps, ref } from 'vue'
+import { pickBy } from 'lodash-es'
+import Tree, { TreeProps, treeMethods } from '../ui-comps/tree'
+import { AnyObject } from '../utils/types'
+import { vueTypeProp } from '../utils/component'
+import { useProxyInstanceMethods } from '../utils/hooks'
 
-export default {
-  name: "UeTreeField",
+export interface TreeFieldProps<D extends AnyObject = AnyObject> extends TreeProps {
+  inline: boolean
+  nodeKey: string
+  checkMode: 'two-way' | 'one-way' | 'none'
+  data: D[]
+  modelValue: string[]
+}
+
+export default defineComponent({
+  name: 'UeTreeField',
   components: {
-    'UeTree': Tree
+    UeTree: Tree
   },
-  mixins: [refFnProxyMixin('treeField', Object.keys(Tree.methods))],
   props: {
     inline: Boolean,
-    nodeKey: {
-      type: String,
-      default: 'id'
-    },
-    checkMode: {
-      type: String,
-      default: 'one-way'
-    },
-    data: {
-      type: Array,
-      default: () => []
-    },
-    value: {
-      type: Array,
-      default: () => []
-    },
+    nodeKey: vueTypeProp<TreeFieldProps['nodeKey']>(String, 'id'),
+    checkMode: vueTypeProp<TreeFieldProps['checkMode']>(String, 'one-way'),
+    data: vueTypeProp<TreeFieldProps['data']>(Array, () => []),
+    modelValue: vueTypeProp<TreeFieldProps['modelValue']>(Array, () => []),
     readonly: Boolean
   },
-  computed: {
-    checkStrictly () {
-      return ['one-way', 'none'].includes(this.checkMode);
-    },
-    treeProps () {
-      const { $attrs, nodeKey, checkStrictly } = this;
-      return Object.assign({ defaultExpandAll: true, expandOnClickNode: false }, $attrs, { nodeKey, checkStrictly });
-    },
-    handledData () {
-      const { readonly, data, value } = this;
-      return readonly ? this.filterNode(data, value) : data;
+  emits: ['update:modelValue'],
+  setup(props, { attrs }) {
+    const treeField = ref()
+    const checkStrictly = computed<boolean>(() => ['one-way', 'none'].includes(props.checkMode))
+
+    const treeProps = computed(
+      () =>
+        mergeProps({ defaultExpandAll: true, expandOnClickNode: false }, attrs, {
+          nodeKey: props.nodeKey,
+          checkStrictly: checkStrictly.value
+        }) as unknown as TreeFieldProps
+    )
+
+    const handledData = computed(() =>
+      props.readonly ? filterNode(props.data, props.modelValue) : props.data
+    )
+
+    const filterNode = (
+      originList: TreeFieldProps['data'],
+      values: TreeFieldProps['modelValue']
+    ) => {
+      if (originList.length && values.length) {
+        const { props, nodeKey } = treeProps.value
+        const childrenKey = (props && props.children) || 'children'
+        const getAccessItem = (list: AnyObject[]) => {
+          const arr: AnyObject[] = []
+          list.forEach(item => {
+            if (values.includes(item[nodeKey])) {
+              const newItem = pickBy(item, (value, key) => key !== childrenKey)
+              item[childrenKey] &&
+                item[childrenKey].length &&
+                (newItem[childrenKey] = getAccessItem(item[childrenKey]))
+              arr.push(newItem)
+            }
+          })
+          return arr
+        }
+        return getAccessItem(originList)
+      }
     }
+
+    const methods = useProxyInstanceMethods(treeField, treeMethods)
+
+    return { treeField, treeProps, handledData, ...methods }
   },
   watch: {
-    value (newVal) {
-      this.$refs.treeField.setCheckedKeys(newVal)
+    modelValue(newVal) {
+      this.$refs.treeField && (this.$refs.treeField as any).setCheckedKeys(newVal)
     }
   },
   methods: {
     /** business **/
-    filterNode (originList, values) {
-      if (originList.length && values.length) {
-        const { props, nodeKey } = this.treeProps;
-        const childrenKey = (props && props.children) || "children";
-        const getAccessItem = list => {
-          let arr = [];
-          list.forEach(item => {
-            if (values.includes(item[nodeKey])) {
-              let newItem = pickBy(item, (value, key) => key !== childrenKey);
-              item[childrenKey] &&
-                item[childrenKey].length &&
-                (newItem[childrenKey] = getAccessItem(item[childrenKey]));
-              arr.push(newItem);
-            }
-          });
-          return arr;
-        };
-        return getAccessItem(originList);
-      }
-    },
     // 递归处理权限树选中状态
-    setChildrenNodeCheck (node, checked) {
-      const { treeField } = this.$refs;
+    setChildrenNodeCheck(node: any, checked?: boolean) {
+      const { treeField } = this.$refs
       Array.isArray(node.childNodes) &&
-        node.childNodes.forEach(cnode => {
-          cnode.checked !== checked &&
-            treeField.setChecked(cnode.data, checked);
-          this.setChildrenNodeCheck(cnode, checked);
-        });
+        node.childNodes.forEach((cnode: any) => {
+          cnode.checked !== checked && (treeField as any).setChecked(cnode.data, checked)
+          this.setChildrenNodeCheck(cnode, checked)
+        })
     },
-    setParentNodeCheck (node) {
-      const { treeField } = this.$refs;
-      let { parent } = node;
+    setParentNodeCheck(node: any) {
+      const { treeField } = this.$refs
+      let { parent } = node
       while (parent) {
-        treeField.setChecked(parent.data, true);
-        parent = parent.parent;
+        ;(treeField as any).setChecked(parent.data, true)
+        parent = parent.parent
       }
     },
     /** event **/
-    onValueChange (data) {
-      const { treeField } = this.$refs;
+    onValueChange(data: TreeFieldProps['data']) {
+      const { treeField } = this.$refs
       if (this.checkMode === 'one-way') {
-        const curNode = treeField.getNode(data);
-        const { checked } = curNode;
-        checked && this.setParentNodeCheck(curNode);
-        this.setChildrenNodeCheck(curNode, checked);
+        const curNode = (treeField as any).getNode(data)
+        const { checked } = curNode
+        checked && this.setParentNodeCheck(curNode)
+        this.setChildrenNodeCheck(curNode, checked)
       }
-      this.$emit("input", treeField.getCheckedKeys());
+      this.$emit('update:modelValue', (treeField as any).getCheckedKeys())
     }
   }
-};
+})
 </script>
 <style lang="scss">
 .ue-tree-field {

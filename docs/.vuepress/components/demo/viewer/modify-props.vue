@@ -13,16 +13,16 @@
     </p>
     <el-row>
       <el-col :span="14" style="height: 280px;overflow:auto;">
-        <ue-viewer ref="viewer" :imgs="imgs" :inline="true" :options="options" :active-index.sync="actIndex">
+        <ue-viewer ref="viewer" :images="images" :inline="true" :options="options" v-model.active-index="actIndex">
         </ue-viewer>
       </el-col>
       <el-col :span="9" :offset="1">
         <el-button-group>
           <el-button type="primary" size="small" icon="el-icon-plus" @click="addImage">添加一张</el-button>
-          <el-button type="primary" size="small" icon="el-icon-minus" :disabled="imgs.length <= 1" @click="reduceImage">添加一张</el-button>
+          <el-button type="primary" size="small" icon="el-icon-minus" :disabled="images.length <= 1" @click="reduceImage">添加一张</el-button>
         </el-button-group>
         <p>
-          当前图片索引：<el-input-number size="small" :min="0" :max="imgs.length - 1" v-model="actIndex"></el-input-number>
+          当前图片索引：<el-input-number size="small" :min="0" :max="images.length - 1" v-model="actIndex"></el-input-number>
         </p>
         <p>
           <el-button-group >
@@ -77,16 +77,16 @@ export default {
         scalable: true,
         transition: true
       },
-      imgs: [images[1], images[2]]
+      images: [images[1], images[2]]
     }
   },
   methods: {
     addImage () {
       const index = 1 + Math.floor(Math.random() * 3)
-      this.imgs.push(images[index])
+      this.images.push(images[index])
     },
     reduceImage () {
-      this.imgs.splice(Math.floor(this.imgs.length * Math.random()), 1)
+      this.images.splice(Math.floor(this.images.length * Math.random()), 1)
     },
     callMethod (fnName, ...args) {
       this.$refs.viewer[fnName](...args)

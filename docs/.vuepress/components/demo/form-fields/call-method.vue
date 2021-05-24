@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     clearFieldValidate () {
-      console.log(12312, this.$refs.formFields)
       this.$refs.formFields.callItemMethod('name', 'clearValidate');
     }
   }

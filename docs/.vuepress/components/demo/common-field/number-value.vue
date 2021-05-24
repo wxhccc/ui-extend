@@ -1,7 +1,7 @@
 <template>
   <div>
     {{value}}
-    <ue-common-field :field="inputField" v-model="value.input">
+    <ue-common-field v-bind="inputField" v-model="value.input">
     </ue-common-field>
   </div>
 </template>

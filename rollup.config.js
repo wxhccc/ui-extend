@@ -40,7 +40,7 @@ export function createConfig(config, plugins) {
     {
       output,
       external: ['vue', 'ant-design-vue'],
-      plugins: [tsPlugin, json(), vuePlugin({ css: false }), resolve(), commonjs(), css(), , scss({
+      plugins: [tsPlugin, json(), vuePlugin({ css: false }), resolve(), commonjs(), css(), scss({
         sass: require('sass'),
       })].concat(plugins)
     }

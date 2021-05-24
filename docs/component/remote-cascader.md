@@ -1,3 +1,6 @@
+---
+title: RemoteCascader 异步级联选择器
+---
 ## RemoteCascader 异步级联选择器
 
 基于Cascader组件的动态加载封装的表单域组件。简化异步请求逻辑，支持数据回填。
@@ -19,11 +22,7 @@
 ::: tip 提示
 组件会透传Cascader组件支持的绝大部分属性和事件绑定以及插槽，但关于动态加载部分的可能无法覆盖。
 
-Tree组件文档参照 <element-link component="Tree"></element-link>
-:::
-
-::: warning 警告
-Element库2.8和2.9版本的Cascader组件Api不一致。2.9版本的需要设置本组件的`is-resolve`，且回填体验不佳。
+Tree组件文档参照 <ui-link component="Tree"></ui-link>
 :::
 
 

@@ -10,7 +10,7 @@
 import { h, mergeProps, resolveComponent } from 'vue'
 const CustomField = {
   props: {
-    value: null,
+    modelValue: null,
     formItemProps: Object,
     fieldProps: Object
   },
@@ -29,25 +29,28 @@ const CustomField = {
       modelData: []
     }
   },
+  emit: ['change'],
   methods: {
     handleCascadeChange (value) {
       this.modelData = this.cascadeData[value] || []
     }
   },
   watch: {
-    value (newValue, oldValue) {
+    modelValue (newValue, oldValue) {
       newValue !== oldValue && this.$emit('change', newValue)
     }
   },
   render () {
-    const { formItemProps, fieldProps, value, modelData } = this;
+    const { formItemProps, fieldProps, modelValue, modelData } = this;
     const ElOption = resolveComponent('ElOption')
     const ElFormItem = resolveComponent('ElFormItem')
     const ElSelect = resolveComponent('ElSelect')
-    const optionNodes = modelData.map(item => h(ElOption, { props: item }))
-    return h(ElFormItem, formItemProps, [
-      h(ElSelect, mergeProps({ value }), optionNodes)
-    ])
+    const optionNodes = modelData.map(item => h(ElOption, item))
+    return h(ElFormItem, formItemProps, {
+      default: () => h(ElSelect, mergeProps(this.$attrs, fieldProps, { modelValue }), {
+        default: () => optionNodes
+      })
+    })
   }
 }
 
@@ -57,7 +60,7 @@ export default {
       formData: {},
       items: [
         {
-          prop: 'region',
+          name: 'region',
           props: {
             label: '活动区域'
           },
@@ -73,29 +76,30 @@ export default {
           }
         },
         {
-          prop: 'content',
+          name: 'content',
           props: {
             formItemProps: {
               label: '活动内容',
             }
           },
-          cascadeModel: 'region',
+          dependencies: 'region',
           /* 函数调用时会绑定FormFields组件内的this，可以通过$refs拿到本表单项组件实例. */
-          cascadeHandler (value, prop, modelData, item) {
+          cascadeHandler (value, name, modelData, item) {
             /* item是当前对象，这里可以修改item的props将数据传入组件，建议修改数据方式。
             * 也可以调用组件实例上的方法。
             * 这里使用了较为复杂的调用实例的方法的方式。
             */
-            this.$refs[prop][0].handleCascadeChange(value)
+           console.log(111, name, value)
+            this.$refs[name].handleCascadeChange(value)
           },
           component: CustomField
         },
         {
-          prop: 'prize',
+          name: 'prize',
           props: {
             label: '活动奖励'
           },
-          cascadeModel: 'content',
+          dependencies: 'content',
           cascadeData: {
             '01': [
               { value: '奖品1', label: '奖品1' },

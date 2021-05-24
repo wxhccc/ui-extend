@@ -30,7 +30,7 @@ export default {
         option: {}
       },
       telphoneItem: {
-        prop: 'telphone',
+        name: 'telphone',
         props: {
           label: '住宅电话'
         },
@@ -40,7 +40,7 @@ export default {
         ]
       },
       optionItem: {
-        prop: 'option',
+        name: 'option',
         props: {
           label: 'Option'
         },

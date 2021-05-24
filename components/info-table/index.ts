@@ -1,5 +1,6 @@
 import { wrapperInstall } from '../utils/component'
-import FormFields from './main'
+import InfoTable from './main.vue'
 
 export * from './types'
-export default wrapperInstall(FormFields)
+
+export default wrapperInstall(InfoTable)

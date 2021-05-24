@@ -58,7 +58,6 @@ export default defineUserConfig<DefaultThemeOptions>({
               text: 'Form',
               isGroup: true,
               children: [
-                'search-input.md',
                 'tree-field.md',
                 'form-btns.md',
                 'common-field.md',
@@ -78,13 +77,6 @@ export default defineUserConfig<DefaultThemeOptions>({
               ]
             },
             {
-              text: 'Notice',
-              isGroup: true,
-              children: [
-                'multi-alert.md'
-              ]
-            },
-            {
               text: 'Plugins',
               isGroup: true,
               children: [
@@ -97,7 +89,6 @@ export default defineUserConfig<DefaultThemeOptions>({
               text: 'Higher',
               isGroup: true,
               children: [
-                'waterfall-pane.md',
                 'search-form.md',
                 'common-list-page.md'
               ]

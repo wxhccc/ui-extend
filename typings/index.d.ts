@@ -15,10 +15,13 @@ declare namespace UE {
     install: Plugin
   }
 
-  interface Option {
+  interface Option extends Record<string, any> {
     label: string | number
     value: string | number
-    [key: string]: any
+  }
+
+  interface TreeNodeData extends Option {
+    children?: TreeNodeData[]
   }
 
   interface Size {

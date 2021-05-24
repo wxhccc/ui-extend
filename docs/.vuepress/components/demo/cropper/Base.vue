@@ -11,12 +11,13 @@
 </template>
 
 <script>
+import img from './images/picture.jpg'
 export default {
   data () {
     return {
       isReady: false,
       message: '',
-      src: 'https://oss.sw.wxhice.com/adm/459d9f227ccbbbbaac4a429971f78461.jpg'
+      src: img
     }
   },
   methods: {

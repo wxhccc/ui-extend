@@ -1,16 +1,16 @@
 import { computed, DefineComponent, defineComponent, h } from 'vue'
 import Button from '../ui-comps/button'
 import confirm from '../ui-comps/confirm'
-import { defaultProp } from '../utils/component'
+import { vueTypeProp } from '../utils/component'
 import { ButtonItem, RowDataHandle } from './types'
 
 export default defineComponent({
   name: 'UeActionBtns',
   props: {
-    data: defaultProp<any>(null, null),
-    extraArgs: defaultProp<unknown[]>(Array, () => []),
-    loadingFlags: defaultProp<Record<string, boolean>>(Object, () => ({})),
-    btns: defaultProp<ButtonItem[]>(Array, () => [])
+    data: vueTypeProp<any>(null, null),
+    extraArgs: vueTypeProp<unknown[]>(Array, () => []),
+    loadingFlags: vueTypeProp<Record<string, boolean>>(Object, () => ({})),
+    btns: vueTypeProp<ButtonItem[]>(Array, () => [])
   },
   setup(props) {
     const propHanlde = <R, D>(

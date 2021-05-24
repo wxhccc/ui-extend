@@ -28,7 +28,7 @@ export default {
       sending: false,
       cells: [
         {
-          prop: 'date', label: '日期', props: { span: 12 },
+          name: 'date', label: '日期', props: { span: 12 },
           canEdit: true,
           fieldProps: {
             field: {
@@ -41,7 +41,7 @@ export default {
           }
         },
         {
-          prop: 'name', label: '姓名', props: { span: 12 },
+          name: 'name', label: '姓名', props: { span: 12 },
           canEdit: true,
           fieldProps: {
             props: {
@@ -58,7 +58,7 @@ export default {
           }
         },
         {
-          prop: 'address', label: '地址',
+          name: 'address', label: '地址',
           fieldProps: {
             field: {
               component: 'ElInput',
@@ -69,7 +69,7 @@ export default {
           }
         }
       ],
-      value: null,
+      value: {},
       data: {
         date: '2016-05-02',
         name: '王小虎',

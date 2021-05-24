@@ -1,6 +1,5 @@
 import { App, PropType } from 'vue'
-import refMethodsProxyMixin from './mixins/ref-fn-proxy'
-import { AnyFunction } from './types'
+import { AnyFunction, AnyObject } from './types'
 
 export function getPublicMethodNames(...components: UE.Component[]) {
   return components.reduce(
@@ -17,14 +16,15 @@ export function resolveProps<T extends Record<string, any> = Record<string, any>
   return props instanceof Function ? props(...args) : props
 }
 
-export const defaultProp = <T>(type: unknown, value?: unknown) => ({
+export const vueTypeProp = <T>(
+  type: unknown,
+  value?: T extends AnyObject | [] ? AnyFunction<T> : T,
+  required?: boolean
+) => ({
   type: type as PropType<T>,
-  default: value
+  default: value,
+  ...(required ? { required: true } : {})
 })
-
-export function getComponentFnProxy(component: UE.Component, ref: string) {
-  return refMethodsProxyMixin(ref || component.name, component.$_ue_methods)
-}
 
 export const wrapperInstall = (component: UE.UnpluginComponent) => {
   const c = component as any

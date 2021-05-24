@@ -1,7 +1,7 @@
 <template>
   <el-row :gutter="20">
     <el-col :span="24">
-      <p>Select-----value: {{selectValue}}</p>
+      <el-button @click="changeData" size="small">变更数据</el-button><br /><br />
       <ue-common-field v-bind="selectField" v-model="selectValue">
       </ue-common-field>
     </el-col>
@@ -29,6 +29,18 @@ export default {
           return h('span', { style: { color: 'red' } }, [item.label + index]);
         }
       }
+    }
+  },
+  methods: {
+    createData() {
+      return Array(2 + Math.round(Math.random() * 10)).fill('').map(() => ({
+        label: Math.random(),
+        value: Math.random()
+      }))
+    },
+    changeData() {
+      this.selectValue = ''
+      this.selectField.data = this.createData()
     }
   }
 }

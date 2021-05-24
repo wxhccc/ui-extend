@@ -5,11 +5,11 @@
     <div class="pagination-container">
       <ue-pagination
         v-if="isPaginationShow"
-        v-on="paginationEvents"
+        v-model:current-page="curPage"
         v-bind="handlePagination"
         :page-size="pageSize"
-        :current-page.sync="curPage"
         :total="dataTotal"
+        v-on="paginationEvents"
         @size-change="handleSizeChange"
       >
         <template #default>
@@ -21,18 +21,18 @@
 </template>
 
 <script>
-import { Loading, Pagination } from 'UE/ui-comps';
-import storageMixin from 'UE/mixins/component-storage';
+import { Loading, Pagination } from 'UE/ui-comps'
+import storageMixin from 'UE/mixins/component-storage'
 
 const propsDefault = {
   background: true
-};
+}
 
 export default {
   name: 'UePagedList',
   components: {
-    'UeLoading': Loading,
-    'UePagination': Pagination
+    UeLoading: Loading,
+    UePagination: Pagination
   },
   mixins: [storageMixin()],
   props: {
@@ -64,8 +64,8 @@ export default {
     restore: Boolean,
     needStore: Boolean
   },
-  data () {
-    const { storeKey, restore, initData } = this;
+  data() {
+    const { storeKey, restore, initData } = this
     return Object.assign(
       { pageSize: 20, curPage: 1 },
       initData,
@@ -74,114 +74,118 @@ export default {
         $_oldExtraForm: {}
       },
       restore && this.$_mixin_storeSession('pagination', storeKey)
-    );
-  },
-  created () {
-    this.createdAutoSend && this.getInitPageData();
+    )
   },
   computed: {
-    handledPropKey () {
-      return Object.assign({ total: 'total', rows: 'rows', pageSize: 'size', curPage: 'page' }, this.propKeys);
+    handledPropKey() {
+      return Object.assign(
+        { total: 'total', rows: 'rows', pageSize: 'size', curPage: 'page' },
+        this.propKeys
+      )
     },
-    orderRules () {
-      this.curPage = 1;
-      return this.orderRules;
+    orderRules() {
+      this.curPage = 1
+      return this.orderRules
     },
-    handlePagination () {
-      return Object.assign({}, propsDefault, this.paginationProps);
+    handlePagination() {
+      return Object.assign({}, propsDefault, this.paginationProps)
     },
-    handledLoading () {
-      const { loadingProps } = this;
+    handledLoading() {
+      const { loadingProps } = this
       return typeof loadingProps === 'string' ? { text: loadingProps } : loadingProps
     },
-    dataList () {
-      const { rows } = this.handledPropKey;
-      return this.pagedData && Array.isArray(this.pagedData[rows]) ? this.pagedData[rows] : [];
+    dataList() {
+      const { rows } = this.handledPropKey
+      return this.pagedData && Array.isArray(this.pagedData[rows]) ? this.pagedData[rows] : []
     },
-    dataTotal () {
+    dataTotal() {
       const { total } = this.handledPropKey
-      return (this.pagedData && this.pagedData[total]) ? Number(this.pagedData[total]) : 0;
+      return this.pagedData && this.pagedData[total] ? Number(this.pagedData[total]) : 0
     },
-    params () {
-      const { pageSize, curPage } = this.handledPropKey;
-      return Object.assign({}, this.extraForm, { [pageSize]: this.pageSize, [curPage]: this.curPage });
+    params() {
+      const { pageSize, curPage } = this.handledPropKey
+      return Object.assign({}, this.extraForm, {
+        [pageSize]: this.pageSize,
+        [curPage]: this.curPage
+      })
     },
-    isPaginationShow () {
-      const { restore, curPage, dataTotal } = this;
-      return (curPage === 1) || !restore || (restore && dataTotal);
+    isPaginationShow() {
+      const { restore, curPage, dataTotal } = this
+      return curPage === 1 || !restore || (restore && dataTotal)
     }
   },
   watch: {
-    'extraForm': {
+    extraForm: {
       handler: 'handleExtraForm',
       deep: true
     },
-    'params': 'sendFetchParam',
-    'refresh': 'refreshList'
+    params: 'sendFetchParam',
+    refresh: 'refreshList'
+  },
+  created() {
+    this.createdAutoSend && this.getInitPageData()
   },
   $_ue_methods: ['getStoreData', 'sendRequest', 'clearStoreData'],
   methods: {
     /** utils **/
-    getInitPageData () {
-      const { restore, $_mixin_storeSession, storeKey } = this;
+    getInitPageData() {
+      const { restore, $_mixin_storeSession, storeKey } = this
       if (restore && $_mixin_storeSession('params', storeKey)) {
         Promise.resolve(this.getPagedData($_mixin_storeSession('params', storeKey))).finally(() => {
-          this.$_isRestoring = false;
-        });
+          this.$_isRestoring = false
+        })
       } else {
-        this.sendFetchParam();
+        this.sendFetchParam()
       }
     },
     /** bussiness **/
-    handleExtraForm (newVal, oldVal) {
-      const { $_oldExtraForm } = this;
+    handleExtraForm(newVal, oldVal) {
+      const { $_oldExtraForm } = this
       if (newVal !== oldVal || JSON.stringify(newVal) !== $_oldExtraForm) {
-        this.$_oldExtraForm = JSON.stringify(newVal);
-        this.curPage = 1;
+        this.$_oldExtraForm = JSON.stringify(newVal)
+        this.curPage = 1
         this.$emit('extra-form-change', newVal, this.$_oldExtraForm)
       }
     },
-    sendFetchParam () {
-      if (this.$_isRestoring) return;
-      this.needStore && this.storeData();
-      const fetchAccessKey = this.fetchAccessKey || +new Date();
-      this.getPagedData(this.params, fetchAccessKey);
+    sendFetchParam() {
+      if (this.$_isRestoring) return
+      this.needStore && this.storeData()
+      const fetchAccessKey = this.fetchAccessKey || +new Date()
+      this.getPagedData(this.params, fetchAccessKey)
     },
-    refreshList (newVal) {
+    refreshList(newVal) {
       if (newVal) {
         this.sendFetchParam()
         this.$emit('update:refresh', false)
       }
     },
-    storeData () {
-      const { curPage, pageSize } = this;
-      this.$_mixin_storeSession('pagination', this.storeKey, { curPage, pageSize });
-      this.$_mixin_storeSession('params', this.storeKey, this.params);
+    storeData() {
+      const { curPage, pageSize } = this
+      this.$_mixin_storeSession('pagination', this.storeKey, { curPage, pageSize })
+      this.$_mixin_storeSession('params', this.storeKey, this.params)
     },
     /** public methods **/
-    getStoreData () {
+    getStoreData() {
       return {
         pagination: this.$_mixin_storeSession('pagination', this.storeKey),
         params: this.$_mixin_storeSession('params', this.storeKey)
       }
     },
-    sendRequest () {
+    sendRequest() {
       this.sendFetchParam()
     },
-    clearStoreData (module = ['params', 'pagination']) {
-      const modules = Array.isArray(module) ? module : [module];
+    clearStoreData(module = ['params', 'pagination']) {
+      const modules = Array.isArray(module) ? module : [module]
       modules.forEach(item => {
-        this.$_mixin_storeSession(item, this.storeKey, null, true);
-      });
+        this.$_mixin_storeSession(item, this.storeKey, null, true)
+      })
     },
     /** events **/
-    handleSizeChange (val) {
-      this.pageSize = val;
+    handleSizeChange(val) {
+      this.pageSize = val
     }
-
   }
 }
-
 </script>
 <style lang="scss">
 .ue-paged-list {

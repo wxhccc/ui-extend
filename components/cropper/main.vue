@@ -1,70 +1,83 @@
 <template>
   <div class="ue-cropper">
-    <img v-show="src" :src="src" />
+    <img v-show="src" ref="img" :src="src" @load="initCropper" />
     <slot name="init">
       <div v-if="!isReady" class="initing-model">
-        <span class="tip-span">{{initTip}}</span>
+        <span class="tip-span">{{ initTip }}</span>
       </div>
     </slot>
   </div>
 </template>
 
-<script>
-import Cropper from 'cropperjs';
-import 'cropperjs/dist/cropper.css';
+<script lang="ts">
+import { computed, defineComponent, mergeProps, ref } from 'vue'
+import Cropper from 'cropperjs'
+import { vueTypeProp } from '../utils/component'
+import { AnyFunction, AnyObject } from '../utils/types'
+// import 'cropperjs/dist/cropper.css'
 
-const defOptsCreator = (type) => {
+type ShortType = 'avatar'
+
+const defOptsCreator = (type?: ShortType) => {
   const typeOpts = {
-    avatar: { 
+    avatar: {
       aspectRatio: 1
     }
   }
-  return Object.assign({
+  return {
     viewMode: 2,
-  }, typeOpts[type])
+    ...(type ? typeOpts[type] : {})
+  }
 }
-export default {
+
+export interface CropperProps {
+  src: string
+  type?: 'avatar'
+  initTip?: string
+  options?: Cropper.Options
+}
+
+export type EventName = 'ready' | 'cropstart' | 'cropmove' | 'cropend' | 'crop' | 'zoom'
+const eventNames: EventName[] = ['ready', 'cropstart', 'cropmove', 'cropend', 'crop', 'zoom']
+
+export default defineComponent({
   name: 'UeCropper',
   props: {
-    src: [String],
-    type: String,
-    initTip: {
-      type: String,
-      default: 'cropper is initializing...'
-    },
-    options: Object
+    src: vueTypeProp<string>(String),
+    type: vueTypeProp<CropperProps['type']>(String),
+    initTip: vueTypeProp<CropperProps['initTip']>(String, 'cropper is initializing...'),
+    options: vueTypeProp<CropperProps['options']>(Object)
   },
-  data () {
-    return {
-      isReady: false,
-      $cropper: null
-    }
-  },
-  mounted () {
-    this.src && this.initCropper()
-  },
-  beforeDestroy () {
-    this.$cropper && this.$cropper.destroy()
-  },
-  computed: {
-    defOpts () {
-      return defOptsCreator(this.type)
-    },
-    handledEvents () {
-      let events = {};
-      const eventNames = ['ready', 'cropstart', 'cropmove', 'cropend', 'crop', 'zoom'];
-      eventNames.forEach(name => {
-        events[name] = (event) => {
-          this.options && typeof this.options[name] === 'function' && this.options[name](event);
-          name === 'ready' && this.setReadyState(true);
-          this.$emit('on-' + name, event);
+  emits: eventNames.map(name => `on-${name}`),
+  setup(props, { emit, attrs }) {
+    const isReady = ref(false)
+    const cropper = ref<Cropper>()
+    const img = ref<HTMLImageElement>()
+    const defOptions = computed(() => defOptsCreator(props.type))
+
+    const handledEvents = computed(() => {
+      const events = {} as Record<EventName, Cropper.Options[EventName]>
+
+      eventNames.forEach((name: EventName) => {
+        events[name] = (event: Cropper.CropperEvent) => {
+          const method = props.options
+          method && method instanceof Function && method(event)
+          name === 'ready' && setReadyState(true)
+          emit('on-' + name, event)
         }
-      });
-      return events;
-    },
-    handledOpts () {
-      return Object.assign({}, this.defOpts, this.options, this.handledEvents);
+      })
+      return events
+    })
+
+    const setReadyState = (state = false) => {
+      isReady.value = state
     }
+
+    const handledOpts = computed(() =>
+      mergeProps(attrs, defOptions.value, props.options as AnyObject, handledEvents.value)
+    ) as Cropper.Options
+
+    return { img, isReady, cropper, defOptions, setReadyState, handledOpts }
   },
   watch: {
     src: 'urlChange',
@@ -73,37 +86,41 @@ export default {
       deep: true
     }
   },
+  beforeUnmount() {
+    this.cropper && this.cropper.destroy()
+  },
   methods: {
     // utils
-    initCropper () {
+    initCropper() {
+      this.img && (this.cropper = new Cropper(this.img, this.handledOpts))
+      console.log(1111, this.cropper)
+    },
+
+    urlChange() {
+      this.setReadyState()
+      this.cropper ? this.cropper.replace(this.src) : this.initCropper()
+    },
+    resetCropper() {
       this.$nextTick(() => {
-        this.$el.firstChild && (this.$cropper = new Cropper(this.$el.firstChild, this.handledOpts))
+        this.cropper && this.cropper.reset()
       })
     },
-    setReadyState (state = false) {
-      this.isReady = state;
-    },
-    urlChange () {
-      this.setReadyState();
-      this.$cropper ? this.$cropper.replace(this.src) : this.initCropper()
-    },
-    resetCropper () {
-      this.$cropper && this.$nextTick(() => { this.$cropper.reset() })
-    },
-    getCroppedFile () {
+    getCroppedFile() {
       return new Promise(resolve => {
         this.callCropperFn('getCroppedCanvas').toBlob(resolve)
-      });
+      })
     },
-    callCropperFn (fn, ...args) {
-      const { $cropper } = this;
-      if ($cropper && typeof $cropper[fn] === 'function') return $cropper[fn](...args);
+    callCropperFn<K extends keyof Cropper>(fn: K, ...args: Parameters<Cropper[K]>) {
+      const { cropper } = this
+      if (cropper && typeof cropper[fn] === 'function')
+        return (cropper[fn] as AnyFunction<any>)(...args)
     }
-    // events
   }
-}
+})
 </script>
-<style lang="scss" scoped >
+
+<style lang="scss" scoped>
+@import 'cropperjs/dist/cropper.css';
 .ue-cropper {
   position: relative;
   overflow: hidden;
@@ -117,7 +134,7 @@ export default {
     width: 100%;
     height: 100%;
     text-align: center;
-    background-color: rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, 0.3);
     .tip-span {
       color: #ffffff;
       font-size: 16px;

@@ -1,3 +1,6 @@
+---
+title: InfoTable 信息表格
+---
 ## InfoTable 信息表格
 
 组件是使用`Row`组件和`Col`组件生成的类表格组件。用于展示label-value格式的信息。
@@ -40,7 +43,7 @@
 
 
 ::: tip 提示
-Layout组件文档参照 <element-link component="Layout"></element-link>
+Layout组件文档参照 <ui-link component="Layout"></ui-link>
 :::
 
 

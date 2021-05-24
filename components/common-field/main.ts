@@ -3,16 +3,16 @@ import {
   DefineComponent,
   defineComponent,
   h,
+  markRaw,
   mergeProps,
   resolveComponent,
-  toRef,
-  toRefs,
+  shallowRef,
   VNode
 } from 'vue'
 import { cloneDeep } from 'lodash-es'
-import { resolveProps, defaultProp } from '../utils/component'
-import { ON_UPDATE_MODEL_VALUE, UI_MODEL_VALUE, UPDATE_MODEL_VALUE } from '../utils/const'
-import { FieldOption } from './types'
+import { resolveProps, vueTypeProp } from '../utils/component'
+import { ON_UI_UPDATE_MODEL_VALUE, UI_MODEL_VALUE } from '../utils/const'
+import { CommonFieldProps } from './types'
 
 const fieldChild: Record<string, string> = {
   Select: 'Option',
@@ -20,84 +20,103 @@ const fieldChild: Record<string, string> = {
   RadioGroup: 'Radio'
 }
 
+type CFProps = CommonFieldProps
+
 type ResolveComponent = Exclude<ReturnType<typeof resolveComponent>, string>
 
 export default defineComponent({
   name: 'UeCommonField',
   props: {
-    modelValue: defaultProp<any>(null),
-    field: defaultProp<FieldOption>(Object, () => ({}))
+    modelValue: vueTypeProp<any>(null),
+    initValue: vueTypeProp<any>(null),
+    isNumber: Boolean,
+    data: vueTypeProp<CFProps['data']>(Array),
+    props: vueTypeProp<CFProps['props']>([Object, Function]),
+    component: vueTypeProp<CFProps['component']>([String, Function, Object]),
+    childComponent: vueTypeProp<CFProps['childComponent']>([String, Function, Object]),
+    dataItemRenader: vueTypeProp<CFProps['dataItemRenader']>([String, Function, Object]),
+    // only for element-plus
+    forbidValueFixed: Boolean,
+    slots: vueTypeProp<CFProps['slots']>(Object)
   },
   $_ue_methods: ['callFieldMethod'],
-  emits: [UPDATE_MODEL_VALUE],
+  emits: ['update:modelValue'],
   setup(props, { attrs, emit, slots }) {
-    const { component, childComponent, data, props: fProps } = toRefs(props.field)
-    const isNumber = toRef(props.field, 'isNumber')
     const parseNumber = (value: string) => {
       return Number.isNaN(Number.parseFloat(value)) ? '' : Number.parseFloat(value)
     }
 
     const fieldValue = computed({
       get(): any {
-        const initValue = toRef(props.field, 'initValue')
-        return initValue.value && props.modelValue === undefined
-          ? cloneDeep(initValue.value)
+        return props.initValue && props.modelValue === undefined
+          ? cloneDeep(props.initValue)
           : cloneDeep(props.modelValue)
       },
       set(value) {
         let handleVal = value
-        if (isNumber.value && typeof value === 'string') {
+        if (props.isNumber && typeof value === 'string') {
           handleVal = value.endsWith('.') || value === '-' ? value : parseNumber(value)
         }
-        emit(UPDATE_MODEL_VALUE, handleVal)
+        emit('update:modelValue', handleVal)
       }
     })
 
-    const onBlurNumberHandler = isNumber.value
-      ? {
-          onBlur: (...args: unknown[]) => {
-            if (typeof fieldValue.value === 'string') {
-              fieldValue.value = parseNumber(fieldValue.value)
+    const onBlurNumberHandler = computed(() =>
+      props.isNumber
+        ? {
+            onBlur: (...args: unknown[]) => {
+              if (typeof fieldValue.value === 'string') {
+                fieldValue.value = parseNumber(fieldValue.value)
+              }
+              if (attrs.onBlur instanceof Function) attrs.onBlur(...args)
             }
-            if (attrs.onBlur instanceof Function) attrs.onBlur(...args)
           }
-        }
-      : {}
-
-    const fieldProps = computed(() =>
-      mergeProps(
-        attrs,
-        fProps && fProps.value ? resolveProps(fProps.value) : {},
-        onBlurNumberHandler,
-        {
-          [UI_MODEL_VALUE]: fieldValue.value,
-          [ON_UPDATE_MODEL_VALUE]: (val: any) => (fieldValue.value = val),
-          ref: 'field'
-        }
-      )
+        : {}
     )
 
-    const Field =
-      typeof component.value === 'string'
-        ? (resolveComponent(component.value) as DefineComponent)
-        : component.value
+    const Field = shallowRef(
+      typeof props.component === 'string'
+        ? (resolveComponent(props.component) as DefineComponent)
+        : props.component
+    )
+
+    const modelProps = computed(() => {
+      if (!Field.value) return {}
+      const isModelValue = Field.value.props && 'modelValue' in Field.value.props
+      const modelValue = isModelValue ? 'modelValue' : UI_MODEL_VALUE
+      const onUpdateModelValue = isModelValue ? 'onUpdate:modelValue' : ON_UI_UPDATE_MODEL_VALUE
+      return {
+        [modelValue]: fieldValue.value,
+        [onUpdateModelValue]: (val: any) => (fieldValue.value = val),
+        ref: 'field'
+      }
+    })
+
+    const fieldProps = computed(() => {
+      if (!Field.value) return {}
+      return mergeProps(
+        attrs,
+        props.props ? resolveProps(props.props) : {},
+        onBlurNumberHandler.value,
+        modelProps.value
+      )
+    })
 
     const isItemNeedFixed = computed(() => {
-      const forbidValueFixed = toRef(props.field, 'forbidValueFixed')
-      if (forbidValueFixed.value || typeof component.value !== 'string') return false
-      return ['ElRadioGroup', 'ElCheckboxGroup'].includes(component.value)
+      if (props.forbidValueFixed || typeof props.component !== 'string') return false
+      return ['ElRadioGroup', 'ElCheckboxGroup'].includes(props.component)
     })
 
     const childField = computed<ResolveComponent | undefined>(() => {
-      if (childComponent && childComponent.value) {
+      if (props.childComponent) {
         const childFieldComp =
-          typeof childComponent.value === 'string'
-            ? resolveComponent(childComponent.value)
-            : childComponent.value
+          typeof props.childComponent === 'string'
+            ? resolveComponent(props.childComponent)
+            : markRaw(props.childComponent)
         if (typeof childFieldComp !== 'string') return childFieldComp
       }
-      if (typeof component.value === 'string') {
-        const noPrefixName = component.value.replace('El', '')
+      if (typeof props.component === 'string') {
+        const noPrefixName = props.component.replace('El', '')
         const childFieldComp = fieldChild[noPrefixName]
           ? resolveComponent(`El${fieldChild[noPrefixName]}`)
           : ''
@@ -107,37 +126,37 @@ export default defineComponent({
     })
 
     const createDataItem = (item: UE.Option, index: number) => {
-      const dataItemRenader = toRef(props.field, 'dataItemRenader')
       const { value, label } = item
       const childNodes =
-        dataItemRenader.value && typeof dataItemRenader.value === 'function'
-          ? dataItemRenader.value(item, index)
+        props.dataItemRenader && props.dataItemRenader instanceof Function
+          ? props.dataItemRenader(item, index)
           : undefined
       const ChildFieldComp = childField.value as DefineComponent
+
       return isItemNeedFixed.value
         ? h(
             ChildFieldComp,
-            { ...item, label: value },
+            { ...item, label: value, key: value },
             { default: () => (childNodes ? childNodes : label) }
           )
-        : h(ChildFieldComp, { ...item }, { default: () => childNodes })
+        : h(ChildFieldComp, { ...item, key: value }, { default: () => childNodes })
     }
 
     const dataChildren = computed(() => {
-      return data && Array.isArray(data.value) && data.value.length && childField.value
-        ? data.value.map(createDataItem)
+      return Array.isArray(props.data) && props.data.length && childField.value
+        ? props.data.map(createDataItem)
         : undefined
     })
 
-    const dataSlots = toRef(props.field, 'slots')
-    const fieldSlots = { ...dataSlots.value, ...slots }
-    if (dataChildren.value) {
-      fieldSlots.default = () => dataChildren.value as VNode[]
-    }
+    const fieldSlots = computed(() => ({
+      ...(dataChildren.value ? { default: () => dataChildren.value } : {}),
+      ...props.slots,
+      ...slots
+    }))
 
     return () => {
-      if (!Field) return
-      return h(Field, fieldProps.value, fieldSlots)
+      if (!Field.value) return
+      return h(Field.value, fieldProps.value, fieldSlots.value)
     }
   },
   methods: {

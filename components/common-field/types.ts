@@ -1,9 +1,10 @@
 import { DefineComponent, Slots, VNode } from 'vue'
-import { FunctionalType } from '../utils/types'
+import { AnyObject, FunctionalType } from '../utils/types'
 
-export interface FieldOption<V = any, D extends UE.Option = UE.Option> {
+export interface CommonFieldProps<V = any, D extends UE.Option = UE.Option> extends AnyObject {
+  modelValue: V
   initValue?: V
-  isNumber?: number
+  isNumber?: boolean
   data?: D[]
   props?: FunctionalType<Record<string, any>>
   component: string | DefineComponent

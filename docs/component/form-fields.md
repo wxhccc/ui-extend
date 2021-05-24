@@ -1,3 +1,6 @@
+---
+title: FormFields 表单项组
+---
 ## FormFields 表单项组
 
 使用[FormFieldItem](./form-field-item)组件或者自定义组件来生成一组表单项，(多个)表单项组可以放置于`Form`组件中来渲染出完整表单。此外带data数据的表单项组件之间还可以设置联动。

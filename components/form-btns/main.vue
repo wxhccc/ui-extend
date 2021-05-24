@@ -31,19 +31,14 @@
   </div>
 </template>
 <script lang="ts">
-import { ComponentPublicInstance, defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 import Button, { ButtonProps } from '../ui-comps/button'
 import confirm from '../ui-comps/confirm'
-import { AnyFunction } from '../utils/types'
-import { defaultProp } from '../utils/component'
+import { vueTypeProp } from '../utils/component'
+import { BtnType, FormBtnsProps } from './types'
 
-export type BtnType = 'submit' | 'cancel' | 'reset'
 const allBtnKeys: BtnType[] = ['submit', 'cancel', 'reset']
-export type BtnsProps = ButtonProps | ((btnType: BtnType) => ButtonProps)
-export interface FormInstance extends ComponentPublicInstance {
-  validate: () => Promise<unknown>
-  resetFields: AnyFunction<void>
-}
+type FBProps = FormBtnsProps
 
 export default defineComponent({
   name: 'UeFormBtns',
@@ -52,16 +47,16 @@ export default defineComponent({
   },
   props: {
     sending: Boolean,
-    form: defaultProp<FormInstance>(Object),
-    submit: defaultProp<AnyFunction<void>>(Function),
-    cancel: defaultProp<AnyFunction<void>>(Function),
+    form: vueTypeProp<FBProps['form']>(Object),
+    submit: vueTypeProp<FBProps['submit']>(Function),
+    cancel: vueTypeProp<FBProps['cancel']>(Function),
     isCancel: Boolean,
     submitOnly: Boolean,
-    btnKeys: defaultProp<BtnType[]>(Array),
+    btnKeys: vueTypeProp<FBProps['btnKeys']>(Array),
     isValidate: Boolean,
     submitConfirm: Boolean,
-    btnProps: defaultProp<BtnsProps>([Object, Function], () => ({})),
-    texts: defaultProp<Record<string, string>>(Object, () => ({}))
+    btnProps: vueTypeProp<FBProps['btnProps']>([Object, Function], () => ({} as ButtonProps)),
+    texts: vueTypeProp<FBProps['texts']>(Object, () => ({}))
   },
   emits: ['validate-error'],
   computed: {

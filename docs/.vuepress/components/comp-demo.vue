@@ -1,7 +1,29 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+const props = withDefaults(defineProps<{
+  name: string
+}>(), { name: 'Base' })
+
+const route = useRoute()
+
+const componentName = computed(() => {
+  const { path } = route
+  return path.indexOf('/component/') >= 0 ? path.split('/').pop()?.split('.').shift() : ''
+})
+
+const demoCompName = computed(() => {
+  return `${componentName.value}-${props.name}`
+})
+</script>
+<script lang="ts">
+export default { name: 'CompDemo' }
+</script>
+
 <template>
-  <demo-block v-if="UEGLOBAL.elemReady" :class="['component-demo-block', `${$componentName}-demo`]">
-    <template v-if="componentName" #source>
-      <component :is="componentName"></component>
+  <demo-block :class="['component-demo-block', `${componentName}-demo`]">
+    <template v-if="demoCompName" #source>
+      <component :is="demoCompName"></component>
     </template>
     <template #default>
       <slot name="description"></slot>
@@ -12,28 +34,7 @@
   </demo-block>
 </template>
 
-<script>
-export default {
-  name: 'CompDemo',
-  props: {
-    name: {
-      type: String,
-      default: 'Base'
-    }
-  },
-  created () {
-    !this.UEGLOBAL.elemReady && this.$ElemPromise.then(() => {
-      this.UEGLOBAL.elemReady = true
-    })
-  },
-  computed: {
-    componentName () {
-      const { $componentName, name } = this
-      return `demo-${$componentName}-${name}`
-    }
-  }
-}
-</script>
+
 
 <style lang="scss">
 .component-demo-block {

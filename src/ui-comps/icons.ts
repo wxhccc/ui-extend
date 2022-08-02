@@ -10,11 +10,11 @@ import {
   Edit
 } from '@element-plus/icons-vue'
 
-const createIconComponent = (name: string, Search: DefineComponent) =>
+const createIconComponent = (name: string, component: DefineComponent) =>
   defineComponent({
     name,
     setup() {
-      return () => h(ElIcon, { default: () => h(Search) })
+      return () => h(ElIcon, h(component))
     }
   })
 

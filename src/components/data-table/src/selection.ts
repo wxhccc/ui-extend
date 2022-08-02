@@ -32,6 +32,6 @@ export default defineComponent({
       } as Partial<UeRadioProps>
     })
 
-    return () => h(UeRadio, handleBindProps.value)
+    return () => h(UeRadio, handleBindProps.value, h('span'))
   }
 })

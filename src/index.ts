@@ -2,7 +2,7 @@ import { App } from 'vue'
 import { version } from '../package.json'
 import Loading from './ui-comps/loading'
 import ActionBtns from '@/components/action-btns'
-// import DataTable from '@/components/data-table'
+import DataTable from '@/components/data-table'
 import Cropper from '@/components/cropper'
 import CommonField from '@/components/common-field'
 import FormBtns from '@/components/form-btns'
@@ -34,7 +34,8 @@ const components = [
   PagedList,
   SearchInput,
   Ticker,
-  TreeField
+  TreeField,
+  DataTable
 ]
 
 const install = function (app: App) {
@@ -54,7 +55,8 @@ export {
   PagedList,
   SearchInput,
   Ticker,
-  TreeField
+  TreeField,
+  DataTable
 }
 
 export default {
@@ -72,5 +74,6 @@ export default {
   PagedList,
   SearchInput,
   Ticker,
-  TreeField
+  TreeField,
+  DataTable
 }

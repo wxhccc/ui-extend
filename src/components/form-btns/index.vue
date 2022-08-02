@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { vueTypeProp } from '@/utils/component'
-import { UeMessageBox, UeButtonProps } from '@/ui-comps'
+import { UeButton, UeMessageBox, UeButtonProps } from '@/ui-comps'
 import type { BtnType, FormBtnsProps } from './types'
 import { awaitWrapper } from '@wxhccc/es-util'
 
@@ -93,7 +93,7 @@ export default { name: 'FormBtns' }
 <template>
   <div class="me-form-btns">
     <template v-for="item in handleBtnKeys">
-      <a-button
+      <ue-button
         v-if="item === 'submit'"
         :key="item"
         class="me-button"
@@ -101,18 +101,20 @@ export default { name: 'FormBtns' }
         :loading="sending"
         v-bind="handleBtnProps(item)"
         @click="submitHandle"
-        >{{ sending ? handleWords.sending : handleWords.sureBtn }}</a-button
       >
-      <a-button
+        {{ sending ? handleWords.sending : handleWords.sureBtn }}
+      </ue-button>
+      <ue-button
         v-if="item === 'cancel'"
         :key="item"
         class="me-button"
         :disabled="sending"
         v-bind="handleBtnProps(item)"
         @click="callMethod('cancel')"
-        >{{ handleWords.cancelBtn }}</a-button
       >
-      <a-button
+        {{ handleWords.cancelBtn }}
+      </ue-button>
+      <ue-button
         v-if="item === 'reset'"
         :key="item"
         class="me-button"
@@ -121,7 +123,7 @@ export default { name: 'FormBtns' }
         @click="resetForm"
       >
         {{ handleWords.resetBtn }}
-      </a-button>
+      </ue-button>
     </template>
   </div>
 </template>

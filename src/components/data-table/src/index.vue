@@ -1,129 +1,102 @@
 <script setup lang="ts">
-import { Table } from 'UE/ui-comps';
-import { TableMethods } from 'UE/ui-comps/table';
-import refFnProxyMixin from 'UE/mixins/ref-fn-proxy';
-import UeDeepColumn from './deep-column';
-import { get, pick } from 'UE/utils/lodash'
+import { ref, watch, provide, computed, useAttrs } from 'vue'
+import { get, isFunction } from 'lodash-es'
+import { UeTable, UeTableProps } from '@/ui-comps'
+import UeDeepColumn from './deep-column'
+import { useVModel } from '@/hooks/props'
+import { vueTypeProp } from '@/utils/component'
+import { DataTableColumn, DataTableProps } from '../types'
 
-const defEmptyCell = (value) => ((value || value === 0) ? value : '--')
+const defEmptyCell = (value: StrOrNum) => (value || value === 0 ? value : '--')
 
 const tbPropsDefault = {
   border: true,
   stripe: true
-};
-
-export default {
-  name: 'UeDataTable',
-  components: {
-    'UeTable': Table,
-    UeDeepColumn
-  },
-  mixins: [refFnProxyMixin('table', TableMethods)],
-  props: {
-    ...Table.props,
-    columns: {
-      type: Array,
-      required: true
-    },
-    selectionKey: [String, Function],
-    selectionValue: [Array, String, Number],
-    setEmptyCell: [Function, Boolean]
-  },
-  provide () {
-    return {
-      getScopeRowKey: this.getScopeRowKey,
-      getSelectItemValue: this.getSelectItemValue,
-      handleRadioChange: this.handleRadioChange
-    }
-  },
-  data () {
-    return {
-      selfSelectionValue: []
-    }
-  },
-  computed: {
-    $_selectionValue: {
-      get () { return this.selectionValue || this.selfSelectionValue; },
-      set (value) {
-        this.selfSelectionValue = value;
-        this.$emit('update:selectionValue', value);
-      }
-    },
-    emptyCellHandler () {
-      const { setEmptyCell } = this;
-      return typeof setEmptyCell === 'function' ? setEmptyCell : (setEmptyCell && defEmptyCell);
-    },
-    handleColumns () {
-      return this.columns.filter(item => (typeof item.hide === 'function' ? item.hide() : !item.hide))
-    },
-    selectionWatcher () {
-      return {
-        value: this.selectionValue,
-        data: this.data
-      };
-    },
-    tableProps () {
-      return { ...tbPropsDefault, ...pick(this.$props, Object.keys(Table.props)) };
-    },
-    handledSelectionKey () {
-      return this.selectionKey || this.rowKey;
-    }
-  },
-  watch: {
-    selectionWatcher: {
-      handler: 'handleSelectionValueChange',
-      deep: true
-    }
-  },
-  $_ue_methods: TableMethods,
-  methods: {
-    getScopeRowKey (row) {
-      return get(row, this.rowKey);
-    },
-    getSelectItemValue (row) {
-      const selectionKey = this.handledSelectionKey;
-      if (typeof selectionKey === 'string') {
-        return row[selectionKey];
-      } else if (typeof selectionKey === 'function') {
-        return selectionKey(row);
-      }
-      return row;
-    },
-    handleSelectionValueChange () {
-      if (!Array.isArray(this.selectionValue)) return;
-      const { selectionValue, data, $refs: { table } } = this;
-      table && data.forEach(row => {
-        const value = this.getSelectItemValue(row);
-        table.toggleRowSelection(row, selectionValue.indexOf(value) >= 0);
-      });
-    },
-    /** events **/ 
-    handleCheckboxChange (values) {
-      if (!Array.isArray(this.selectionValue)) return;
-      const { handledSelectionKey: selectionKey } = this;
-      const keys = selectionKey ? values.map(this.getSelectItemValue) : values
-      this.$_selectionValue = keys;
-    },
-    handleRadioChange (value) {
-      this.$_selectionValue = value
-    }
-  }
 }
+type SelectionValue = DataTableProps['selectionValue']
+
+const props = defineProps({
+  columns: vueTypeProp<NonNullable<DataTableProps['columns']>>(Array, () => [], true),
+  selectionKey: vueTypeProp<DataTableProps['selectionKey']>([String, Function]),
+  selectionValue: vueTypeProp<SelectionValue>([Array, String, Number]),
+  setEmptyCell: vueTypeProp<DataTableProps['setEmptyCell']>([Function, Boolean])
+})
+const emit = defineEmits<{
+  (e: 'update:selectionValue', value?: SelectionValue): void
+}>()
+
+const attrs = useAttrs() as unknown as UeTableProps<any>
+
+const table = ref()
+
+const handleSelectionValue = useVModel(props, 'selectionValue', emit, { supportInner: true })
+
+const emptyCellHandler = computed(() => {
+  const { setEmptyCell } = props
+  return isFunction(setEmptyCell) ? setEmptyCell : setEmptyCell ? defEmptyCell : undefined
+})
+const handleColumns = computed(() =>
+  props.columns.filter((item) => (isFunction(item.hide) ? item.hide() : !item.hide))
+)
+
+const handledSelectionKey = computed(() => {
+  return props.selectionKey || attrs.rowKey
+})
+
+const getScopeRowKey = (row: any) => {
+  const { rowKey } = attrs
+  return isFunction(rowKey) ? rowKey(row) : rowKey ? get(row, rowKey) : Math.random()
+}
+
+const getSelectItemValue = (row: any) => {
+  const selectionKey = handledSelectionKey.value
+  if (typeof selectionKey === 'string') {
+    return row[selectionKey]
+  } else if (typeof selectionKey === 'function') {
+    return selectionKey(row)
+  }
+  return row
+}
+const handleSelectionValueChange = () => {
+  const values = handleSelectionValue.value
+  if (!Array.isArray(values)) return
+  const { data } = attrs
+  table.value && Array.isArray(data)
+  data.forEach((row) => {
+    const value = getSelectItemValue(row)
+    table.value.toggleRowSelection(row, values.indexOf(value) >= 0)
+  })
+}
+/** events **/
+const handleCheckboxChange = (values: StrOrNum[]) => {
+  if (!Array.isArray(handleSelectionValue.value)) return
+  const selectionKey = handledSelectionKey.value
+  const keys = selectionKey ? values.map(getSelectItemValue) : values
+  handleSelectionValue.value = keys
+}
+const handleRadioChange = (value: SelectionValue) => {
+  handleSelectionValue.value = value
+}
+
+provide('getScopeRowKey', getScopeRowKey)
+provide('getSelectItemValue', getSelectItemValue)
+provide('handleRadioChange', handleRadioChange)
+
+defineExpose(table.value)
+
+watch(() => [attrs.data, props.selectionValue], handleSelectionValueChange)
+</script>
+<script lang="ts">
+export default { name: 'UeDataTable' }
 </script>
 <template>
-  <ue-table
-    class="ue-data-table"
-    ref="table"
-    v-bind="tableProps"
-    v-on="$listeners"
-    @selection-change="handleCheckboxChange"
-  >
+  <ue-table ref="table" class="ue-data-table" @selection-change="handleCheckboxChange">
     <ue-deep-column
       v-for="(column, index) of handleColumns"
-      :column="column"
-      :data="{ selectionValue: $_selectionValue }"
-      :empty-cell="emptyCellHandler"
       :key="column.key || column.prop || index"
+      :column="column"
+      :data="{ selectionValue: handleSelectionValue }"
+      :empty-cell="emptyCellHandler"
     >
     </ue-deep-column>
   </ue-table>

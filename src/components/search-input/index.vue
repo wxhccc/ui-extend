@@ -29,16 +29,14 @@ const setValue = () => {
 }
 </script>
 <script lang="ts">
-export default { name: 'SearchInput' }
+export default { name: 'UeSearchInput' }
 </script>
 
 <template>
   <ue-input v-bind="$attrs" v-model="tempValue" class="ue-search-input" @keyup.enter="setValue">
     <template #append>
       <ue-button plain v-bind="btnProps" :loading="loading" @click="setValue">
-        <template #icon>
-          <search-outlined></search-outlined>
-        </template>
+        <search-outlined></search-outlined>
       </ue-button>
     </template>
   </ue-input>

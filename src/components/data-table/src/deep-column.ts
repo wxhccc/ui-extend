@@ -1,69 +1,85 @@
 import { defineComponent, h, inject, computed } from 'vue'
-import { omit } from 'lodash-es';
-import { UeTableColumn } from '@/ui-comps';
-import ActionBtnsSlot from './action-btns';
+import { omit } from 'lodash-es'
+import { UeTableColumn } from '@/ui-comps'
+import ActionBtns from '@/components/action-btns'
 import SelectionSlot from './selection'
-import { vueTypeProp } from '@/utils/component';
-import { DataTableColumn } from '../types';
+import { vueTypeProp } from '@/utils/component'
+import { DataTableColumn } from '../types'
 
-
-export default defineComponent({
+const DeepColumn = defineComponent({
   name: 'UeDeepColumn',
   props: {
-    column: vueTypeProp<DataTableColumn>(Object),
+    column: vueTypeProp<DataTableColumn>(Object, () => ({} as DataTableColumn)),
     data: vueTypeProp<any>(null),
-    emptyCell: vueTypeProp<boolean | AnyFunction<StrOrNum>>([Boolean, Function])
+    emptyCell: vueTypeProp<undefined | AnyFunction<StrOrNum>>(Function)
   },
   setup(props) {
     const getScopeRowKey = inject('getScopeRowKey') as AnyFunction<StrOrNum>
 
-    const tableColumnProps = computed(() => getTableColumnProps(props.column, props.emptyCell))
-
-    const slotComponent = computed(() => {
-      const { slots, action, selection } = props.column
-      const { default: defSlot } = slots || {}
-      return defSlot || (action && ActionBtnsSlot) || (selection === 'radio' && SelectionSlot);
+    const tableColumnProps = computed(() => {
+      const { column, emptyCell } = props
+      const { slots, action, prop, formatter, selection, width, minWidth } = column
+      const result = omit(column, [
+        'isRemoteSort',
+        'action',
+        'slots',
+        'children',
+        'selection',
+        'getSelectionProps'
+      ])
+      if (emptyCell && !slots?.default && !action && prop) {
+        result.formatter = (...args) => {
+          const result = formatter ? formatter(...args) : args[2]
+          return emptyCell ? emptyCell(result, ...args) : result
+        }
+      }
+      if (selection === 'checkbox') {
+        result.type = 'selection'
+      } else if (selection === 'radio' && (!width || !minWidth)) {
+        result.width = 50
+      }
+      return result
     })
 
-    const getTableColumnProps = (column, emptyCell) => {
-      const { scopeSlot, action, prop, formatter, selection, width, minWidth } = column;
-      let result = omit(column, ['isRemoteSort', 'action', 'slots', 'children', 'selection', 'getSelectionProps']);
-      if (emptyCell && !scopeSlot && !action && prop) {
-        result.formatter = (...args) => {
-          const result = formatter ? formatter(...args) : args[2];
-          return emptyCell ? emptyCell(result, ...args) : result;
-        };
-      }
-      selection && handleSelectionColumn(result, selection);
-      return result;
-    }
-    const handleSelectionColumn = (props, type) => {
-      type === 'radio'
-        ? (!props.width || !props.minWidth) && (props.width = 50)
-        : (props.type = 'selection');
-    }
-    const scopedSlotCreator = () => {
+    const handleSlots = computed(() => {
       const { column, data } = props
-      return (scope) => h(component, { key: getScopeRowKey(scope.row), props: { column, scope, data } })
-    }
+      const { children, slots, action, selection, notUseRender } = column
+      const { default: defSlot, ...rest } = slots || {}
+      const childrenColumns: any =
+        Array.isArray(children) && children.length
+          ? children.map((item, index) => h(DeepColumn, { column: item, key: index }))
+          : null
+      const needDefSlot: boolean = !notUseRender && !!(defSlot || action || selection === 'radio')
+      return {
+        ...rest,
+        ...(needDefSlot || childrenColumns
+          ? {
+              default: (scope: any) => {
+                const defSlotContent = defSlot
+                  ? defSlot(scope)
+                  : action
+                  ? h(ActionBtns, {
+                      key: getScopeRowKey(scope.row),
+                      btns: action,
+                      loadingFlags: scope.row,
+                      data: scope.row,
+                      extraArgs: [scope]
+                    })
+                  : selection === 'radio'
+                  ? h(SelectionSlot, { key: getScopeRowKey(scope.row), column, scope, data })
+                  : null
+                return [defSlotContent, childrenColumns]
+              }
+            }
+          : {})
+      }
+    })
 
-    return () => {
-      const { column: { children, notUseScopeSlot }, slotComponent, headerComponent } = this;
-      let scopedSlots = {};
-      slotComponent && !notUseScopeSlot && (scopedSlots.default = this.scopedSlotCreator(h, slotComponent));
-      headerComponent && (scopedSlots.header = this.scopedSlotCreator(headerComponent));
-      return h(UeTableColumn, )
-
-
-      )
-    }
+    return () => h(UeTableColumn, tableColumnProps.value, handleSlots.value)
   }
 })
 
 // <TableColumn {...{ props: this.tableColumnProps }} scopedSlots={scopedSlots}>
-// {
-//   Array.isArray(children) && children.length && children.map((item, index) => (
-//     <UeDeepColumn column={item} key={index}></UeDeepColumn>
-//   ))
-// }
+
 // </TableColumn>
+export default DeepColumn

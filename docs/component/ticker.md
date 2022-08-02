@@ -5,13 +5,13 @@
 ### 基础用法
 
 :::demo Base
-<<< @/docs/.vuepress/components/demo/ticker/Base.vue
+<<< @/docs/.vuepress/demo/ticker/Base.vue
 :::
 
 ### 更多样的配置
 
 :::demo props-control
-<<< @/docs/.vuepress/components/demo/ticker/props-control.vue
+<<< @/docs/.vuepress/demo/ticker/props-control.vue
 :::
 
 !!!include(ticker/index.zh-CN.md)!!!

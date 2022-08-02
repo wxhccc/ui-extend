@@ -87,6 +87,7 @@ const setParentNodeCheck = (node: any) => {
 /** event **/
 const onValueChange = (data: any) => {
   if (props.checkMode === 'one-way') {
+    console.log(treeField.value)
     const curNode = treeField.value?.getNode(data)
     const { checked } = curNode
     checked && setParentNodeCheck(curNode)
@@ -104,7 +105,7 @@ const { ignoreWatch } = useIgnoreWatch(
 )
 </script>
 <script lang="ts">
-export default { name: 'TreeField' }
+export default { name: 'UeTreeField' }
 </script>
 <template>
   <ue-tree

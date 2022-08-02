@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, reactive, computed, watch, useAttrs } from 'vue'
 import CopyClipboard from '@/components/copy-clipboard'
-import { UeImage } from '@/ui-comps'
+import { UeForm, UeRow, UeCol, UeButton, UeImage, UeButtonProps } from '@/ui-comps'
 import { EyeOutlined, CheckOutlined, CloseOutlined, EditOutlined } from '@/ui-comps/icons'
 import { vueTypeProp } from '@/utils/component'
-import FormFieldItem, { FormFieldItemOption, UeColProps } from '../form-field-item'
+import FormFieldItem, { FormFieldItemOption } from '../form-field-item'
 import { InfoTableProps, CellItem } from './types'
 
 type ITPWithDef = Required<InfoTableProps>
@@ -15,7 +15,7 @@ const props = defineProps({
   editMode: vueTypeProp<ITPWithDef['editMode']>(String, 'manual'),
   data: vueTypeProp<ITPWithDef['data']>(Object, () => ({})),
   cells: vueTypeProp<ITPWithDef['cells']>(Array, () => []),
-  column: vueTypeProp<ITPWithDef['column']>(Array, 3),
+  column: vueTypeProp<ITPWithDef['column']>(Number, 3),
   modelValue: vueTypeProp<InfoTableProps['modelValue']>(Object),
   setEmptyCell: vueTypeProp<InfoTableProps['setEmptyCell']>([Boolean, Function], true),
   bordered: vueTypeProp<InfoTableProps['bordered']>(Boolean),
@@ -51,7 +51,7 @@ const labelStyle = computed(() => {
     ? { width: typeof labelWidth === 'number' ? `${labelWidth}px` : labelWidth }
     : {}
 })
-const compSize = computed(() => (attrs.size as string) || 'small')
+const compSize = computed(() => (attrs.size as UeButtonProps['size']) || 'small')
 
 const valueOrData = computed(() => props.modelValue || props.data)
 
@@ -170,11 +170,11 @@ watch(valueOrData, () => {
 })
 </script>
 <script lang="ts">
-export default { name: 'InfoTable' }
+export default { name: 'UeInfoTable' }
 </script>
 
 <template>
-  <a-form class="ue-info-table" :model="formData">
+  <ue-form class="ue-info-table" :model="formData">
     <div class="table-header">
       <div class="header-title">
         <slot name="title">
@@ -182,16 +182,16 @@ export default { name: 'InfoTable' }
         </slot>
       </div>
       <slot name="extra">
-        <a-button v-if="editBtn" type="link" @click="$emit('edit')">
+        <ue-button v-if="editBtn" link @click="$emit('edit')">
           <template #icon>
             <EditOutlined />
           </template>
           编辑
-        </a-button>
+        </ue-button>
       </slot>
     </div>
-    <a-row :class="['info-table', { 'is-bordered': bordered }]">
-      <a-col
+    <ue-row :class="['info-table', { 'is-bordered': bordered }]">
+      <ue-col
         v-for="item in handleCells"
         :key="getItemKey(item)"
         :class="['info-item-cell', { 'no-wrap-cell': valueNoWrap }]"
@@ -219,9 +219,9 @@ export default { name: 'InfoTable' }
             }}</a>
             <template v-else>
               <span v-if="valueNoWrap" class="info-text ue-text-ellipsis">
-                <a-tooltip :title="getItemValue(item, secretFlags[getItemKey(item)])">
+                <ue-tooltip :title="getItemValue(item, secretFlags[getItemKey(item)])">
                   {{ getItemValue(item, secretFlags[getItemKey(item)]) }}
-                </a-tooltip>
+                </ue-tooltip>
               </span>
               <span v-else class="info-text">{{
                 getItemValue(item, secretFlags[getItemKey(item)])
@@ -231,34 +231,34 @@ export default { name: 'InfoTable' }
                 class="ope-btn copy-btn"
                 :text="getItemValue(item)"
               />
-              <a-button
+              <ue-button
                 v-else-if="item.isSecret"
                 class="ope-btn view-btn"
-                type="link"
+                link
                 size="small"
                 @click="switchSecretHidden(item)"
               >
                 <EyeOutlined />
-              </a-button>
+              </ue-button>
             </template>
           </template>
           <div v-if="checkItemCanEdit(item) && editMode === 'manual'" class="edit-btns">
             <template v-if="getItemEditFlag(item)">
-              <a-button type="link" :size="compSize" @click="setEditFlag(item, false)"
+              <ue-button link :size="compSize" @click="setEditFlag(item, false)"
                 ><close-outlined
-              /></a-button>
-              <a-button type="link" :size="compSize" @click="updateValue(item)"
+              /></ue-button>
+              <ue-button link :size="compSize" @click="updateValue(item)"
                 ><check-outlined
-              /></a-button>
+              /></ue-button>
             </template>
-            <a-button v-else type="link" :size="compSize" @click="editItem(item)"
+            <ue-button v-else link :size="compSize" @click="editItem(item)"
               ><edit-outlined
-            /></a-button>
+            /></ue-button>
           </div>
         </div>
-      </a-col>
-    </a-row>
-  </a-form>
+      </ue-col>
+    </ue-row>
+  </ue-form>
 </template>
 
 <style lang="scss">

@@ -1615,6 +1615,15 @@
     "@vuepress/core" "2.0.0-beta.49"
     prismjs "^1.28.0"
 
+"@vuepress/plugin-register-components@^2.0.0-beta.49":
+  version "2.0.0-beta.49"
+  resolved "https://registry.yarnpkg.com/@vuepress/plugin-register-components/-/plugin-register-components-2.0.0-beta.49.tgz#d4ff7d95090df55101f54491c9f0e317aa24c4cc"
+  integrity sha512-OYnsLazh5f3ldwdh/qT8rdVjqMEh7eOiGrwucGRvlUwuQ71CE51OUrK6qIOaGZ5gkwmamYcAwLF37bs5lyZ+oA==
+  dependencies:
+    "@vuepress/core" "2.0.0-beta.49"
+    "@vuepress/utils" "2.0.0-beta.49"
+    chokidar "^3.5.3"
+
 "@vuepress/plugin-theme-data@2.0.0-beta.49":
   version "2.0.0-beta.49"
   resolved "https://registry.yarnpkg.com/@vuepress/plugin-theme-data/-/plugin-theme-data-2.0.0-beta.49.tgz#a9e8ccb2d8aecb04c6b5a8c07a039eae1ef0be6f"

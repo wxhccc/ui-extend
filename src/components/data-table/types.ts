@@ -1,7 +1,9 @@
 import { Slot } from 'vue'
 import { ActionBtnIem } from '@/components/action-btns/type'
+import { UeTableColumnProps } from '@/ui-comps'
 
-export interface DataTableColumn {
+export interface DataTableColumn<T = any> extends UeTableColumnProps<T> {
+  key?: StrOrNum
   /** 是否隐藏（不渲染）当前列，可以为boolean类型值，也可以用函数动态控制。 */
   hide?: Functional<boolean>
   /** 操作按钮数组，设置此值时会使用内部操作按钮组件按钮。操作按钮采用ActionBtns组件生成 */

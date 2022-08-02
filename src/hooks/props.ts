@@ -21,7 +21,7 @@ export const useIgnoreWatch = (...args: Parameters<typeof watch>) => {
 export const useVModel = <P extends AnyObject, K extends Extract<keyof P, string>>(
   props: P,
   key: K,
-  emit: (name: `update:${K}` | 'change', value?: P[K]) => void,
+  emit: (name: `update:${K}`, value?: P[K]) => void,
   options?: {
     beforeEmit?: AnyFunction<void>
     supportInner?: boolean

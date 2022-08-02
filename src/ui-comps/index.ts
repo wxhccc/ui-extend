@@ -46,5 +46,9 @@ export type {
   ImageProps as UeImageProps
 } from 'element-plus'
 
+export { TableColumnCtx as UeTableColumnProps } from 'element-plus/es/components/table/src/table-column/defaults'
+
+export { TableProps as UeTableProps } from 'element-plus/es/components/table/src/table/defaults'
+
 export { default as UeLoading } from './loading'
 export type { LoadingProps } from './loading'

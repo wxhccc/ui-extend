@@ -11,3 +11,5 @@ docs/.vuepress/dist
 .npm
 .eslintcache
 *.map
+.temp
+.cache

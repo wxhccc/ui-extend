@@ -11,7 +11,7 @@
 此示例包含各种情况下的按钮处理。
 
 ::: demo All
-<<< @/docs/.vuepress/components/demo/action-btns/All.vue
+<<< @/docs/.vuepress/demo/action-btns/All.vue
 :::
 
 ::: tip 提示

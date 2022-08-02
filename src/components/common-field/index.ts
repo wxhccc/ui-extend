@@ -46,7 +46,7 @@ export interface CommonFieldProps<
 type CFProps = CommonFieldProps
 
 export default defineComponent({
-  name: 'CommonField',
+  name: 'UeCommonField',
   inheritAttrs: false,
   props: {
     modelValue: vueTypeProp<any>(null),

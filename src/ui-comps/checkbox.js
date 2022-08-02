@@ -1,1 +1,0 @@
-export { Checkbox as default, CheckboxGroup } from 'element-ui';

@@ -1,1 +1,0 @@
-export { FormItem as default } from 'element-ui';

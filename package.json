@@ -2,7 +2,8 @@
   "name": "@wxhccc/ui-extend",
   "version": "0.1.2",
   "description": "a library contains some componets base on ohter ui library.",
-  "main": "lib/index.common.js",
+  "main": "dist/ui-extend.umd.js",
+  "module": "dist/ui-extend.mjs",
   "unpkg": "lib/index.js",
   "files": [
     "lib",

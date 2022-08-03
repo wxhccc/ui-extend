@@ -7,7 +7,7 @@
     :pagination-props="{layout: 'total,sizes,prev,pager,next'}"
     :getPagedData="getPagedData"
   >
-    <template #default="{rows}">
+    <template #default="{ rows }">
       <ul class="list-ul">
         <li v-for="(item, index) in rows">
           <div class="avatar"></div>

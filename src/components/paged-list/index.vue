@@ -15,7 +15,7 @@ export type PagedListProps<D extends AnyObject = AnyObject> = PagedCommonProps<D
 const storeSession = useStorage('PagedList')
 
 export default defineComponent({
-  name: 'PagedList',
+  name: 'UePagedList',
   components: {
     UePagination,
     UeLoading

@@ -3,7 +3,6 @@ import { computed } from 'vue'
 import { vueTypeProp } from '@/utils/component'
 import { UeButton, UeMessageBox, UeButtonProps } from '@/ui-comps'
 import type { BtnType, FormBtnsProps } from './types'
-import { awaitWrapper } from '@wxhccc/es-util'
 
 type FBProps = FormBtnsProps
 
@@ -87,16 +86,16 @@ const resetForm = () => {
 }
 </script>
 <script lang="ts">
-export default { name: 'FormBtns' }
+export default { name: 'UeFormBtns' }
 </script>
 
 <template>
-  <div class="me-form-btns">
+  <div class="ue-form-btns">
     <template v-for="item in handleBtnKeys">
       <ue-button
         v-if="item === 'submit'"
         :key="item"
-        class="me-button"
+        class="ue-button"
         type="primary"
         :loading="sending"
         v-bind="handleBtnProps(item)"
@@ -107,7 +106,7 @@ export default { name: 'FormBtns' }
       <ue-button
         v-if="item === 'cancel'"
         :key="item"
-        class="me-button"
+        class="ue-button"
         :disabled="sending"
         v-bind="handleBtnProps(item)"
         @click="callMethod('cancel')"
@@ -117,7 +116,7 @@ export default { name: 'FormBtns' }
       <ue-button
         v-if="item === 'reset'"
         :key="item"
-        class="me-button"
+        class="ue-button"
         :disabled="sending"
         v-bind="handleBtnProps(item)"
         @click="resetForm"
@@ -131,7 +130,7 @@ export default { name: 'FormBtns' }
 <style lang="scss">
 .ue-form-btns {
   padding: 10px 0;
-  .-button {
+  .ue-button {
     min-width: 80px;
     margin-right: 20px;
   }

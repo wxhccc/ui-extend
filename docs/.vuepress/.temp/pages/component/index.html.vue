@@ -54,6 +54,6 @@
 <span class="token comment">&lt;!-- 引入组件库 --></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://unpkg.com/@wxhccc/ui-extend/lib/index.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="custom-container tip"><p class="custom-container-title">友情提示</p>
-<p>建议用cdn引入方式时在链接地址上锁定版本，以避免组件库升级时带来的兼容性方面的影响。锁定版本的方法见<a href="https://unpkg.com" target="_blank" rel="noopener noreferrer">unpkg.com<ExternalLinkIcon/></a></p>
+<p>建议用cdn引入方式时在链接地址上锁定版本，以避免组件库升级时带来的兼容性方面的影响。锁定版本的方法见<a href="https://unpkg.com.vue" target="_blank" rel="noopener noreferrer">unpkg.com<ExternalLinkIcon/></a></p>
 </div>
 </div></template>

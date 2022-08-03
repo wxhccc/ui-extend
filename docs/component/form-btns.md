@@ -5,19 +5,19 @@
 ### 基础用法
 
 ::: demo Base
-<<< @/docs/.vuepress/demo/form-btns/Base.vue
+@[code](../.vuepress/demo/form-btns/Base.vue)
 :::
 
 ### 有Form组件的场景和修改按钮顺序
 
 ::: demo with-form FromBtns组件可以放在ElFormItem组件内，也可以不放。放置在ElFormItem组件内会继承Form的部分属性，具体见文档
-<<< @/docs/.vuepress/demo/form-btns/with-form.vue
+@[code](../.vuepress/demo/form-btns/with-form.vue)
 :::
 
 ### 提交前确认和定制文本内容
 
 ::: demo confirm-custom 组件未放置在Form里，因此可以放在在页面的fixed容器中方便操作。
-<<< @/docs/.vuepress/demo/form-btns/confirm-custom.vue
+@[code](../.vuepress/demo/form-btns/confirm-custom.vue)
 :::
 
 ::: tip 相关文档

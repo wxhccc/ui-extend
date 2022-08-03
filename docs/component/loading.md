@@ -11,7 +11,7 @@
 ### 基础用法
 
 :::demo Base
-<<< @/docs/.vuepress/demo/loading/Base.vue
+@[code](../.vuepress/demo/loading/Base.vue)
 :::
 
 ### 更多样的配置
@@ -19,7 +19,7 @@
 可以自定义加载文案，图标和背景色，也可以控制是否全屏
 
 :::demo props-control
-<<< @/docs/.vuepress/demo/loading/props-control.vue
+@[code](../.vuepress/demo/loading/props-control.vue)
 :::
 
 ### Attributes

@@ -24,8 +24,8 @@ export const pagesRoutes = [
   ["v-1c607f0b","/component/waterfall-pane.html",{"title":""},["/component/waterfall-pane","/component/waterfall-pane.md"]],
   ["v-15814726","/wiki/",{"title":""},["/wiki/index.html","/wiki/README.md"]],
   ["v-bc8b7342","/wiki/data/",{"title":""},["/wiki/data/index.html","/wiki/data/README.md"]],
-  ["v-98d04f78","/wiki/utils/",{"title":""},["/wiki/utils/index.html","/wiki/utils/README.md"]],
   ["v-063e0077","/wiki/mixins/",{"title":""},["/wiki/mixins/index.html","/wiki/mixins/README.md"]],
   ["v-7ca7ddbc","/wiki/optionals/",{"title":""},["/wiki/optionals/index.html","/wiki/optionals/README.md"]],
+  ["v-98d04f78","/wiki/utils/",{"title":""},["/wiki/utils/index.html","/wiki/utils/README.md"]],
   ["v-3706649a","/404.html",{"title":""},["/404"]],
 ]

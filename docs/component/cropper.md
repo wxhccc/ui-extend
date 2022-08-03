@@ -7,13 +7,13 @@
 本示例裁剪后将在新窗口打开裁剪后的图片
 
 ::: demo Base
-<<< @/docs/.vuepress/demo/cropper/Base.vue
+@[code](../.vuepress/demo/cropper/Base.vue)
 :::
 
 ### 带预览框的头像裁剪
 
 ::: demo view-avatar
-<<< @/docs/.vuepress/demo/cropper/view-avatar.vue
+@[code](../.vuepress/demo/cropper/view-avatar.vue)
 :::
 
 ::: tip 说明

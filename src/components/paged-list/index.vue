@@ -12,8 +12,6 @@ import { useStorage } from '@/hooks'
 
 export type PagedListProps<D extends AnyObject = AnyObject> = PagedCommonProps<D>
 
-const storeSession = useStorage('PagedList')
-
 export default defineComponent({
   name: 'UePagedList',
   components: {
@@ -24,6 +22,8 @@ export default defineComponent({
   props: pagedCompProps(),
   emits,
   setup(props, context) {
+    const storeSession = useStorage(props.sessionStorageKey)
+
     const { pagination, dataList, getStoreData, clearStoreData } = usePagedLogic<typeof props>(
       props,
       context as unknown as Context,

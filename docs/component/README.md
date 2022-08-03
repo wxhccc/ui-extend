@@ -40,5 +40,5 @@ npm i @wxhccc/ui-extend -S
 ```
 
 ::: tip 友情提示
-建议用cdn引入方式时在链接地址上锁定版本，以避免组件库升级时带来的兼容性方面的影响。锁定版本的方法见[unpkg.com](https://unpkg.com)
+建议用cdn引入方式时在链接地址上锁定版本，以避免组件库升级时带来的兼容性方面的影响。锁定版本的方法见[unpkg.com](https://unpkg.com.vue)
 :::

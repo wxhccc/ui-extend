@@ -9,7 +9,7 @@ sidebarDepth: 2
 ### 完整引入
 
 ::: warning 提醒
-完整引入需先安装前置依赖，具体见[安装](./)
+完整引入需先安装前置依赖，具体见[安装](./.vue)
 :::
 
 在main.js中添加以下内容
@@ -18,7 +18,7 @@ import Vue from 'vue'
 
 import UiExtend from '@wxhccc/ui-extend'
 
-Vue.use(UiExtend)
+Vue.use(UiExtend.vue)
 ```
 以上代码便完成了UiExtend的引入
 

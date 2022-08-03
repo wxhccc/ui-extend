@@ -9,13 +9,13 @@ Pagination组件文档参照 <element-link component="Pagination"></element-link
 ### 无序列表（ul）
 
 ::: demo Ul
-<<< @/docs/.vuepress/demo/paged-list/Ul.vue
+@[code](../.vuepress/demo/paged-list/Ul.vue)
 :::
 
 ### 分页表格（table）
 
 ::: demo Table
-<<< @/docs/.vuepress/demo/paged-list/Table.vue
+@[code](../.vuepress/demo/paged-list/Table.vue)
 :::
 
 ### 分页列表恢复
@@ -25,7 +25,7 @@ Pagination组件文档参照 <element-link component="Pagination"></element-link
 此外本来也展示了如何进行请求时序控制
 
 ::: demo Restore 恢复必须要设置`created-auto-send`为true，才会在组件创建时将记录数据传递给请求接口
-<<< @/docs/.vuepress/demo/paged-list/Restore.vue
+@[code](../.vuepress/demo/paged-list/Restore.vue)
 :::
 
 !!!include(paged-list/index.zh-CN.md)!!!

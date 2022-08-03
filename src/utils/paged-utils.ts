@@ -46,6 +46,7 @@ export interface PagedCommonProps<D extends AnyObject = AnyObject, PD = PagedDat
   pagination?: boolean | UePaginationProps
   /** 是否采用前端分页方式 */
   localPaged?: boolean
+  sessionStorageKey?: string
 }
 
 export const pagedCompProps = <CP extends PagedCommonProps = PagedCommonProps>() => ({
@@ -76,7 +77,8 @@ export const pagedCompProps = <CP extends PagedCommonProps = PagedCommonProps>()
   /** 是否需要缓存数据功能 */
   needStore: Boolean,
   pagination: vueTypeProp<CP['pagination']>([Boolean, Object]),
-  localPaged: Boolean
+  localPaged: Boolean,
+  sessionStorageKey: vueTypeProp<string>(String, 'PagedList')
 })
 
 type HasDefProp = 'getPagedData' | 'storeKey'
@@ -118,10 +120,10 @@ export function usePagedLogic<
     isRestoring: props.restore
   })
 
-  const onPagedChange = (curPage: number, pageSize: number) => {
-    const paged = { curPage, pageSize }
+  const onPagedChange = (paged: { curPage?: number; pageSize?: number }) => {
     Object.assign(data, paged)
-    context.emit('pagedChange', paged)
+    const { pageSize, curPage } = data
+    context.emit('pagedChange', { pageSize, curPage })
   }
 
   const pagination = computed<null | UePaginationProps>(() => {
@@ -137,8 +139,8 @@ export function usePagedLogic<
       ...((pagination === true ? {} : pagination) as UePaginationProps),
       pageSize: data.pageSize,
       total: props.pagedData.total,
-      onChange: onPagedChange,
-      onShowSizeChange: onPagedChange
+      onCurrentChange: (curPage: number) => onPagedChange({ curPage }),
+      onSizeChange: (pageSize: number) => onPagedChange({ pageSize })
     }
   })
 

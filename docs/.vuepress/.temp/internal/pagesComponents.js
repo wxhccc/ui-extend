@@ -51,12 +51,12 @@ export const pagesComponents = {
   "v-15814726": defineAsyncComponent(() => import(/* webpackChunkName: "v-15814726" */"F:/www/github/ui-extend/docs/.vuepress/.temp/pages/wiki/index.html.vue")),
   // path: /wiki/data/
   "v-bc8b7342": defineAsyncComponent(() => import(/* webpackChunkName: "v-bc8b7342" */"F:/www/github/ui-extend/docs/.vuepress/.temp/pages/wiki/data/index.html.vue")),
-  // path: /wiki/utils/
-  "v-98d04f78": defineAsyncComponent(() => import(/* webpackChunkName: "v-98d04f78" */"F:/www/github/ui-extend/docs/.vuepress/.temp/pages/wiki/utils/index.html.vue")),
   // path: /wiki/mixins/
   "v-063e0077": defineAsyncComponent(() => import(/* webpackChunkName: "v-063e0077" */"F:/www/github/ui-extend/docs/.vuepress/.temp/pages/wiki/mixins/index.html.vue")),
   // path: /wiki/optionals/
   "v-7ca7ddbc": defineAsyncComponent(() => import(/* webpackChunkName: "v-7ca7ddbc" */"F:/www/github/ui-extend/docs/.vuepress/.temp/pages/wiki/optionals/index.html.vue")),
+  // path: /wiki/utils/
+  "v-98d04f78": defineAsyncComponent(() => import(/* webpackChunkName: "v-98d04f78" */"F:/www/github/ui-extend/docs/.vuepress/.temp/pages/wiki/utils/index.html.vue")),
   // path: /404.html
   "v-3706649a": defineAsyncComponent(() => import(/* webpackChunkName: "v-3706649a" */"F:/www/github/ui-extend/docs/.vuepress/.temp/pages/404.html.vue")),
 }

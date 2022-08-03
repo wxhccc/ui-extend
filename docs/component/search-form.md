@@ -7,7 +7,7 @@
 建议使用按钮触发数据变动，这样可以避免短时间内多次调用数据接口。
 
 :::demo Base 
-<<< @/docs/.vuepress/demo/search-form/Base.vue
+@[code](../.vuepress/demo/search-form/Base.vue)
 :::
 
 ### 设置Form组件和搜索按钮的参数
@@ -17,7 +17,7 @@
 此例使用了`data.sync`来绑定数据。
 
 :::demo more-props 此例设置了`Form`组件的size，label-width属性，还通过`buttonItemOptions`设置了搜索按钮的参数和其父级`FormItem`组件的属性。
-<<< @/docs/.vuepress/demo/search-form/more-props.vue
+@[code](../.vuepress/demo/search-form/more-props.vue)
 :::
 
 !!!include(search-form/index.zh-CN.md)!!!

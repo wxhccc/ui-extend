@@ -10,7 +10,7 @@ import FormFieldItem from '@/components/form-field-item'
 import FormFields from '@/components/form-fields'
 import InfoTable from '@/components/info-table'
 // import CommonListPage from '@/components/common-list-page'
-// import PagedTable from '@/components/paged-table'
+import PagedTable from '@/components/paged-table'
 import MultiAlert from '@/components/multi-alert'
 import PagedList from '@/components/paged-list'
 // import RemoteCascader from '@/components/remote-cascader'
@@ -21,7 +21,7 @@ import TreeField from '@/components/tree-field'
 // import VideoPlayer from '@/components/video-player'
 // import WaterfallPane from '@/components/waterfall-pane'
 
-const components = [
+const components = {
   Loading,
   ActionBtns,
   Cropper,
@@ -35,11 +35,12 @@ const components = [
   SearchInput,
   Ticker,
   TreeField,
-  DataTable
-]
+  DataTable,
+  PagedTable
+}
 
 const install = function (app: App) {
-  components.forEach((component) => app.component(component.name, component))
+  Object.entries(components).forEach(([key, component]) => app.component(component.name, component))
 }
 
 export {
@@ -56,24 +57,12 @@ export {
   SearchInput,
   Ticker,
   TreeField,
-  DataTable
+  DataTable,
+  PagedTable
 }
 
 export default {
   version,
   install,
-  Loading,
-  ActionBtns,
-  Cropper,
-  CommonField,
-  FormBtns,
-  FormFieldItem,
-  FormFields,
-  InfoTable,
-  MultiAlert,
-  PagedList,
-  SearchInput,
-  Ticker,
-  TreeField,
-  DataTable
+  ...components
 }

@@ -1,101 +1,74 @@
-<script>
-import PagedList from 'Comps/paged-list';
-import DataTable from 'Comps/data-table';
-import storageMixin from 'UE/mixins/component-storage';
-import { getPublicMethodNames, getComponentFnProxy } from 'UE/utils/component';
-import { pick } from 'UE/utils/lodash';
+<script setup lang="ts">
+import { reactive, computed, useAttrs } from 'vue'
+import { pick } from 'lodash-es'
+import { pagedCompProps } from '@/utils/paged-utils'
+import { vueTypeProp } from '@/utils/component'
+import UePagedList from '../paged-list'
+import UeDataTable from '../data-table'
 
-const ueMethods = getPublicMethodNames(PagedList, DataTable);
-
-export default {
-  name: 'UePagedTable',
-  components: {
-    [PagedList.name]: PagedList,
-    [DataTable.name]: DataTable
-  },
-  mixins: [
-    storageMixin(),
-    getComponentFnProxy(PagedList),
-    getComponentFnProxy(DataTable)
-  ],
-  props: {
-    ...DataTable.props,
-    ...PagedList.props,
-    dataTableProps: Object,
-    dataTableEvents: Object,
-    initSort: Object,
-    sortPropKeys: Object
-  },
-  data () {
-    const { storeKey, restore, initSort } = this;
-    return Object.assign(
-      { ueSort: initSort || {} },
-      restore && this.$_mixin_storeSession('listTable', storeKey)
-    );
-  },
-  computed: {
-    pagedListProps () {
-      return pick(this.$props, Object.keys(PagedList.props));
-    },
-    sortKeys () {
-      return Object.assign({ orderby: 'orderby', order: 'order' }, this.sortPropKeys);
-    },
-    tableProps () {
-      return Object.assign({}, this.ueDefaultSort(), pick(this.$props, Object.keys(DataTable.props), this.dataTableProps))
-    },
-    tableEvents () {
-      return { ...this.$listeners, ...this.dataTableEvents };
-    },
-    handledExtraForm () {
-      const { sortKeys: { orderby, order }, ueSort } = this;
-      const sortArgs = ueSort.orderby ? { [orderby]: ueSort.orderby, [order]: ueSort.order } : {};
-      return Object.assign({}, sortArgs, this.extraForm);
-    }
-  },
-  $_ue_methods: ueMethods,
-  methods: {
-    // utils
-    ueDefaultSort () {
-      return this.restore && this.ueSort.orderby ? { defaultSort: { prop: this.ueSort.orderby, order: this.ueSort.sort } } : {};
-    },
-    // bussiness
-    /** events **/
-    handleSortChange (values) {
-      if (values.column && values.column.sortable === 'custom' && values.prop && values.order) {
-        const sort = {
-          orderby: values.prop,
-          order: (values.order === 'descending' ? 'desc' : 'asc')
-        };
-        this.$_mixin_storeSession('listTable', this.storeKey, { sort });
-        this.sort = sort;
-      }
-    }
-
-  }
+interface SortConfig {
+  orderby?: string
+  order?: string
 }
 
+const props = defineProps({
+  ...pagedCompProps(),
+  initSort: vueTypeProp<SortConfig>(Object),
+  sortPropKeys: vueTypeProp<SortConfig>(Object)
+})
+const attrs = useAttrs()
+
+const ueSort = reactive(props.initSort || {})
+
+const pagedListProps = computed(() => ({ ...pick(props, Object.keys(UePagedList.props)) }))
+
+const sortKeys = computed(() => ({ orderby: 'orderby', order: 'order', ...props.sortPropKeys }))
+
+const tableProps = computed(() => ({ ...ueDefaultSort(), ...attrs }))
+
+const handledExtraForm = computed(() => {
+  const { orderby, order } = sortKeys.value
+  const sortArgs = ueSort.orderby ? { [orderby]: ueSort.orderby, [order]: ueSort.order } : {}
+  return { ...sortArgs, ...props.extraModel }
+})
+
+const ueDefaultSort = () => {
+  return props.restore && ueSort.orderby
+    ? { defaultSort: { prop: ueSort.orderby, order: ueSort.order } }
+    : {}
+}
+
+const handleSortChange = (values: any) => {
+  if (values.column && values.column.sortable === 'custom' && values.prop && values.order) {
+    const sort = {
+      orderby: values.prop,
+      order: values.order === 'descending' ? 'desc' : 'asc'
+    }
+    Object.assign(ueSort, sort)
+  }
+}
+</script>
+<script lang="ts">
+export default { name: 'UePagedTable' }
 </script>
 <template>
   <ue-paged-list
     ref="UePagedList"
     class="ue-paged-table"
     v-bind="pagedListProps"
-    :extraForm="handledExtraForm"
+    :extra-form="handledExtraForm"
   >
-    <template v-slot="{ rows }">
+    <template #default="{ rows }">
       <ue-data-table
         ref="UeDataTable"
         v-bind="tableProps"
         :data="rows"
-        :columns="columns"
-        v-on="tableEvents"
         @sort-change="handleSortChange"
       >
       </ue-data-table>
     </template>
   </ue-paged-list>
 </template>
-
 
 <style lang="scss">
 .ue-paged-table {

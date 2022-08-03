@@ -49,12 +49,12 @@ export const pagesData = {
   "v-15814726": () => import(/* webpackChunkName: "v-15814726" */"F:/www/github/ui-extend/docs/.vuepress/.temp/pages/wiki/index.html.js").then(({ data }) => data),
   // path: /wiki/data/
   "v-bc8b7342": () => import(/* webpackChunkName: "v-bc8b7342" */"F:/www/github/ui-extend/docs/.vuepress/.temp/pages/wiki/data/index.html.js").then(({ data }) => data),
-  // path: /wiki/utils/
-  "v-98d04f78": () => import(/* webpackChunkName: "v-98d04f78" */"F:/www/github/ui-extend/docs/.vuepress/.temp/pages/wiki/utils/index.html.js").then(({ data }) => data),
   // path: /wiki/mixins/
   "v-063e0077": () => import(/* webpackChunkName: "v-063e0077" */"F:/www/github/ui-extend/docs/.vuepress/.temp/pages/wiki/mixins/index.html.js").then(({ data }) => data),
   // path: /wiki/optionals/
   "v-7ca7ddbc": () => import(/* webpackChunkName: "v-7ca7ddbc" */"F:/www/github/ui-extend/docs/.vuepress/.temp/pages/wiki/optionals/index.html.js").then(({ data }) => data),
+  // path: /wiki/utils/
+  "v-98d04f78": () => import(/* webpackChunkName: "v-98d04f78" */"F:/www/github/ui-extend/docs/.vuepress/.temp/pages/wiki/utils/index.html.js").then(({ data }) => data),
   // path: /404.html
   "v-3706649a": () => import(/* webpackChunkName: "v-3706649a" */"F:/www/github/ui-extend/docs/.vuepress/.temp/pages/404.html.js").then(({ data }) => data),
 }

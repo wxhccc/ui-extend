@@ -2,13 +2,146 @@
 <p>基于<a href="./form-fields">FormFields</a>组件和<element-link component="Form"></element-link>组件封装的搜索表单。用于列表的搜索条件。</p>
 <h3 id="基础用法" tabindex="-1"><a class="header-anchor" href="#基础用法" aria-hidden="true">#</a> 基础用法</h3>
 <p>建议使用按钮触发数据变动，这样可以避免短时间内多次调用数据接口。</p>
-<comp-demo name="Base"><p>&lt;&lt;&lt; @/docs/.vuepress/demo/search-form/Base.vue</p>
-</comp-demo><h3 id="设置form组件和搜索按钮的参数" tabindex="-1"><a class="header-anchor" href="#设置form组件和搜索按钮的参数" aria-hidden="true">#</a> 设置Form组件和搜索按钮的参数</h3>
+<comp-demo name="Base"><div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    是否使用按钮触发：<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-switch</span> <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>buttonTrigger<span class="token punctuation">"</span></span> <span class="token attr-name">active-text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>是<span class="token punctuation">"</span></span> <span class="token attr-name">inactive-text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>否<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-switch</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>{{formData}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ue-search-form</span> <span class="token attr-name">:items</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>items<span class="token punctuation">"</span></span> <span class="token attr-name">:button-trigger</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>buttonTrigger<span class="token punctuation">"</span></span> <span class="token attr-name">@search</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>updateFormData<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ue-search-form</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">formData</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">buttonTrigger</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">items</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token literal-property property">prop</span><span class="token operator">:</span> <span class="token string">'name'</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'活动名称'</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">field</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">component</span><span class="token operator">:</span> <span class="token string">'ElInput'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token literal-property property">prop</span><span class="token operator">:</span> <span class="token string">'region'</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'活动区域'</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">field</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">component</span><span class="token operator">:</span> <span class="token string">'ElSelect'</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+              <span class="token literal-property property">placeholder</span><span class="token operator">:</span> <span class="token string">'请选择活动区域'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+              <span class="token punctuation">{</span> <span class="token literal-property property">value</span><span class="token operator">:</span> <span class="token string">'shanghai'</span><span class="token punctuation">,</span> <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'区域一'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token punctuation">{</span> <span class="token literal-property property">value</span><span class="token operator">:</span> <span class="token string">'beijing'</span><span class="token punctuation">,</span> <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'区域二'</span> <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token literal-property property">prop</span><span class="token operator">:</span> <span class="token string">'date'</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'活动时间'</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">field</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+              <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'daterange'</span><span class="token punctuation">,</span>
+              <span class="token literal-property property">placeholder</span><span class="token operator">:</span> <span class="token string">'请选择日期'</span><span class="token punctuation">,</span>
+              <span class="token literal-property property">startPlaceholder</span><span class="token operator">:</span> <span class="token string">'开始日期'</span><span class="token punctuation">,</span>
+              <span class="token literal-property property">endPlaceholder</span><span class="token operator">:</span> <span class="token string">'开始日期'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">component</span><span class="token operator">:</span> <span class="token string">'ElDatePicker'</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">initValue</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token function">updateFormData</span> <span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>formData <span class="token operator">=</span> value
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></comp-demo><h3 id="设置form组件和搜索按钮的参数" tabindex="-1"><a class="header-anchor" href="#设置form组件和搜索按钮的参数" aria-hidden="true">#</a> 设置Form组件和搜索按钮的参数</h3>
 <p>组件会透传所有属性和事件给内部<code v-pre>Form</code>组件，并且代理了<code v-pre>Form</code>组件上的所有方法。</p>
 <p>此例使用了<code v-pre>data.sync</code>来绑定数据。</p>
 <comp-demo name="more-props"><div slot="description"><p>此例设置了<code>Form</code>组件的size，label-width属性，还通过<code>buttonItemOptions</code>设置了搜索按钮的参数和其父级<code>FormItem</code>组件的属性。</p>
-</div><p>&lt;&lt;&lt; @/docs/.vuepress/demo/search-form/more-props.vue</p>
-</comp-demo><h3 id="attributes" tabindex="-1"><a class="header-anchor" href="#attributes" aria-hidden="true">#</a> Attributes</h3>
+</div><div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>{{formData}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ue-search-form</span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>small<span class="token punctuation">"</span></span> <span class="token attr-name">label-width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>auto<span class="token punctuation">"</span></span> <span class="token attr-name">:items</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>items<span class="token punctuation">"</span></span> <span class="token attr-name">:button-item-options</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>itemOptions<span class="token punctuation">"</span></span> <span class="token attr-name">:data.sync</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>formData<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ue-search-form</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">formData</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">itemOptions</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">formItemProps</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">size</span><span class="token operator">:</span> <span class="token string">'middle'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">buttonProps</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'success'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">btnText</span><span class="token operator">:</span> <span class="token string">'搜索'</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">buttonTrigger</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">items</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token literal-property property">prop</span><span class="token operator">:</span> <span class="token string">'name'</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'活动名称'</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">field</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">component</span><span class="token operator">:</span> <span class="token string">'ElInput'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token literal-property property">prop</span><span class="token operator">:</span> <span class="token string">'region'</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'活动区域'</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">field</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">component</span><span class="token operator">:</span> <span class="token string">'ElSelect'</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+              <span class="token literal-property property">placeholder</span><span class="token operator">:</span> <span class="token string">'请选择活动区域'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+              <span class="token punctuation">{</span> <span class="token literal-property property">value</span><span class="token operator">:</span> <span class="token string">'shanghai'</span><span class="token punctuation">,</span> <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'区域一'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token punctuation">{</span> <span class="token literal-property property">value</span><span class="token operator">:</span> <span class="token string">'beijing'</span><span class="token punctuation">,</span> <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'区域二'</span> <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token literal-property property">prop</span><span class="token operator">:</span> <span class="token string">'date'</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'时间'</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">field</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+              <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'daterange'</span><span class="token punctuation">,</span>
+              <span class="token literal-property property">placeholder</span><span class="token operator">:</span> <span class="token string">'请选择日期'</span><span class="token punctuation">,</span>
+              <span class="token literal-property property">startPlaceholder</span><span class="token operator">:</span> <span class="token string">'开始日期'</span><span class="token punctuation">,</span>
+              <span class="token literal-property property">endPlaceholder</span><span class="token operator">:</span> <span class="token string">'开始日期'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">component</span><span class="token operator">:</span> <span class="token string">'ElDatePicker'</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">initValue</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></comp-demo><h3 id="attributes" tabindex="-1"><a class="header-anchor" href="#attributes" aria-hidden="true">#</a> Attributes</h3>
 <table>
 <thead>
 <tr>

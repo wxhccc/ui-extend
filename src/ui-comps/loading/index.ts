@@ -1,15 +1,16 @@
 import {
   defineComponent,
   shallowRef,
-  onUnmounted,
+  onBeforeUnmount,
   getCurrentInstance,
   App,
-  ExtractPropTypes
+  ExtractPropTypes,
+  onMounted
 } from 'vue'
 import { ElLoading } from 'element-plus'
 import { vueTypeProp } from '@/utils/component'
 
-const props = {
+const compProps = {
   body: vueTypeProp<boolean>(Boolean),
   text: vueTypeProp<string>(String),
   spinner: vueTypeProp<string>(String),
@@ -17,11 +18,11 @@ const props = {
   background: vueTypeProp<string>(String)
 }
 
-export type LoadingProps = Partial<ExtractPropTypes<typeof props>>
+export type LoadingProps = Partial<ExtractPropTypes<typeof compProps>>
 
 const Loading = defineComponent({
   name: 'UeLoading',
-  props,
+  props: compProps,
   setup(props) {
     const service = shallowRef()
 
@@ -34,17 +35,13 @@ const Loading = defineComponent({
       })
     }
 
-    createService()
+    onMounted(createService)
 
-    onUnmounted(() => {
+    onBeforeUnmount(() => {
       service.value?.close()
     })
     return {}
   }
 })
-
-Loading.install = function (app: App) {
-  app.component(Loading.name, Loading)
-}
 
 export default Loading

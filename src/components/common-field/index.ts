@@ -4,17 +4,22 @@ import {
   defineComponent,
   h,
   mergeProps,
-  shallowRef,
   Slots,
   VNode,
   Component,
   markRaw,
-  ref
+  ref,
+  resolveComponent
 } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import { ON_UI_UPDATE_MODEL_VALUE, UI_MODEL_CHECKED, UI_MODEL_VALUE } from '@/utils/const'
 import { resolveProps, vueTypeProp } from '@/utils/component'
-import { UeInput } from '@/ui-comps'
+
+const fieldChild: Record<string, string> = {
+  ElSelect: 'ElOption',
+  ElCheckboxGroup: 'ElCheckbox',
+  ElRadioGroup: 'ElRadio'
+}
 
 export interface CommonFieldProps<
   V = any,
@@ -34,9 +39,9 @@ export interface CommonFieldProps<
   /** 表单域组件的绑定对象，具有更高优先级，以便在属性冲突时可以设置属性 */
   props?: Functional<FP>
   /** 表单域组件名称（需要已经全局注册的组件），或者传入非响应式的组件对象（避免warning） */
-  component: Component
+  component: string | Component
   /** 表单域组件的子组件，规则同上 */
-  childComponent?: Component
+  childComponent?: string | Component
   /** 子组件的默认插槽自定义渲染函数 */
   dataItemRenader?: (item: D, index: number) => VNode
   /** 表单域组件的插槽对象，部分插槽无法覆盖 */
@@ -58,7 +63,8 @@ export default defineComponent({
     component: vueTypeProp<CFProps['component']>([String, Function, Object]),
     childComponent: vueTypeProp<CFProps['childComponent']>([String, Function, Object]),
     dataItemRenader: vueTypeProp<CFProps['dataItemRenader']>([String, Function, Object]),
-    slots: vueTypeProp<CFProps['slots']>(Object)
+    slots: vueTypeProp<CFProps['slots']>(Object),
+    libPrefix: vueTypeProp<string>(String, 'El')
   },
   emits: ['update:modelValue', 'change'],
   setup(props, { attrs, emit, slots, expose }) {
@@ -93,14 +99,23 @@ export default defineComponent({
       fieldValue.value = fieldValue.value
     }
 
-    const Field = shallowRef(markRaw(props.component) as DefineComponent)
-
-    const childField = computed(() => {
-      return props.childComponent && markRaw(props.childComponent)
+    const Field = computed(() => {
+      const { component } = props
+      const comp = typeof component === 'string' ? resolveComponent(component) : component
+      return comp ? markRaw(comp as DefineComponent) : null
     })
 
-    const isModelValue = computed(() => Field.value.props && 'modelValue' in Field.value.props)
-    const isModelCheck = computed(() => Field.value.props && 'checked' in Field.value.props)
+    const childField = computed(() => {
+      const { component, childComponent: cc } = props
+      let comp = typeof cc === 'string' ? resolveComponent(cc) : cc
+      if (!comp && typeof component === 'string' && fieldChild[component]) {
+        comp = resolveComponent(fieldChild[component])
+      }
+      return comp ? markRaw(comp as DefineComponent) : null
+    })
+
+    const isModelValue = computed(() => Field.value?.props && 'modelValue' in Field.value.props)
+    const isModelCheck = computed(() => Field.value?.props && 'checked' in Field.value.props)
 
     const baseFieldProps = computed(() => {
       if (!Field.value) {
@@ -130,8 +145,9 @@ export default defineComponent({
     }
 
     const dataChildren = computed(() => {
-      return Array.isArray(props.data) && props.data.length && childField.value
-        ? props.data.map(createDataItem)
+      const { data } = props
+      return Array.isArray(data) && data.length && childField.value
+        ? data.map(createDataItem)
         : undefined
     })
 
@@ -141,20 +157,13 @@ export default defineComponent({
       ...slots
     }))
 
-    const needTrim = computed(() => {
-      if (props.component === UeInput) {
-        return true
-      }
-      return props.needTrim
-    })
-
     const onBlurNumberHandler =
-      props.isNumber || needTrim.value
+      props.isNumber || props.needTrim
         ? {
             onBlur: (...args: unknown[]) => {
               if (typeof fieldValue.value === 'string') {
                 let value: StrOrNum = fieldValue.value
-                if (needTrim.value) {
+                if (props.needTrim) {
                   value = value.trim()
                 }
                 if (props.isNumber) {
@@ -193,7 +202,7 @@ export default defineComponent({
 
     return () => {
       if (!Field.value) {
-        return
+        return null
       }
       return h(Field.value, fieldProps.value, fieldSlots.value)
     }

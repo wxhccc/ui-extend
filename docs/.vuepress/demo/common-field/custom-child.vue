@@ -2,12 +2,12 @@
   <el-row :gutter="20">
     <el-col :span="12">
       <p>Select-----value: {{selectValue}}</p>
-      <ue-common-field :field="selectField" v-model="selectValue">
+      <ue-common-field v-bind="selectField" v-model="selectValue">
       </ue-common-field>
     </el-col>
     <el-col :span="12">
       <p>RadioGroup-----value: {{radioValue}}</p>
-      <ue-common-field :field="radioField" v-model="radioValue">
+      <ue-common-field v-bind="radioField" v-model="radioValue">
       </ue-common-field>
     </el-col>
   </el-row>

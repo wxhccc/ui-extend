@@ -16,12 +16,13 @@ import { resolveProps, vueTypeProp } from '@/utils/component'
 export * from './types'
 
 export default defineComponent({
-  name: 'FormFieldItem',
+  name: 'UeFormFieldItem',
   inheritAttrs: false,
   props: {
     modelValue: vueTypeProp<any>(null),
     props: vueTypeProp<FormFieldItemOption['props']>([Object, Function]),
     name: vueTypeProp<FormFieldItemOption['name']>([String, Number]),
+    prop: vueTypeProp<FormFieldItemOption['prop']>([String, Number]),
     prevNames: vueTypeProp<FormFieldItemOption['prevNames']>(Array),
     text: vueTypeProp<FormFieldItemOption['text']>([Boolean, String, Function]),
     slots: vueTypeProp<FormFieldItemOption['slots']>(Object),
@@ -35,7 +36,9 @@ export default defineComponent({
       const curPath = name ? [name] : []
       return Array.isArray(prevNames) ? prevNames.concat(curPath) : curPath
     }
-    const formItemNames = computed(() => handleFormItemName(props.name, props.prevNames))
+
+    const handleName = computed(() => props.name || props.prop)
+    const formItemNames = computed(() => handleFormItemName(handleName.value, props.prevNames))
     const hasChild = computed(() => Array.isArray(props.children) && props.children.length > 0)
 
     const handleValue = computed({
@@ -69,23 +72,25 @@ export default defineComponent({
       return hasLabelTip.value
         ? {
             label: () =>
-              h(UeSpace, [
-                formItemProps.value.label,
-                h(UeTooltip, { title: props.labelTip }, h(QuestionFilled))
-              ])
+              h(UeSpace, {
+                default: () => [
+                  formItemProps.value.label,
+                  h(UeTooltip, { title: props.labelTip }, { default: () => h(QuestionFilled) })
+                ]
+              })
           }
         : {}
     })
 
     const handledItemText = computed(() => {
-      const { name, text } = props
-      return text ? handleItemText(text, name, handleValue.value) : ''
+      const { text } = props
+      return text ? handleItemText(text, handleName.value, handleValue.value) : ''
     })
     const handledFieldContent = computed(() => {
-      const { name, field, children } = props
+      const { field, children } = props
       return hasChild.value
         ? handleMultItems(children as ChildFormFieldItemOption[])
-        : handleFormItemField(field, name)
+        : handleFormItemField(field, handleName.value)
     })
 
     const formItemContent = computed(() => {
@@ -107,19 +112,20 @@ export default defineComponent({
       return h(
         CommomField,
         mergeProps(field, {
-          class: 'me-common-field',
+          class: 'ue-common-field',
           [MODEL_VALUE]: value,
           [ON_UPDATE_MODEL_VALUE]: (val: any) => handleValueChange(val, name)
         })
       )
     }
     const getChildFormItemProps = (child: ChildFormFieldItemOption) => {
-      const { name, props, field } = child
-      const prevNames = handleFormItemName(name, formItemNames.value)
+      const { name, prop, props, field } = child
+      const handleName = name || prop
+      const prevNames = handleFormItemName(handleName, formItemNames.value)
       return mergeProps((props ? resolveProps(props) : {}) as VNodeProps, {
         prop: prevNames,
         field,
-        ref: `${name}`
+        ref: `${handleName}`
       })
     }
     const handleMultItems = (children: ChildFormFieldItemOption[]) => {
@@ -130,13 +136,13 @@ export default defineComponent({
         {
           default: () =>
             children.map((child, idx) => {
-              const { key, name, colProps } = child
-              const colKey: string | number = key || name || idx
+              const { key, name, prop, colProps } = child
+              const colKey: string | number = key || prop || name || idx
               return h(
                 UeCol,
                 mergeProps((colProps ? resolveProps(colProps) : {}) as VNodeProps, {
                   span,
-                  class: 'me-sub-item-panel',
+                  class: 'ue-sub-item-panel',
                   key: colKey
                 }),
                 {
@@ -148,12 +154,13 @@ export default defineComponent({
       )
     }
     const handleChildItemContent = (item: ChildFormFieldItemOption) => {
-      const { text, name, field, slots } = item
+      const { text, name, prop, field, slots } = item
+      const handleName = name || prop
       if (text) {
-        return handleItemText(text, name, name && handleValue.value[name])
+        return handleItemText(text, handleName, handleName && handleValue.value[handleName])
       }
       const childFieldProps = getChildFormItemProps(item)
-      const formItemContent = handleFormItemField(field, name)
+      const formItemContent = handleFormItemField(field, handleName)
       const formItemSlots = {
         ...slots,
         default: () => formItemContent
@@ -166,8 +173,8 @@ export default defineComponent({
       return h(
         UeFormItem,
         mergeProps(handleFormItemProps.value, {
-          class: 'me-form-field-item',
-          key: `${props.name}`,
+          class: 'ue-form-field-item',
+          key: `${handleName.value}`,
           ref: 'formItem'
         }),
         {

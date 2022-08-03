@@ -7,13 +7,14 @@
 </template>
 
 <script>
+import { h } from 'vue'
 const CustomField = {
   props: {
     value: Array,
     formItemProps: Object,
     fieldProps: Object
   },
-  render (h) {
+  render () {
     const { formItemProps, fieldProps, value } = this;
     return h('ElFormItem', { props: formItemProps }, [
       h('UeTreeField', { props: { ...fieldProps, value }, on: this.$listeners })

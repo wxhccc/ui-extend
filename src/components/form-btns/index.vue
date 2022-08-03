@@ -94,31 +94,31 @@ export default { name: 'UeFormBtns' }
     <template v-for="item in handleBtnKeys">
       <ue-button
         v-if="item === 'submit'"
+        v-bind="handleBtnProps(item)"
         :key="item"
         class="ue-button"
         type="primary"
         :loading="sending"
-        v-bind="handleBtnProps(item)"
         @click="submitHandle"
       >
         {{ sending ? handleWords.sending : handleWords.sureBtn }}
       </ue-button>
       <ue-button
         v-if="item === 'cancel'"
+        v-bind="handleBtnProps(item)"
         :key="item"
         class="ue-button"
         :disabled="sending"
-        v-bind="handleBtnProps(item)"
         @click="callMethod('cancel')"
       >
         {{ handleWords.cancelBtn }}
       </ue-button>
       <ue-button
         v-if="item === 'reset'"
+        v-bind="handleBtnProps(item)"
         :key="item"
         class="ue-button"
         :disabled="sending"
-        v-bind="handleBtnProps(item)"
         @click="resetForm"
       >
         {{ handleWords.resetBtn }}

@@ -26,7 +26,7 @@ type InnerFormFields = FormFieldsItem & {
 }
 
 export default defineComponent({
-  name: 'FormFields',
+  name: 'UeFormFields',
   props: {
     modelValue: vueTypeProp<NonNullable<FormFieldsProps['modelValue']>>(Object, () => ({})),
     items: vueTypeProp<NonNullable<FormFieldsProps['items']>>(Array, () => []),

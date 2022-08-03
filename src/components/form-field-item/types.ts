@@ -12,6 +12,8 @@ export interface FormFieldItemOption {
   props?: Functional<FormItemProps>
   /** 对应FormItem组件的name属性 */
   name?: NamePath
+  /** 对应FormItem组件的prop属性，使用于element-plus */
+  prop?: NamePath
   /** 祖先层级的属性序列，可以构造多层级数据 */
   prevNames?: NamePath[]
   /** 表单域内是否显示文本，或者设置显示的文本内容 */

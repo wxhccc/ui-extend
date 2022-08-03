@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { h } from 'vue'
 const CustomField = {
   props: {
     value: null,
@@ -38,7 +39,7 @@ const CustomField = {
       newValue !== oldValue && this.$emit('change', newValue)
     }
   },
-  render (h) {
+  render () {
     const { formItemProps, fieldProps, value, modelData } = this;
     const optionNodes = modelData.map(item => h('ElOption', { props: item }))
     return h('ElFormItem', { props: formItemProps }, [

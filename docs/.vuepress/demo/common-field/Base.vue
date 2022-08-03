@@ -2,42 +2,41 @@
   <el-row :gutter="20">
     <el-col :span="8">
       <p>Input-----value: {{inputValue}}</p>
-      <ue-common-field :field="inputField" v-model="inputValue">
+      <ue-common-field v-bind="inputField" v-model="inputValue">
       </ue-common-field>
     </el-col>
     <el-col :span="12" :offset="4">
       <p>Select-----value: {{selectValue}}</p>
-      <ue-common-field :field="selectField" v-model="selectValue">
+      <ue-common-field v-bind="selectField" v-model="selectValue">
       </ue-common-field>
     </el-col>
     <el-col :span="12">
       <p>RadioGroup-----value: {{radioValue}}</p>
-      <ue-common-field :field="radioField" v-model="radioValue">
+      <ue-common-field v-bind="radioField" v-model="radioValue">
       </ue-common-field>
     </el-col>
     <el-col :span="12">
       <p>CheckboxGroup<br/>value: {{checkboxValue}}</p>
-      <ue-common-field :field="checkboxField" v-model="checkboxValue">
+      <ue-common-field v-bind="checkboxField" v-model="checkboxValue">
       </ue-common-field>
     </el-col>
   </el-row>
 </template>
 
 <script lang="ts">
-import { defineComponent, markRaw } from 'vue'
-import { ElInput, ElSelect, ElRadioGroup, ElCheckboxGroup } from 'element-plus'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   data () {
     return {
       inputValue: '',
       inputField: {
-        component: markRaw(ElInput),
+        component: 'ElInput',
         props: { size: 'small' }
       },
       selectValue: '',
       selectField: {
-        component: markRaw(ElSelect),
+        component: 'ElSelect',
         props: () => ({ size: 'small' }),
         data: [
           { value: '选项1', label: '黄金糕' },
@@ -49,7 +48,7 @@ export default defineComponent({
       },
       radioValue: 1,
       radioField: {
-        component: markRaw(ElRadioGroup),
+        component: 'ElRadioGroup',
         props: () => ({ size: 'small' }),
         data: [
           { value: '选项1', label: '黄金糕' },
@@ -59,7 +58,7 @@ export default defineComponent({
       },
       checkboxValue: [],
       checkboxField: {
-        component: markRaw(ElCheckboxGroup),
+        component: 'ElCheckboxGroup',
         data: [
           { value: '选项1', label: '黄金糕' },
           { value: '选项2', label: '双皮奶' },

@@ -11,6 +11,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "noEmit": true,
+    "declarationDir": "dist",
     "lib": ["esnext", "dom"],
     "types": ["vite/client"],
     "resolveJsonModule": true,

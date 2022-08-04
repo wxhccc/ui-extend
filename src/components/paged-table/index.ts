@@ -1,3 +1,3 @@
-import PagedTable from './index.vue'
+export { default as default } from './index.vue'
 
-export default PagedTable
+export * from './types'

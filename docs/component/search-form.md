@@ -14,8 +14,6 @@
 
 组件会透传所有属性和事件给内部`Form`组件，并且代理了`Form`组件上的所有方法。
 
-此例使用了`data.sync`来绑定数据。
-
 :::demo more-props 此例设置了`Form`组件的size，label-width属性，还通过`buttonItemOptions`设置了搜索按钮的参数和其父级`FormItem`组件的属性。
 @[code](../.vuepress/demo/search-form/more-props.vue)
 :::

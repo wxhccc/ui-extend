@@ -6,6 +6,7 @@ import UeDeepColumn from './deep-column'
 import { useVModel } from '@/hooks/props'
 import { vueTypeProp } from '@/utils/component'
 import { DataTableColumn, DataTableProps } from '../types'
+import { resolveFunctional } from '@/utils'
 
 const defEmptyCell = (value: StrOrNum) => (value || value === 0 ? value : '--')
 
@@ -35,9 +36,7 @@ const emptyCellHandler = computed(() => {
   const { setEmptyCell } = props
   return isFunction(setEmptyCell) ? setEmptyCell : setEmptyCell ? defEmptyCell : undefined
 })
-const handleColumns = computed(() =>
-  props.columns.filter((item) => (isFunction(item.hide) ? item.hide() : !item.hide))
-)
+const handleColumns = computed(() => props.columns.filter((item) => !resolveFunctional(item.hide)))
 
 const handledSelectionKey = computed(() => {
   return props.selectionKey || attrs.rowKey

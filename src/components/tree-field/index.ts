@@ -1,3 +1,1 @@
-import TreeField from './index.vue'
-
-export default TreeField
+export { default as default } from './index.vue'

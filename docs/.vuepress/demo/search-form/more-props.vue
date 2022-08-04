@@ -1,19 +1,18 @@
 <template>
   <div>
     <p>{{formData}}</p>
-    <ue-search-form size="small" label-width="auto" :items="items" :button-item-options="itemOptions" :data.sync="formData">
+    <ue-search-form size="small" label-width="auto" :items="items" :buttonOptions="buttonOptions" v-model="formData">
     </ue-search-form>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   data () {
     return {
       formData: {},
-      itemOptions: {
-        formItemProps: { size: 'middle' },
-        buttonProps: { type: 'success' },
+      buttonOptions: {
+        searchBtnProps: { type: 'success' },
         btnText: '搜索'
       },
       buttonTrigger: true,

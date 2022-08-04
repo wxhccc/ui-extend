@@ -11,7 +11,7 @@ interface FieldsBaseOption {
   spliceStart?: number
 }
 export interface CustomFieldsOption
-  extends Pick<FormFieldItemOption, 'props' | 'name' | 'prevNames'>,
+  extends Pick<FormFieldItemOption, 'prop' | 'props' | 'name' | 'prevNames'>,
     FieldsBaseOption {
   component?: string | DefineComponent
   slotName?: string

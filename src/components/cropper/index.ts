@@ -1,3 +1,1 @@
-import Cropper from './index.vue'
-
-export default Cropper
+export { default as default } from './index.vue'

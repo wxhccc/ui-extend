@@ -25,6 +25,8 @@ export interface FormFieldItemOption {
   /** 给表单项label解释的提示文字 */
   labelTip?: string
   children?: ChildFormFieldItemOption[]
+  // 如果搜索表单使用了记忆功能，则在恢复数据时通知监听了的组件
+  onRestored?: (data: AnyObject) => void
 }
 
 export interface ChildFormFieldItemOption extends Omit<FormFieldItemOption, 'children'> {

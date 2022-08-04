@@ -1,3 +1,3 @@
-import PagedList from './index.vue'
+export { default as default } from './index.vue'
 
-export default PagedList
+export { PagedCommonProps as PagedListProps } from '@/utils/paged-utils'

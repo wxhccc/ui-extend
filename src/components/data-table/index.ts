@@ -1,5 +1,3 @@
-import DataTable from './src/index.vue'
-
-export default DataTable
+export { default as default } from './src/index.vue'
 
 export * from './types'

@@ -1,3 +1,1 @@
-import MultiAlert from './index.vue'
-
-export default MultiAlert
+export { default as default } from './index.vue'

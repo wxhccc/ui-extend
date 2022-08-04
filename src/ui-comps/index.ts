@@ -15,6 +15,7 @@ export {
   ElRadioGroup as UeRadioGroup,
   ElFormItem as UeFormItem,
   ElForm as UeForm,
+  formProps as ueFormProps,
   ElRow as UeRow,
   ElCol as UeCol,
   ElTabs as UeTabs,
@@ -37,7 +38,8 @@ export type {
   RadioGroupProps as UeRadioGroupProps,
   FormItemProps as UeFormItemProps,
   FormProps as UeFormProps,
-  FormInstance,
+  FormInstance as UeFormInstance,
+  FormItemInstance as UeFormItemInstance,
   RowProps as UeRowProps,
   ColProps as UeColProps,
   TabsProps as UeTabsProps,
@@ -51,4 +53,5 @@ export { TableColumnCtx as UeTableColumnProps } from 'element-plus/es/components
 export { TableProps as UeTableProps } from 'element-plus/es/components/table/src/table/defaults'
 
 export { default as UeLoading } from './loading'
+
 export type { LoadingProps } from './loading'

@@ -14,7 +14,7 @@ import PagedTable from '@/components/paged-table'
 import MultiAlert from '@/components/multi-alert'
 import PagedList from '@/components/paged-list'
 // import RemoteCascader from '@/components/remote-cascader'
-// import SearchForm from '@/components/search-form'
+import SearchForm from '@/components/search-form'
 import SearchInput from '@/components/search-input'
 import Ticker from '@/components/ticker'
 import TreeField from '@/components/tree-field'
@@ -36,11 +36,14 @@ const components = {
   Ticker,
   TreeField,
   DataTable,
-  PagedTable
+  PagedTable,
+  SearchForm
 }
 
 const install = function (app: App) {
-  Object.entries(components).forEach(([key, component]) => app.component(component.name, component))
+  Object.entries(components).forEach(([_key, component]) =>
+    app.component(component.name, component)
+  )
 }
 
 export {
@@ -58,7 +61,8 @@ export {
   Ticker,
   TreeField,
   DataTable,
-  PagedTable
+  PagedTable,
+  SearchForm
 }
 
 export default {

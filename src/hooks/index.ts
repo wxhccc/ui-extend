@@ -1,4 +1,4 @@
-import { onMounted, Ref, watch, onBeforeUnmount } from 'vue'
+import { onMounted, Ref, watch, onBeforeUnmount, ComponentPublicInstance } from 'vue'
 import { createRAFTimer, TimerCallback, TimerInstance } from '@wxhccc/es-util'
 import { CompStorage } from '@/utils/storage'
 import { IOCallback, useIntersectionObserver } from './observers'
@@ -107,4 +107,20 @@ export function useStorage(componentName: string) {
       return data[key]
     }
   }
+}
+
+export const useProxyInstanceMethods = <C = ComponentPublicInstance, K extends keyof C = keyof C>(
+  instanceRef: Ref<C | undefined>,
+  methodNames: K[] = []
+) => {
+  return methodNames.reduce((acc, name) => {
+    acc[name] = ((...args: any[]) => {
+      if (!instanceRef.value) {
+        return
+      }
+      const method = instanceRef.value[name as keyof C]
+      return method instanceof Function ? method(...args) : undefined
+    }) as unknown as C[K]
+    return acc
+  }, {} as Record<K, C[K]>)
 }

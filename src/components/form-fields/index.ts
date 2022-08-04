@@ -12,7 +12,7 @@ import {
   markRaw
 } from 'vue'
 import { cloneDeep, get, set } from 'lodash-es'
-import FormFieldItem, { NamePath } from '../form-field-item'
+import FormFieldItem from '../form-field-item'
 import { resolveProps, vueTypeProp } from '@/utils/component'
 import { FormFieldsItem, FormFieldsOption, FormFieldsProps } from './types'
 
@@ -64,13 +64,14 @@ export default defineComponent({
     })
 
     const getValue = (item: InnerFormFields) => {
-      const { name, prevNames } = item
+      const { name, prop, prevNames } = item
+      const handleName = prop || name
       let prevValue = props.modelValue
       // 如果配置了prevNames，需要拼接属性来获取参数
       if (prevNames && Array.isArray(prevNames) && prevNames.length) {
         prevValue = get(props.modelValue, prevNames, {})
       }
-      return name !== undefined ? prevValue[name as string] : prevValue
+      return handleName !== undefined ? prevValue[handleName as string] : prevValue
     }
 
     const emitUpdate = (val: AnyObject) => {
@@ -78,10 +79,11 @@ export default defineComponent({
       emit('change', val)
     }
     const setValue = (item: InnerFormFields, value?: unknown, delay?: boolean) => {
-      const { name, prevNames } = item
+      const { name, prop, prevNames } = item
+      const handleName = prop || name
       const cloneValues = cloneDeep(props.modelValue)
 
-      const changeValue = (name !== undefined ? { [name]: value } : value) as AnyObject
+      const changeValue = (handleName !== undefined ? { [handleName]: value } : value) as AnyObject
       // 如果配置了prevNames，需要拼接属性来获取参数
       if (prevNames && Array.isArray(prevNames) && prevNames.length) {
         const prevValue = get(props.modelValue, prevNames, {})
@@ -94,7 +96,7 @@ export default defineComponent({
       }
       window.setTimeout(() => {
         Object.assign(cacheValue.value, props.modelValue, {
-          ...((name !== undefined ? { [name]: value } : value) as AnyObject)
+          ...((handleName !== undefined ? { [handleName]: value } : value) as AnyObject)
         })
         emitUpdate(cacheValue.value)
         cacheValue.value = {}
@@ -103,8 +105,9 @@ export default defineComponent({
 
     const fieldItems = computed<VNodeChild>(() =>
       handledItems.value.map((item, index) => {
-        const { name, key, __onChange: onChange } = item
-        const itemKey = `${name || key || index}`
+        const { name, prop, key, __onChange: onChange } = item
+        const handleName = prop || name
+        const itemKey = `${handleName || key || index}`
 
         const userProps = (item.props ? resolveProps(item.props) : {}) as VNodeProps
 
@@ -143,7 +146,7 @@ export default defineComponent({
     // 级联数据项监听器
     const listenCascader = (item: InnerFormFields, handledItems: InnerFormFields[]) => {
       const { dependencies } = item
-      const cascaderField = handledItems.find((item) => item.name === dependencies)
+      const cascaderField = handledItems.find((item) => (item.prop || item.name) === dependencies)
       if (!cascaderField) {
         return
       }
@@ -153,14 +156,15 @@ export default defineComponent({
     }
 
     const cascaderHandler = (item: InnerFormFields, value?: unknown, init?: boolean) => {
-      const { cascadeData, spliceStart = 0, clearValue, name, cascadeHandler } = item
+      const { cascadeData, spliceStart = 0, clearValue, name, prop, cascadeHandler } = item
+      const handleName = prop || name
       const modelData =
         cascadeData && Array.isArray(cascadeData[value as string])
           ? cascadeData[value as string]
           : []
       if (cascadeHandler instanceof Function) {
         const instance = (getCurrentInstance() || {}).proxy
-        cascadeHandler.call(instance, value, name, modelData, item)
+        cascadeHandler.call(instance, value, handleName, modelData, item)
       } else if ('field' in item && item.field) {
         const { data } = item.field
         Array.isArray(data)
@@ -169,7 +173,7 @@ export default defineComponent({
             ? data.slice(0, spliceStart).concat(modelData)
             : modelData
       }
-      if (!init && name && props.modelValue[name] !== clearValue) {
+      if (!init && handleName && props.modelValue[handleName] !== clearValue) {
         setValue(item, clearValue, true)
         changeHandler(item, value)
       }
@@ -186,8 +190,12 @@ export default defineComponent({
 
     const initCascaderFields = () => {
       handledItems.value.forEach((item) => {
-        item.__watchers &&
-          item.__watchers.forEach((watcher) => watcher(props.modelValue[item.name as string], true))
+        if (!item.__watchers) {
+          return
+        }
+        item.__watchers.forEach((watcher) =>
+          watcher(props.modelValue[(item.prop || item.name) as string], true)
+        )
       })
     }
 

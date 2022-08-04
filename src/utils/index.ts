@@ -1,3 +1,5 @@
+import { isFunction } from 'lodash-es'
+
 export * from './formatter'
 
 /***
@@ -13,4 +15,17 @@ export function loadjs(url: string) {
     script.onload = resolve
     script.onerror = reject
   })
+}
+
+/**
+ * 解析可能是函数形式的变量的数据
+ * @param value 变量
+ * @param args 可能的参数
+ * @returns 返回数据
+ */
+export function resolveFunctional<R, F extends AnyFunction<R> = AnyFunction<R>>(
+  value: R | F,
+  ...args: Parameters<F>
+): R {
+  return isFunction(value) ? value(...args) : value
 }

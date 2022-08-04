@@ -5,11 +5,7 @@ import { pagedCompProps } from '@/utils/paged-utils'
 import { vueTypeProp } from '@/utils/component'
 import UePagedList from '../paged-list'
 import UeDataTable from '../data-table'
-
-interface SortConfig {
-  orderby?: string
-  order?: string
-}
+import { SortConfig } from './types'
 
 const props = defineProps({
   ...pagedCompProps(),

@@ -18,17 +18,27 @@ export const useIgnoreWatch = (...args: Parameters<typeof watch>) => {
   return { ignoreWatch }
 }
 
-export const useVModel = <P extends AnyObject, K extends Extract<keyof P, string>>(
+export const useVModel = <
+  P extends AnyObject,
+  K extends Extract<keyof P, string>,
+  E extends (name: `update:${K}`, value?: P[K]) => void
+>(
   props: P,
   key: K,
-  emit: (name: `update:${K}`, value?: P[K]) => void,
+  emit?: E,
   options?: {
+    noEmit?: boolean
     beforeEmit?: AnyFunction<void>
     supportInner?: boolean
+    initValue?: P[K]
   }
 ) => {
-  const { beforeEmit, supportInner } = { ...options }
+  const { beforeEmit, supportInner, initValue, noEmit } = { ...options }
   const innerValue = ref<P[K]>()
+
+  if (initValue) {
+    innerValue.value = initValue
+  }
 
   return computed({
     get: () => (typeof props[key] !== undefined ? props[key] : innerValue.value),
@@ -39,7 +49,9 @@ export const useVModel = <P extends AnyObject, K extends Extract<keyof P, string
       if (beforeEmit instanceof Function) {
         beforeEmit(value)
       }
-      emit(`update:${key}`, value)
+      if (!noEmit && emit) {
+        emit(`update:${key}`, value)
+      }
     }
   })
 }

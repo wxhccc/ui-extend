@@ -4,6 +4,7 @@ import { isFunction } from 'lodash-es'
 import { UeButton, UeMessageBox } from '@/ui-comps'
 import { vueTypeProp } from '@/utils/component'
 import { ActionBtnIem } from './type'
+import { resolveFunctional } from '@/utils'
 
 const props = defineProps({
   data: vueTypeProp<any>(null),
@@ -18,7 +19,7 @@ const getLoadingKey = (item: ActionBtnIem, index: number) => {
   return item.loadingKey || item.key || `__btn${index}loading`
 }
 const propHanlde = <T>(prop: Functional<T>, item: ActionBtnIem) => {
-  return isFunction(prop) ? prop(props.data, item, ...props.extraArgs) : prop
+  return resolveFunctional<T>(prop, props.data, item, ...props.extraArgs)
 }
 
 const btnsClick = async (item: ActionBtnIem) => {

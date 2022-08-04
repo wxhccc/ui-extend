@@ -1,5 +1,6 @@
 import { DefineComponent, VNode } from 'vue'
-import { UeColProps, FormFieldItemOption } from '../form-field-item/types'
+import { UeColProps } from '@/ui-comps'
+import { FormFieldItemOption } from '../form-field-item/types'
 
 export interface InfoTableProps<D extends AnyObject = AnyObject, V extends AnyObject = AnyObject> {
   title?: string

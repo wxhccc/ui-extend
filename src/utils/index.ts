@@ -1,3 +1,5 @@
+import { isRef, Ref } from 'vue'
+import { LockRefHandle, wp, WpOptions } from '@wxhccc/es-util'
 import { isFunction } from 'lodash-es'
 
 export * from './formatter'
@@ -29,3 +31,16 @@ export function resolveFunctional<R, F extends AnyFunction<R> = AnyFunction<R>>(
 ): R {
   return isFunction(value) ? value(...args) : value
 }
+
+/**
+ * wrapPromise 包裹promise对象
+ * @param promise
+ * @param lock
+ * @returns
+ */
+export function vwp<T>(promise: Promise<T>, lock?: WpOptions['lock'] | Ref<boolean>) {
+  const handleLock = isRef(lock) ? ([lock, 'value'] as unknown as LockRefHandle) : lock
+  return wp(promise, { wrap: true, lock: handleLock })
+}
+
+export type VueWrapPromise = typeof vwp

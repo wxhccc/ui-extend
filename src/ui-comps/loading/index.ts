@@ -40,7 +40,7 @@ const Loading = defineComponent({
     onBeforeUnmount(() => {
       service.value?.close()
     })
-    return {}
+    return () => null
   }
 })
 

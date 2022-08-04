@@ -3,11 +3,13 @@ import { reactive, computed, useAttrs } from 'vue'
 import { pick } from 'lodash-es'
 import { pagedCompProps } from '@/utils/paged-utils'
 import { vueTypeProp } from '@/utils/component'
+import { PropsTypeToDefine } from '@/types/vue-props'
 import UePagedList from '../paged-list'
-import UeDataTable from '../data-table'
+import UeDataTable, { DataTableProps } from '../data-table'
 import { SortConfig } from './types'
 
 const props = defineProps({
+  ...(UeDataTable.props as PropsTypeToDefine<DataTableProps>),
   ...pagedCompProps(),
   initSort: vueTypeProp<SortConfig>(Object),
   sortPropKeys: vueTypeProp<SortConfig>(Object)
@@ -20,7 +22,11 @@ const pagedListProps = computed(() => ({ ...pick(props, Object.keys(UePagedList.
 
 const sortKeys = computed(() => ({ orderby: 'orderby', order: 'order', ...props.sortPropKeys }))
 
-const tableProps = computed(() => ({ ...ueDefaultSort(), ...attrs }))
+const tableProps = computed(() => ({
+  ...ueDefaultSort(),
+  ...attrs,
+  ...pick(props, Object.keys(UeDataTable.props))
+}))
 
 const handledExtraForm = computed(() => {
   const { orderby, order } = sortKeys.value

@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
-import { cloneDeep, pick } from 'lodash-es'
-import { UeTabs } from '@/ui-comps'
+import { ref, reactive, computed, useSlots } from 'vue'
+import { isFunction, pick } from 'lodash-es'
 import { vueTypeProp } from '@/utils/component'
-import PagedTable, { PagedTableProps } from '../paged-table'
-import SearchForm, { SearchFormPorps } from '../search-form'
-import { ButtonOnClick, CommonListPageProps, OperationOption } from './types'
 import { PropsTypeToDefine } from '@/types/vue-props'
 import { useVModel } from '@/hooks/props'
+import { vwp } from '@/utils'
+import UePagedTable, { PagedTableProps } from '../paged-table'
+import UeSearchForm from '../search-form'
+import { CommonListPageProps } from './types'
 
 const props = defineProps({
-  ...(SearchForm.props as PropsTypeToDefine<SearchFormPorps>),
-  ...(PagedTable.props as PropsTypeToDefine<PagedTableProps>),
+  ...(UePagedTable.props as PropsTypeToDefine<PagedTableProps>),
   pagedData: vueTypeProp<PagedTableProps['pagedData']>(Object),
   getPagedData: vueTypeProp<PagedTableProps['getPagedData']>(Function),
   request: vueTypeProp<CommonListPageProps['request']>(Function),
@@ -28,93 +27,75 @@ const emit = defineEmits<{
 }>()
 
 const handleSearchParams = useVModel(props, 'searchParams', emit, { supportInner: true })
-const handlePagedData = useVModel(props, 'pagedData', undefined, { supportInner: true, noEmit: true })
+const handlePagedData = useVModel(props, 'pagedData', undefined, {
+  supportInner: true,
+  noEmit: true
+})
+const slots = useSlots()
 
 const selfLoading = ref(false)
 const operateLoadings = reactive<Record<string, boolean>>({})
 
-  computed: {
-    pagedTableSlots(): string[] {
-      return Object.keys(this.$slots).filter((name) => !['default', 'operation'].includes(name))
-    },
-    handleOperation(): null | OperationOption {
-      if (!this.operation) {
-        return null
-      }
-      const items = Array.isArray(this.operation) ? this.operation : this.operation.items
-      items.forEach((item) => {
-        // 对按钮类组件进行click事件拦截，将相关数据传入事件函数
-        const { component, onClick, lockingKey } = item || {}
-        if (!component && onClick && lockingKey) {
-          const loadingSwitch = (bool: boolean) => (this.operateLoadings[lockingKey] = bool)
-          item.onClick = () => {
-            ;(onClick as ButtonOnClick)(item, loadingSwitch)
-          }
-        }
-      })
-      return Array.isArray(this.operation)
-        ? { items: this.operation, loadings: this.operateLoadings }
-        : this.operation
-    },
-    pagedTableProps(): PagedTableProps {
-      return {
-        ...this.$attrs,
-        ...pick(this.$props, Object.keys(PagedTable.props))
-      } as PagedTableProps
-    },
-    searchFormProps(): SearchFormPorps {
-      return {
-        layout: 'inline',
-        ...pick(this.$props, Object.keys(SearchForm.props)),
-        ...this.searchForms
-      } as SearchFormPorps
-    },
-    showSearchForm(): boolean {
-      const { items } = this.searchFormProps
-      return Array.isArray(items) && items.length > 0
-    },
-    handlePagedData(): CommonListPageProps['pagedData'] {
-      return this.pagedData || this.selfPagedData
-    },
-    handleSearchParams: {
-      get(): AnyObject {
-        return this.searchParams || this.selfSearchParams
-      },
-      set(val: AnyObject) {
-        let newValue = cloneDeep(val)
-        this.selfSearchParams = newValue
-        this.$emit('update:searchParams', newValue)
-      }
-    },
-    handleExtraParams() {
-      if (this.searchParamsHandler instanceof Function) {
-        return this.searchParamsHandler(this.handleSearchParams)
-      }
-      return this.handleSearchParams
-    },
-    handleGetPageData(): PagedTableProps['getPagedData'] {
-      return (this.getPagedData || this.selfGetPagedData) as PagedTableProps['getPagedData']
-    },
-    handleLoading(): boolean {
-      const loading = this.$attrs.loading as boolean | undefined
-      return loading !== undefined ? loading : this.selfLoading
-    }
-  },
-  methods: {
-    async selfGetPagedData(params: AnyObject) {
-      if (!this.request) {
-        return
-      }
-      const handleParams =
-        this.fetchParamsHandler instanceof Function ? this.fetchParamsHandler(params) : params
-      const [, data] = await this.$fetch<CommonListPageProps['pagedData']>(
-        this.request(handleParams),
-        'selfLoading'
-      )
-      this.selfPagedData = data && data.records ? data : { records: [], total: 0 }
-    }
+const pagedTableSlots = computed(() =>
+  Object.keys(slots).filter((name) => !['default', 'operation'].includes(name))
+)
+
+const handleOperation = computed(() => {
+  const { operation } = props
+  if (!operation) {
+    return null
   }
+  const items = Array.isArray(operation) ? operation : operation.items
+  items.forEach((item) => {
+    // 对按钮类组件进行click事件拦截，将相关数据传入事件函数
+    const { component, onClick, lockingKey } = item || {}
+    if (!component && onClick) {
+      const loadingSwitch = (bool: boolean) => {
+        lockingKey && (operateLoadings[lockingKey] = bool)
+      }
+      item.onClick = () => onClick(item, loadingSwitch)
+    }
+  })
+  return Array.isArray(operation) ? { items: operation, loadings: operateLoadings } : operation
 })
+
+const pagedTableProps = computed(() => pick(props, Object.keys(UePagedTable.props)))
+
+const searchFormProps = computed(() => ({
+  layout: 'inline',
+  ...props.searchForms
+}))
+
+const showSearchForm = computed(() => {
+  const { items } = searchFormProps.value
+  return Array.isArray(items) && items.length > 0
+})
+
+const handleExtraParams = computed(() => {
+  const { searchParamsHandler } = props
+  if (isFunction(searchParamsHandler)) {
+    return searchParamsHandler(handleSearchParams.value)
+  }
+  return handleSearchParams.value
+})
+
+const handleGetPageData = computed(
+  () => (props.getPagedData || selfGetPagedData) as PagedTableProps['getPagedData']
+)
+
+const handleLoading = computed(() =>
+  props.loading !== undefined ? props.loading : selfLoading.value
+)
+
+const selfGetPagedData = async (params: AnyObject) => {
+  const { request, fetchParamsHandler } = props
+  if (!request) {
+    return
+  }
+  const handleParams = isFunction(fetchParamsHandler) ? fetchParamsHandler(params) : params
+  const [, data] = await vwp<PagedTableProps['pagedData']>(request(handleParams), selfLoading)
+  handlePagedData.value = data ? data : { rows: [], total: 0 }
+}
 </script>
 <script lang="ts">
 export default { name: 'UeCommonListPage' }
@@ -122,7 +103,7 @@ export default { name: 'UeCommonListPage' }
 <template>
   <div v-if="columns" class="ue-common-list-page">
     <div v-if="handleOperation || showSearchForm" class="top-form-container">
-      <div :class="['operation-pane', { 'single-line': singleLine }]">
+      <div :class="['operation-pane', { 'single-line': searchFormProps.singleLine }]">
         <slot name="operation">
           <div v-if="handleOperation" class="operation-btns-pane">
             <component
@@ -142,15 +123,15 @@ export default { name: 'UeCommonListPage' }
           </div>
         </slot>
       </div>
-      <search-form
+      <ue-search-form
         v-if="showSearchForm"
         ref="searchForm"
         v-bind="searchFormProps"
         v-model="handleSearchParams"
-      ></search-form>
+      ></ue-search-form>
     </div>
     <slot></slot>
-    <paged-table
+    <ue-paged-table
       v-if="columns.length"
       ref="pagedTable"
       v-bind="pagedTableProps"
@@ -162,7 +143,7 @@ export default { name: 'UeCommonListPage' }
       <template v-for="item in pagedTableSlots" :key="item" #[item]="scope">
         <slot :name="item" v-bind="scope"></slot>
       </template>
-    </paged-table>
+    </ue-paged-table>
   </div>
 </template>
 

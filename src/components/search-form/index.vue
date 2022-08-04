@@ -163,7 +163,7 @@ export default { name: 'UeSearchForm' }
 <template>
   <ue-form
     ref="form"
-    :class="['ue-search-form', { 'single-line': singleLine }]"
+    :class="['ue-search-form', { 'single-line': formProps.singleLine }]"
     v-bind="formProps"
     :model="formData"
     :rules="formRules"

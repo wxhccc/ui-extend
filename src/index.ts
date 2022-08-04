@@ -9,7 +9,7 @@ import FormBtns from '@/components/form-btns'
 import FormFieldItem from '@/components/form-field-item'
 import FormFields from '@/components/form-fields'
 import InfoTable from '@/components/info-table'
-// import CommonListPage from '@/components/common-list-page'
+import CommonListPage from '@/components/common-list-page'
 import PagedTable from '@/components/paged-table'
 import MultiAlert from '@/components/multi-alert'
 import PagedList from '@/components/paged-list'
@@ -37,7 +37,8 @@ const components = {
   TreeField,
   DataTable,
   PagedTable,
-  SearchForm
+  SearchForm,
+  CommonListPage
 }
 
 const install = function (app: App) {
@@ -62,7 +63,8 @@ export {
   TreeField,
   DataTable,
   PagedTable,
-  SearchForm
+  SearchForm,
+  CommonListPage
 }
 
 export default {

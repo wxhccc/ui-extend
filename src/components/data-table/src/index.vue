@@ -5,15 +5,11 @@ import { UeTable, UeTableProps } from '@/ui-comps'
 import UeDeepColumn from './deep-column'
 import { useVModel } from '@/hooks/props'
 import { vueTypeProp } from '@/utils/component'
-import { DataTableColumn, DataTableProps } from '../types'
+import { DataTableProps } from '../types'
 import { resolveFunctional } from '@/utils'
 
 const defEmptyCell = (value: StrOrNum) => (value || value === 0 ? value : '--')
 
-const tbPropsDefault = {
-  border: true,
-  stripe: true
-}
 type SelectionValue = DataTableProps['selectionValue']
 
 const props = defineProps({
@@ -89,7 +85,13 @@ watch(() => [attrs.data, props.selectionValue], handleSelectionValueChange)
 export default { name: 'UeDataTable' }
 </script>
 <template>
-  <ue-table ref="table" class="ue-data-table" @selection-change="handleCheckboxChange">
+  <ue-table
+    ref="table"
+    class="ue-data-table"
+    :border="true"
+    stripe
+    @selection-change="handleCheckboxChange"
+  >
     <ue-deep-column
       v-for="(column, index) of handleColumns"
       :key="column.key || column.prop || index"

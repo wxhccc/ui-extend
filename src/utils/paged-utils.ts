@@ -9,7 +9,7 @@ export type PropKey = 'total' | 'rows' | 'pageSize' | 'curPage'
 export type GetPagedData = (params: AnyObject, fetchAccessKey?: string | number) => any
 /* 分页接口数据格式 */
 export interface PagedData<R extends Record<string, any>> {
-  records: R[]
+  rows: R[]
   /** 总记录条数，用于页码分页 */
   total: number
   /** 是否有下一页，用于下拉分页 */
@@ -103,7 +103,7 @@ export function usePagedLogic<
 >(props: CP, context: CTX, storeSession: ReturnType<typeof useStorage>) {
   const propKey = computed(() => ({
     total: 'total',
-    rows: 'records',
+    rows: 'rows',
     pageSize: 'size',
     curPage: 'current',
     ...props.propKeys

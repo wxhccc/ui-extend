@@ -102,9 +102,9 @@ export default defineUserConfig({
         }
       ],
       '/wiki/': [
-        { text: 'Utils', link: 'utils' },
-        { text: 'Optionals', link: 'optionals' },
-        { text: '数据结构', link: 'data' }
+        { text: 'Utils', link: '/wiki/utils/' },
+        { text: 'Optionals', link: '/wiki/optionals/' },
+        { text: '数据结构', link: '/wiki/data/' }
       ],
       '/': [
         ''

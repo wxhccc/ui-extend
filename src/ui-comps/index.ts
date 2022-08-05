@@ -54,4 +54,6 @@ export { TableProps as UeTableProps } from 'element-plus/es/components/table/src
 
 export { default as UeLoading } from './loading'
 
+export type UeSelectProps = AnyObject
+
 export type { LoadingProps } from './loading'

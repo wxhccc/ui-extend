@@ -93,7 +93,7 @@ export default defineUserConfig({
             {
               text: 'Higher',
               children: [
-                { text: 'WaterfallPane 瀑布流容器', link: 'waterfall-pane' },
+                { text: 'ScrollPane 瀑布流容器', link: 'scroll-pane' },
                 { text: 'SearchForm 搜索表单', link: 'search-form' },
                 { text: 'CommonListPage 通用列表页模版', link: 'common-list-page' },
               ]

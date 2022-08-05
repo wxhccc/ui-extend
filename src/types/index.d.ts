@@ -7,6 +7,11 @@ type AnyFunction<T = void> = (...args: any[]) => T
 interface Option {
   label: number | string
   value: number | string | boolean
+  [x: string]: any
+}
+/** 下拉组建的类型 */
+interface SelectOption extends Option {
+  value: number | string
 }
 /** 只将给定字段修改为非必须 */
 type PartailSome<P, RK extends keyof P> = Partial<Pick<P, RK>> & Omit<P, RK>
@@ -27,3 +32,6 @@ type KeyCallMethod<T extends { [x: string]: any }> = <M extends keyof T>(
   methodName: M,
   ...args: Parameters<T[M]>
 ) => ReturnType<T[M]>
+
+/** 可用作路径key的内容 */
+type NamePath = string | number

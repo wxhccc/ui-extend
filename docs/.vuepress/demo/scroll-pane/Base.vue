@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-switch v-model="hasTotal" active-text="有total" inactive-text="无total"></el-switch>
-    <ue-waterfall-pane
+    <ue-scroll-pane
       class="demo-base"
       :loading="loading"
       :data="listData"
@@ -18,7 +18,7 @@
           </li>
         </ul>
       </template>
-    </ue-waterfall-pane>
+    </ue-scroll-pane>
   </div>
 </template>
 

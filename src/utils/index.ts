@@ -1,6 +1,6 @@
 import { isRef, Ref } from 'vue'
 import { LockRefHandle, wp, WpOptions } from '@wxhccc/es-util'
-import { isFunction } from 'lodash-es'
+import { isFunction, mergeWith } from 'lodash-es'
 
 export * from './formatter'
 
@@ -44,3 +44,16 @@ export function vwp<T>(promise: Promise<T>, lock?: WpOptions['lock'] | Ref<boole
 }
 
 export type VueWrapPromise = typeof vwp
+
+/***
+ ** 使用lodash的mergeWith合并对象,规则为数组自动拼接
+ * {object list} args 需要合并的对象序列或数组
+ ** 返回值: {object} 合并后的新对象
+ ***/
+export function mergeObj(...args: Parameters<typeof mergeWith>) {
+  return mergeWith(...args, (objValue: unknown, srcValue: unknown) => {
+    if (Array.isArray(objValue)) {
+      return objValue.concat(srcValue)
+    }
+  })
+}

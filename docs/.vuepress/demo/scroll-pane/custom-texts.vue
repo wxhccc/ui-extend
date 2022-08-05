@@ -1,5 +1,5 @@
 <template>
-  <ue-waterfall-pane
+  <ue-scroll-pane
     :loading="loading"
     :data="listData"
     :total="total"
@@ -16,7 +16,7 @@
         </li>
       </ul>
     </template>
-  </ue-waterfall-pane>
+  </ue-scroll-pane>
 </template>
 
 <script>

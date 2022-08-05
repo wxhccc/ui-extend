@@ -14,7 +14,6 @@
     "declarationDir": "dist",
     "lib": ["esnext", "dom"],
     "types": ["vite/client"],
-    "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]

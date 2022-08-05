@@ -1,5 +1,5 @@
 <template>
-  <ue-waterfall-pane
+  <ue-scroll-pane
     class="demo-unique"
     unique-key="nick"
     :loading="loading"
@@ -15,7 +15,7 @@
         </li>
       </ul>
     </template>
-  </ue-waterfall-pane>
+  </ue-scroll-pane>
 </template>
 
 <script>

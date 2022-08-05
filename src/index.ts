@@ -13,13 +13,16 @@ import CommonListPage from '@/components/common-list-page'
 import PagedTable from '@/components/paged-table'
 import MultiAlert from '@/components/multi-alert'
 import PagedList from '@/components/paged-list'
-// import RemoteCascader from '@/components/remote-cascader'
+import RemoteCascader from '@/components/remote-cascader'
 import SearchForm from '@/components/search-form'
 import SearchInput from '@/components/search-input'
 import Ticker from '@/components/ticker'
 import TreeField from '@/components/tree-field'
 // import VideoPlayer from '@/components/video-player'
-// import WaterfallPane from '@/components/waterfall-pane'
+import ScrollPane from '@/components/scroll-pane'
+
+export * from '@/utils'
+export * from '@/optionals'
 
 const components = {
   Loading,
@@ -38,7 +41,9 @@ const components = {
   DataTable,
   PagedTable,
   SearchForm,
-  CommonListPage
+  CommonListPage,
+  RemoteCascader,
+  ScrollPane
 }
 
 const install = function (app: App) {
@@ -64,7 +69,9 @@ export {
   DataTable,
   PagedTable,
   SearchForm,
-  CommonListPage
+  CommonListPage,
+  RemoteCascader,
+  ScrollPane
 }
 
 export default {

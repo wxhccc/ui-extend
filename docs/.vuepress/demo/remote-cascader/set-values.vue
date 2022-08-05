@@ -3,23 +3,22 @@
     <el-button type="primary" @click="getSaveValues">获取接口数据回填</el-button>
     <el-button @click="clearValues">清空数据</el-button>
     <p>使用<b>init-first-change</b>属性来回填</p>
-    <ue-remote-cascader ref="rc1" :is-resolve="isResolve" v-model="values" init-first-change :load="fetchLevelList"></ue-remote-cascader>
+    <ue-remote-cascader ref="rc1" v-model="values" init-first-change :load="fetchLevelList"></ue-remote-cascader>
     value: {{values}}<br/>
     <p>使用<b>init-value</b>属性来回填</p>
-    <ue-remote-cascader ref="rc2" :is-resolve="isResolve" v-model="values1" :init-value="initValue1" :load="fetchLevelList"></ue-remote-cascader>
+    <ue-remote-cascader ref="rc2" v-model="values1" :init-value="initValue1" :load="fetchLevelList"></ue-remote-cascader>
     value: {{values1}}   init-value: {{initValue1}}<br/>
     <p>回填时使用<b>init-in-order</b>来获取上一级数据对象</p>
-    <ue-remote-cascader ref="rc3" :is-resolve="isResolve" v-model="values2" init-first-change init-in-order :load="fetchLevelList"></ue-remote-cascader>
+    <ue-remote-cascader ref="rc3" v-model="values2" init-first-change init-in-order :load="fetchLevelList"></ue-remote-cascader>
     value: {{values2}}<br/>
   </div>
 </template>
 
 <script>
-import { version } from 'element-ui'
+
 export default {
   data () {
     return {
-      isResolve: this.versionCompare(version, '2.8.2') === 1,
       values: [],
       values1: [],
       initValue1: [],

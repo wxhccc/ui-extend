@@ -2,10 +2,11 @@ export {
   ElButton as UeButton,
   ElInput as UeInput,
   ElAlert as UeAlert,
+  ElSelect as UeSelect,
   ElMessageBox as UeMessageBox,
   ElMessage as UeMessage,
   ElScrollbar as UeScrollbar,
-  ElTreeV2 as UeTree,
+  ElTree as UeTree,
   ElCascader as UeCascader,
   ElPagination as UePagination,
   ElTable as UeTable,
@@ -13,7 +14,9 @@ export {
   ElCheckbox as UeCheckbox,
   ElRadio as UeRadio,
   ElRadioGroup as UeRadioGroup,
+  ElCheckboxGroup as UeCheckboxGroup,
   ElFormItem as UeFormItem,
+  ElDatePicker as UeDatePicker,
   ElForm as UeForm,
   formProps as ueFormProps,
   ElRow as UeRow,
@@ -48,9 +51,11 @@ export type {
   ImageProps as UeImageProps
 } from 'element-plus'
 
-export { TableColumnCtx as UeTableColumnProps } from 'element-plus/es/components/table/src/table-column/defaults'
+export type { TableColumnCtx as UeTableColumnProps } from 'element-plus/es/components/table/src/table-column/defaults'
 
-export { TableProps as UeTableProps } from 'element-plus/es/components/table/src/table/defaults'
+export type { TableProps as UeTableProps } from 'element-plus/es/components/table/src/table/defaults'
+
+export type { TreeProps as UeTreeProps } from 'element-plus/es/components/tree-v2/src/types'
 
 export { default as UeLoading } from './loading'
 

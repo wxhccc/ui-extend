@@ -44,7 +44,9 @@ export default defineComponent({
 <template>
   <div class="ue-paged-list">
     <ue-loading v-if="loading" v-bind="handledLoading"></ue-loading>
-    <slot :rows="dataList"></slot>
+    <div class="data-list-container">
+      <slot :rows="dataList"></slot>
+    </div>
     <div class="pagination-container">
       <ue-pagination v-if="pagination" v-bind="pagination">
         <template #default>
@@ -57,6 +59,12 @@ export default defineComponent({
 
 <style lang="scss">
 .ue-paged-list {
+  display: flex;
+  flex-direction: column;
+  .data-list-container {
+    flex: 1;
+    overflow: hidden;
+  }
   .pagination-container {
     margin-top: 4px;
     padding: 18px 0;

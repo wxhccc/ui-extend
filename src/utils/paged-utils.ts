@@ -132,16 +132,14 @@ export function usePagedLogic<
       return null
     }
     return {
-      size: 'small',
-      showQuickJumper: true,
-      showSizeChanger: true,
-      showTotal: (total: number) => `共${Math.ceil(total / data.pageSize)}页 / 共${total}条数据`,
-      ...((pagination === true ? {} : pagination) as UePaginationProps),
+      background: true,
+      layout: 'prev, pager, next, jumper',
+      ...(pagination === true ? {} : pagination),
       pageSize: data.pageSize,
       total: props.pagedData.total,
       onCurrentChange: (curPage: number) => onPagedChange({ curPage }),
       onSizeChange: (pageSize: number) => onPagedChange({ pageSize })
-    }
+    } as UePaginationProps
   })
 
   const dataList = computed<AnyObject[]>(() => {

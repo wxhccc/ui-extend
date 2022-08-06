@@ -1,4 +1,5 @@
 import { h, markRaw, Slots } from 'vue'
+import { UeInput, UeSelect, UeRadioGroup, UeCheckboxGroup, UeDatePicker } from '@/ui-comps'
 import { DataTableColumn } from '@/components/data-table'
 import { RuleItem } from 'async-validator'
 import {
@@ -108,7 +109,7 @@ export function createInputFormItem(
       : {}
   ) as Slots
   return createFormFieldItem(
-    'AInput',
+    UeInput,
     labelOrProps,
     name,
     {
@@ -145,7 +146,7 @@ interface CreateHasDataFormItem<FE = Partial<CommonFieldProps>> {
 export const createRadioGroupFormItem: CreateHasDataFormItem<
   Partial<CommonFieldProps<any, RadioGroupProps>>
 > = (labelOrProps, name, data, fieldExtra = {}, extraProps = {}) => {
-  return createFormFieldItem('ARadioGroup', labelOrProps, name, { data, ...fieldExtra }, extraProps)
+  return createFormFieldItem(UeRadioGroup, labelOrProps, name, { data, ...fieldExtra }, extraProps)
 }
 /**
  * 生成单选表单项配置对象
@@ -160,7 +161,7 @@ export const createCheckboxGroupFormItem: CreateHasDataFormItem<
   Partial<CommonFieldProps<any, CheckboxGroupProps>>
 > = (labelOrProps, name, data, fieldExtra = {}, extraProps = {}) => {
   return createFormFieldItem(
-    'ACheckboxGroup',
+    UeCheckboxGroup,
     labelOrProps,
     name,
     { data, ...fieldExtra },
@@ -185,7 +186,7 @@ export function createSelectFormItem(
   extraProps?: Partial<FormFieldItemProps>
 ) {
   return createFormFieldItem(
-    'ASelect',
+    UeSelect,
     labelOrProps,
     name,
     {
@@ -228,7 +229,7 @@ export function createDateFormItem(
 ) {
   const typeProps = dateTypeProps()
   return createFormFieldItem(
-    'ElDatePicker',
+    UeDatePicker,
     labelOrProps,
     name,
     {

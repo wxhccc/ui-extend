@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, computed, watch, useAttrs } from 'vue'
+import { ref, computed, useAttrs } from 'vue'
 import { pickBy } from 'lodash-es'
 import { UeTree } from '@/ui-comps'
 import { useIgnoreWatch } from '@/hooks/props'
+import { useProxyInstanceMethods } from '@/hooks/index.js'
 
 export interface TreeFiledProps {
   /** 是否采用行内展示的形式。行内展示使用了flex布局让根节点在水平方向平铺，减少页面高 */
@@ -71,31 +72,37 @@ const filterNode = (originList: any[], values: StrOrNum[]) => {
 }
 // 递归处理权限树选中状态
 const setChildrenNodeCheck = (node: any, checked: boolean) => {
-  Array.isArray(node.childNodes) &&
-    node.childNodes.forEach((cnode: any) => {
-      cnode.checked !== checked && treeField.value?.setChecked(cnode.data, checked)
-      setChildrenNodeCheck(cnode, checked)
-    })
+  treeField.value?.setChecked(node.data, checked, true)
 }
 const setParentNodeCheck = (node: any) => {
   let { parent } = node
   while (parent) {
-    treeField.value?.setChecked(parent.data, true)
+    if (!parent.data?.disabled) {
+      treeField.value?.setChecked(parent.data, true)
+    }
     parent = parent.parent
   }
 }
 /** event **/
 const onValueChange = (data: any) => {
+  const treeRef = treeField.value
+  if (!treeRef) {
+    return
+  }
   if (props.checkMode === 'one-way') {
-    console.log(treeField.value)
-    const curNode = treeField.value?.getNode(data)
+    const curNode = treeRef.getNode(data)
     const { checked } = curNode
     checked && setParentNodeCheck(curNode)
     setChildrenNodeCheck(curNode, checked)
   }
   ignoreWatch.value = true
-  emit('update:modelValue', treeField.value?.getCheckedKeys())
+  const modelValue = [...treeRef.getHalfCheckedKeys(), ...treeRef.getCheckedKeys()]
+  emit('update:modelValue', modelValue)
 }
+
+const proxyMethods = useProxyInstanceMethods(treeField, ['filter'])
+
+defineExpose({ tree: treeField, ...proxyMethods })
 
 const { ignoreWatch } = useIgnoreWatch(
   () => props.modelValue,

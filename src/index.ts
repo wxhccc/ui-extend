@@ -1,4 +1,4 @@
-import { App } from 'vue'
+import type { App } from 'vue'
 import { version } from '../package.json'
 import Loading from './ui-comps/loading'
 import ActionBtns from '@/components/action-btns'
@@ -20,6 +20,7 @@ import Ticker from '@/components/ticker'
 import TreeField from '@/components/tree-field'
 // import VideoPlayer from '@/components/video-player'
 import ScrollPane from '@/components/scroll-pane'
+import TreeTransfer from '@/components/tree-transfer'
 
 export * from '@/utils'
 export * from '@/optionals'
@@ -43,7 +44,8 @@ const components = {
   SearchForm,
   CommonListPage,
   RemoteCascader,
-  ScrollPane
+  ScrollPane,
+  TreeTransfer
 }
 
 const install = function (app: App) {
@@ -71,7 +73,8 @@ export {
   SearchForm,
   CommonListPage,
   RemoteCascader,
-  ScrollPane
+  ScrollPane,
+  TreeTransfer
 }
 
 export default {

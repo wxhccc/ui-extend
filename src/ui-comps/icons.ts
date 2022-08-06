@@ -8,7 +8,9 @@ import {
   Check,
   Close,
   Edit,
-  Loading
+  Loading,
+  ArrowLeft,
+  ArrowRight
 } from '@element-plus/icons-vue'
 
 const createIconComponent = (
@@ -33,3 +35,5 @@ export const EditOutlined = createIconComponent('EditOutlined', Edit)
 export const LoadingOutlined = createIconComponent('LoadingOutlined', Loading, {
   class: 'is-loading'
 })
+export const ArrowLeftOutlined = createIconComponent('ArrowLeftOutlined', ArrowLeft)
+export const ArrowRightOutlined = createIconComponent('ArrowRightOutlined', ArrowRight)

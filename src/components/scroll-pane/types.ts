@@ -1,4 +1,4 @@
-interface TipsTexts {
+export interface TipsTexts {
   /** 加载中 */
   loading?: string
   /** 无更多数据 */

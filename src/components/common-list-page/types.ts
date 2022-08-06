@@ -1,9 +1,9 @@
 import { DefineComponent } from 'vue'
-import { RequestConfig } from '@wxhccc/smartfetch'
 import { BoolSwitch } from '@wxhccc/es-util'
 import { UeButtonProps } from '@/ui-comps'
 import { PagedTableProps } from '../paged-table'
 import { SearchFormPorps } from '../search-form'
+import { PagedData } from '@/utils/paged-utils'
 
 export type ButtonOnClick = (item: OperationItem, loadingSwitch: BoolSwitch) => void
 
@@ -31,7 +31,7 @@ export interface CommonListPageProps<D extends AnyObject = AnyObject>
   extends PartailSome<PagedTableProps<D>, 'pagedData'>,
     SearchFormPorps {
   rowKey?: string | AnyFunction<string>
-  request?: AnyFunction<RequestConfig>
+  request?: AnyFunction<PagedData<D>>
   searchForms?: SearchFormPorps
   searchParamsHandler?: AnyFunction<AnyObject>
   searchParams?: AnyObject

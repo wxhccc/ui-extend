@@ -7,7 +7,7 @@ import {
   UeCheckboxGroup,
   UeDatePicker,
   UeRadio,
-UeCheckbox
+  UeCheckbox
 } from '@/ui-comps'
 import { DataTableColumn } from '@/components/data-table'
 import { RuleItem } from 'async-validator'

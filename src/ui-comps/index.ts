@@ -3,6 +3,7 @@ export {
   ElInput as UeInput,
   ElAlert as UeAlert,
   ElSelect as UeSelect,
+  ElOption as UeOption,
   ElMessageBox as UeMessageBox,
   ElMessage as UeMessage,
   ElScrollbar as UeScrollbar,

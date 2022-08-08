@@ -14,8 +14,7 @@
 | └ text        | 同上                                              | 作用同上一级`text`                                                                                        | --     | --     |
 | └ field       | 同上                                              | 作用同上一级`field`。有扩展字段                                                                           | --     | --     |
 | └└ colProps   | object                                            | 默认情况下子表单项会平分24栅格。可以通过此字段自定义每项所占栅格数。                                      | --     | --     |
-| slots         | object                                            | 具名插槽配置对象，具体结构见                                                                              | --     | --     |
-| scopedSlots   | object                                            | 作用域插槽配置对象，具体结构见                                                                            | --     | --     |
+| slots         | object                                            | 插槽配置对象，具体结构见                                                                              | --     | --     |
 ### Methods
 
 组件代理了根层级的`FormItem`组件上的方法， 具体见FormItem文档。

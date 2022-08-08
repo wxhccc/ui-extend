@@ -2,19 +2,7 @@
 
 | 参数          | 类型   | 说明                                                                                    | 可选值 | 默认值 |
 | :------------ | :----- | :-------------------------------------------------------------------------------------- | :----- | :----- |
-| value/v-model | any    | 绑定值                                                                                  | --     | --     |
-| field         | object | 表单域配置对象。具体字段见[field](#field)                                               | --     | --     |
-| lib-prefix    | string | ui库组件前缀，例如'element-ui'前缀为'El'. 使用字符串生成带子组件的表单域组件时会用到。 | --     | 'El'   |
-
-
-### field
-
-::: warning 注意
-配置参数是`field`对象的键名, 不能使用短横线写法.
-:::
-
-| 参数             | 类型                                 | 说明                                                                                                                                                               | 可选值 | 默认值 |
-| :--------------- | :----------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----- | :----- |
+| modelValue/v-model | any    | 绑定值                                                                                  | --     | --     |
 | component        | string(ComponentName)<br/>/Component | 表单域组件对象，或者字符串名称（需提前注册）。                                                                                                                     | --     | --     |
 | props            | object/function                      | 表单域组件绑定props参数对象，或者返回参数对象的函数。                                                                                                              | --     | --     |
 | events           | object                               | 表单域组件绑定事件对象。和合并覆盖通过模版写法传入组件的事件对象。                                                                                                 | --     | --     |
@@ -26,9 +14,9 @@
 | initValue        | any                                  | 组件绑定值初始值                                                                                                                                                   | --     | --     |
 | forbidValueFixed | boolean                              | 是否禁用对(`ElCheckboxGroup`/`ElRadioGroup`)子组件的value修正。                                                                                                    | --     | --     |
 | childComponent   | Component | 表单域组件子组件，用于生成`data`数据列表。<br/>如果`component`使用了(`ElCheckboxGroup`/`ElRadioGroup`), 此参数可以缺省。                                           | --     | --     |
-| dataItemContent  | Component<br/>/() => VNode           | 表单域组件子组件默认插槽内容，可以使用组件或VNode渲染函数。                                                                                                        | --     | --     |
-| slots            | object                               | 表单域组件的具名插槽配置对象。对象key为插槽名称，值为配置对象，例如`{ header: {...} }`。如果直接写配置对象会当作默认插处理。插槽配置对象说明见[slot](#slot-object) | --     | --     |
-| scopedSlots      | object                               | 表单域组件的作用域域插槽配置对象。对象key为插槽名称，值为返回VNode的函数，具体见[vue-jsx](https://github.com/vuejs/jsx)                                            | --     | --     |
+| dataItemRenader  | Component<br/>/() => VNode           | 表单域组件子组件默认插槽内容，可以使用组件或VNode渲染函数。                                                                                                        | --     | --     |
+| slots            | object                               | 表单域组件的插槽配置对象。对象key为插槽名称，值为配置对象，例如`{ header: Slot }`。如果直接写配置对象会当作默认插处理。插槽配置对象说明见[slot](#slot-object) | --     | --     |
+
 
 ### slot object
 

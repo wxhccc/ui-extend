@@ -36,33 +36,6 @@ createOption('')
 
 ```
 
-### `dateFormatter`
-
-返回表格列配置中formatter对应的格式化函数，用来格式化时间。
-
-时间格式化使用的是Utils里的`dateFormat`
-
-**语法**: `dateFormatter(format)`
-
-**参数**:
-
-* `format` {String} 格式化字符串，默认值为：'YYYY-MM-DD HH:mm:ss'
-
-**返回值**: function
-
-**示例**
-
-```js
-import { dateFormatter } from '@wxhccc/ui-extend/lib/optionals'
-
-const columns = [
-  {
-    label: '日期',
-    prop: 'time',
-    formatter: dateFormatter('date')
-  }
-]
-```
 
 ### `createFormFieldItem`
 
@@ -72,9 +45,9 @@ const columns = [
 
 **参数**:
 
-* `component` {Component/ComponentString} 配置数据中field对象中的component属性，可以用组件字符串或传入组件对象。
-* `labelOrProps` {String/Object} 表单项的label字符串，或者props参数对象
-* `prop` {String} 配置对象的prop属性
+* `component` { Component | string} 配置数据中field对象中的component属性，可以用组件字符串或传入组件对象。字符串组件需提前注册或全局注册，建议使用组件对象。
+* `labelOrProps` {string | FormItemProps} 表单项的label字符串，或者props参数对象
+* `prop` {string} 配置对象的prop属性
 * `fieldExtra` {Object} 配置对象的field对象中的其他属性，可覆盖已配置属性
 * `extraProps` {Object} 配置对象中的其他属性，可覆盖已配置属性
 
@@ -82,8 +55,8 @@ const columns = [
 
 **示例**
 
-```js
-import { createFormFieldItem } from '@wxhccc/ui-extend/lib/optionals'
+```ts
+import { createFormFieldItem } from '@wxhccc/ui-extend'
 
 createFormFieldItem('ElInput', '姓名', 'name')
 /** log 
@@ -97,7 +70,7 @@ createFormFieldItem('ElInput', '姓名', 'name')
 **/
 ```
 
-### `createFfiRulesProps`
+### `createFFIRulesProps`
 
 生成`FormFieldItem`组件的props属性对象
 

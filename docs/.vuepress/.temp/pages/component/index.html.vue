@@ -14,41 +14,42 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">element-ui</td>
+<td style="text-align:left">element-plus</td>
 <td style="text-align:left">是</td>
-<td style="text-align:left"><code v-pre>npm i element-ui -S</code></td>
+<td style="text-align:left"><code v-pre>npm i element-plus</code></td>
 <td style="text-align:left">--</td>
 </tr>
 <tr>
-<td style="text-align:left">lodash</td>
+<td style="text-align:left">lodash/lodash-es</td>
 <td style="text-align:left">是</td>
-<td style="text-align:left"><code v-pre>npm i lodash -S</code></td>
+<td style="text-align:left"><code v-pre>npm i lodash</code></td>
 <td style="text-align:left">--</td>
 </tr>
 <tr>
 <td style="text-align:left">cropperjs</td>
 <td style="text-align:left">否</td>
-<td style="text-align:left"><code v-pre>npm i cropperjs -S</code></td>
+<td style="text-align:left"><code v-pre>npm i cropperjs</code></td>
 <td style="text-align:left"><code v-pre>Cropper</code></td>
 </tr>
 <tr>
 <td style="text-align:left">video.js</td>
 <td style="text-align:left">否</td>
-<td style="text-align:left"><code v-pre>npm i video.js -S</code></td>
+<td style="text-align:left"><code v-pre>npm i video.js</code></td>
 <td style="text-align:left"><code v-pre>VideoPlayer</code></td>
-</tr>
-<tr>
-<td style="text-align:left">viewerjs</td>
-<td style="text-align:left">否</td>
-<td style="text-align:left"><code v-pre>npm i viewerjs -S</code></td>
-<td style="text-align:left"><code v-pre>Viewer</code></td>
 </tr>
 </tbody>
 </table>
 <h2 id="npm-安装" tabindex="-1"><a class="header-anchor" href="#npm-安装" aria-hidden="true">#</a> npm 安装</h2>
 <p>推荐使用 npm 的方式安装，它能更好地和<a href="https://webpack.js.org" target="_blank" rel="noopener noreferrer">webpack<ExternalLinkIcon/></a>打包工具配合使用。</p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>npm i @wxhccc/ui-extend -S
-</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2 id="cdn" tabindex="-1"><a class="header-anchor" href="#cdn" aria-hidden="true">#</a> CDN</h2>
+<CodeGroup>
+  <CodeGroupItem title="YARN" active>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">yarn</span> <span class="token function">add</span> @wxhccc/ui-extend
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div>  </CodeGroupItem>
+  <CodeGroupItem title="NPM" >
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">npm</span> i @wxhccc/ui-extend
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div>  </CodeGroupItem>
+</CodeGroup>
+<h2 id="cdn" tabindex="-1"><a class="header-anchor" href="#cdn" aria-hidden="true">#</a> CDN</h2>
 <p>可以通过推<a href="https://unpkg.com/@wxhccc/ui-extend" target="_blank" rel="noopener noreferrer">unpkg.com/@wxhccc/ui-extend<ExternalLinkIcon/></a>获取到cdn资源，在页面上引入即可开始使用。</p>
 <div class="language-html ext-html line-numbers-mode"><pre v-pre class="language-html"><code><span class="token comment">&lt;!-- 必须先引入element-ui组件库 --></span>
 <span class="token comment">&lt;!-- 引入组件库 --></span>

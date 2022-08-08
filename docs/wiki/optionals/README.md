@@ -6,60 +6,12 @@ sidebarDepth: 3
 
 Optionals主要是提供了**可选**的便捷函数，可以更方便得使用本组件库。
 
-代码文件并未包含在组件库代码中，需要单独引入，使用方法如下：
-
-### npm方式(推荐)
-
-::: warning 提示
-文件引入了Utils文件，所以需要先安装依赖，具体见[Utils](./utils)文档
-:::
 
 ``` js
-// 引入cjs文件
-import * as Optionals from '@wxhccc/ui-extend/lib/optionals'
-// or 配置了node_modules内包也会解析的情况下
-// import { createOption, dateFormatter } from '@wxhccc/ui-extend/src/optionals'
-
-const { createOption, dateFormatter } = Optionals 
-
-```
-### cdn方式
-```html
-<!-- 先引入其他脚本 -->
-<script src="https://unpkg.com/@wxhccc/ui-extend/lib/optionals.min.js"></script>
-
-<script>
-const Optionals = UIEXTENDS.optionals
-
-Optionals.createOption()
-</script>
-```
-## 常量
-
-### formatters
-
-表头列常用格式转换函数
-
-* `moneyFormatter` 金额转换函数
-
-**示例**:
-
-```js
-import { formatters } from '@wxhccc/ui-extend/lib/optionals'
-
-const { moneyFormatter } = formatters;
-
-const columns = [
-  {
-    label: '金额',
-    prop: 'money',
-    formatter: moneyFormatter
-  }
-]
-
+import { createOption } from '@wxhccc/ui-extend'
 ```
 
-## 方法
+## 方法列表
 
 ### createOption
 

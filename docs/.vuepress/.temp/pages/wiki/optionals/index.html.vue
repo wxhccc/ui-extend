@@ -1,46 +1,7 @@
 <template><div><h2 id="使用方法" tabindex="-1"><a class="header-anchor" href="#使用方法" aria-hidden="true">#</a> 使用方法</h2>
 <p>Optionals主要是提供了<strong>可选</strong>的便捷函数，可以更方便得使用本组件库。</p>
-<p>代码文件并未包含在组件库代码中，需要单独引入，使用方法如下：</p>
-<h3 id="npm方式-推荐" tabindex="-1"><a class="header-anchor" href="#npm方式-推荐" aria-hidden="true">#</a> npm方式(推荐)</h3>
-<div class="custom-container warning"><p class="custom-container-title">提示</p>
-<p>文件引入了Utils文件，所以需要先安装依赖，具体见<a href="./utils">Utils</a>文档</p>
-</div>
-<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token comment">// 引入cjs文件</span>
-<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> Optionals <span class="token keyword">from</span> <span class="token string">'@wxhccc/ui-extend/lib/optionals'</span>
-<span class="token comment">// or 配置了node_modules内包也会解析的情况下</span>
-<span class="token comment">// import { createOption, dateFormatter } from '@wxhccc/ui-extend/src/optionals'</span>
-
-<span class="token keyword">const</span> <span class="token punctuation">{</span> createOption<span class="token punctuation">,</span> dateFormatter <span class="token punctuation">}</span> <span class="token operator">=</span> Optionals 
-
-</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="cdn方式" tabindex="-1"><a class="header-anchor" href="#cdn方式" aria-hidden="true">#</a> cdn方式</h3>
-<div class="language-html ext-html line-numbers-mode"><pre v-pre class="language-html"><code><span class="token comment">&lt;!-- 先引入其他脚本 --></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://unpkg.com/@wxhccc/ui-extend/lib/optionals.min.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-<span class="token keyword">const</span> Optionals <span class="token operator">=</span> <span class="token constant">UIEXTENDS</span><span class="token punctuation">.</span>optionals
-
-Optionals<span class="token punctuation">.</span><span class="token function">createOption</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="常量" tabindex="-1"><a class="header-anchor" href="#常量" aria-hidden="true">#</a> 常量</h2>
-<h3 id="formatters" tabindex="-1"><a class="header-anchor" href="#formatters" aria-hidden="true">#</a> formatters</h3>
-<p>表头列常用格式转换函数</p>
-<ul>
-<li><code v-pre>moneyFormatter</code> 金额转换函数</li>
-</ul>
-<p><strong>示例</strong>:</p>
-<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> formatters <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@wxhccc/ui-extend/lib/optionals'</span>
-
-<span class="token keyword">const</span> <span class="token punctuation">{</span> moneyFormatter <span class="token punctuation">}</span> <span class="token operator">=</span> formatters<span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> columns <span class="token operator">=</span> <span class="token punctuation">[</span>
-  <span class="token punctuation">{</span>
-    <span class="token literal-property property">label</span><span class="token operator">:</span> <span class="token string">'金额'</span><span class="token punctuation">,</span>
-    <span class="token literal-property property">prop</span><span class="token operator">:</span> <span class="token string">'money'</span><span class="token punctuation">,</span>
-    <span class="token literal-property property">formatter</span><span class="token operator">:</span> moneyFormatter
-  <span class="token punctuation">}</span>
-<span class="token punctuation">]</span>
-
-</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="方法" tabindex="-1"><a class="header-anchor" href="#方法" aria-hidden="true">#</a> 方法</h2>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> createOption <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@wxhccc/ui-extend'</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2 id="方法列表" tabindex="-1"><a class="header-anchor" href="#方法列表" aria-hidden="true">#</a> 方法列表</h2>
 <h3 id="createoption" tabindex="-1"><a class="header-anchor" href="#createoption" aria-hidden="true">#</a> createOption</h3>
 <p>创建标准格式的option数据对象，通常用来生成下拉选项里的“全部”选项</p>
 <p><strong>语法</strong>: <code v-pre>createOption(value[, label])</code></p>

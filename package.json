@@ -46,12 +46,14 @@
     "@typescript-eslint/parser": "^5.31.0",
     "@vitejs/plugin-vue": "^3.0.1",
     "@vue/eslint-config-typescript": "^11.0.0",
+    "@vuepress/plugin-docsearch": "^2.0.0-alpha.1",
     "@vuepress/plugin-register-components": "^2.0.0-beta.49",
     "@wxhccc/es-util": "^2.0.1",
     "ali-oss": "^6.17.1",
     "babel-plugin-component": "^1.1.1",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-module-resolver": "^3.2.0",
+    "copy-to-clipboard": "^3.3.1",
     "cropperjs": "^1.5.12",
     "cross-env": "^5.2.0",
     "element-plus": "^2.2.11",
@@ -62,11 +64,10 @@
     "lodash-es": "^4.17.21",
     "markdown-it-container": "^3.0.0",
     "markdown-it-include": "^2.0.0",
-    "numeral": "^2.0.6",
     "prettier": "^2.7.1",
     "sass": "^1.54.0",
-    "sass-loader": "^7.1.0",
     "select-version-cli": "0.0.2",
+    "store2": "^2.9.0",
     "typescript": "^4.7.4",
     "video.js": "^7.6.0",
     "viewerjs": "^1.3.6",
@@ -78,19 +79,17 @@
     "vuepress-plugin-clean-urls": "^1.0.3"
   },
   "peerDependencies": {
-    "cropperjs": "^1.5.3",
+    "cropperjs": ">=1.5.3",
     "element-plus": ">=2.0.0",
-    "numeral": "^2.0.6",
     "video.js": ">=7.0.0",
     "viewerjs": ">=1.3.6",
     "vue": ">=3.0.0"
   },
-  "dependencies": {
-    "copy-to-clipboard": "^3.3.1",
-    "store2": "^2.9.0"
+  "optionalDependencies": {
+    "@wxhccc/es-util": "^2.0.1"
   },
   "directories": {
     "doc": "docs",
-    "lib": "lib"
+    "dist": "dist"
   }
 }

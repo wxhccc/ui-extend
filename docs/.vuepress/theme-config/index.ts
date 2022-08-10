@@ -73,9 +73,9 @@ export const sidebar = (): SidebarConfig => ({
     }
   ],
   '/wiki/': [
-    { text: 'Utils', link: '/wiki/utils/' },
-    { text: 'Optionals', link: '/wiki/optionals/' },
-    { text: '数据结构', link: '/wiki/data/' }
+    { text: 'Utils', link: 'utils' },
+    { text: 'Optionals', link: 'optionals' },
+    { text: '数据结构', link: 'data' }
   ],
   '/': [
     ''

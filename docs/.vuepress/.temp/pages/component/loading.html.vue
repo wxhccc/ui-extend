@@ -1,7 +1,7 @@
 <template><div><h2 id="loading-加载组件" tabindex="-1"><a class="header-anchor" href="#loading-加载组件" aria-hidden="true">#</a> Loading 加载组件</h2>
 <p>加载组件，渲染时会在父组件内生成一个显示加载中状态的遮层，也可选择生成全屏遮层。</p>
 <div class="custom-container tip"><p class="custom-container-title">说明</p>
-<p>目前组件是Element的Loading指令的服务封装，支持服务的大部分配置项。Loading文档参照 <element-link component="Loading"></element-link></p>
+<p>目前组件是Element的Loading指令的服务封装，支持服务的大部分配置项。Loading文档参照 <ui-lib-link component="Loading"></ui-lib-link></p>
 <p>封装的目的是本项目后期多UI库的兼容。用户项目内建议遵循对应UI库文档</p>
 </div>
 <h3 id="基础用法" tabindex="-1"><a class="header-anchor" href="#基础用法" aria-hidden="true">#</a> 基础用法</h3>

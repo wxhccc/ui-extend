@@ -9,7 +9,7 @@
 :::
 
 ::: tip 提示
-Input组件文档参照 <element-link component="Input"></element-link>
+Input组件文档参照 <ui-lib-link component="Input"></ui-lib-link>
 :::
 
 

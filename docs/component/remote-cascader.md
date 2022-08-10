@@ -19,7 +19,7 @@
 ::: tip 提示
 组件会透传Cascader组件支持的绝大部分属性和事件绑定以及插槽，但关于动态加载部分的可能无法覆盖。
 
-Tree组件文档参照 <element-link component="Tree"></element-link>
+Tree组件文档参照 <ui-lib-link component="Tree"></ui-lib-link>
 :::
 
 ::: warning 警告

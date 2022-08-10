@@ -21,7 +21,7 @@
 :::
 
 ::: tip 相关文档
-Form组件文档参照 <element-link component="Form"></element-link>
+Form组件文档参照 <ui-lib-link component="Form"></ui-lib-link>
 :::
 
 

@@ -15,7 +15,7 @@
 :::
 
 ::: tip 提示
-Button组件文档参照 <element-link component="Button"></element-link>
+Button组件文档参照 <ui-lib-link component="Button"></ui-lib-link>
 :::
 
 

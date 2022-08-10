@@ -1,6 +1,6 @@
 ## SearchForm 搜索表单
 
-基于[FormFields](./form-fields)组件和<element-link component="Form"></element-link>组件封装的搜索表单。用于列表的搜索条件。
+基于[FormFields](./form-fields)组件和<ui-lib-link component="Form"></ui-lib-link>组件封装的搜索表单。用于列表的搜索条件。
 
 ### 基础用法
 

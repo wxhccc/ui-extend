@@ -28,7 +28,7 @@
 
 
 ::: tip 提示
-Tree组件文档参照 <element-link component="Tree"></element-link>
+Tree组件文档参照 <ui-lib-link component="Tree"></ui-lib-link>
 :::
 
 

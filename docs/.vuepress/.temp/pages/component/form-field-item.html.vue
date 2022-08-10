@@ -280,7 +280,7 @@
 <span class="token punctuation">}</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 </code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></comp-demo><div class="custom-container tip"><p class="custom-container-title">提示</p>
-<p>FormItem组件文档参照 <element-link component="FormItem"></element-link></p>
+<p>FormItem组件文档参照 <ui-lib-link component="FormItem"></ui-lib-link></p>
 </div>
 <h3 id="attributes" tabindex="-1"><a class="header-anchor" href="#attributes" aria-hidden="true">#</a> Attributes</h3>
 <table>
@@ -381,14 +381,7 @@
 <tr>
 <td style="text-align:left">slots</td>
 <td style="text-align:left">object</td>
-<td style="text-align:left">具名插槽配置对象，具体结构见</td>
-<td style="text-align:left">--</td>
-<td style="text-align:left">--</td>
-</tr>
-<tr>
-<td style="text-align:left">scopedSlots</td>
-<td style="text-align:left">object</td>
-<td style="text-align:left">作用域插槽配置对象，具体结构见</td>
+<td style="text-align:left">插槽配置对象，具体结构见</td>
 <td style="text-align:left">--</td>
 <td style="text-align:left">--</td>
 </tr>

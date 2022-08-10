@@ -4,39 +4,37 @@
     <br/><br/>
     <el-input size="small" v-if="data.isEdit" v-model="data.value" ></el-input>
     <br/><br/>
-    <ue-action-btns :data="data" :btns="btns" :loadingFlags="data"></ue-action-btns>
+    <ue-action-btns :data="data" :btns="btns" :loading-flags="data"></ue-action-btns>
   </div>
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      hasRight: true,
-      data: { isEdit: false, value: '' }
-    }
-  },
-  computed: {
-    btns () {
-      const { hasRight } = this
+import { defineComponent, ref, reactive, computed } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const hasRight = ref(true)
+    const data = reactive({ isEdit: false, value: '' })
+
+    const btns = computed(() => {
       return [
         {
           props: { size: 'small' },
           text: 'view',
-          click (data, btn) { console.log(data, btn) }
+          click: (data, btn) => { console.log(data, btn) }
         },
         {
           btype: 'primary',
           loadingKey: 'infoSend',
           text: (data) => (!data.isEdit ? 'edit' : 'save'),
           loadingText: 'saveing...',
-          click: this.editHandle
+          click: editHandle
         },
         {
           props: { size: 'small' },
           btype: 'danger',
           text: 'delete',
-          hide: () => (!this.hasRight),
+          hide: () => (!hasRight.value),
           isConfirm: true,
           confirmMsg: () => ('删除后无法恢复，确定要删除'),
           click () {
@@ -44,17 +42,15 @@ export default {
           }
         }
       ]
-    }
-  },
-  methods: {
-    editHandle (data, btn) {
+    })
+    const editHandle = (data, btn) => {
       console.log(data)
       // 切换到编辑模式
       if (!data.isEdit) {
         data.isEdit = !data.isEdit
       } else {
         // 模拟接口提交
-        this.$set(data, 'infoSend', true)
+        data.infoSend = true
         window.setTimeout(() => {
           // send
           data.infoSend = false
@@ -62,6 +58,8 @@ export default {
         }, 2000)
       }
     }
+
+    return { hasRight, data, btns }
   }
-}
+})
 </script>

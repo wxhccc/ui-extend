@@ -58,7 +58,7 @@
 :::
 
 ::: tip 提示
-Table组件文档参照 <element-link component="Table"></element-link>
+Table组件文档参照 <ui-lib-link component="Table"></ui-lib-link>
 :::
 
 

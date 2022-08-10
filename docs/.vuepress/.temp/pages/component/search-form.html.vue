@@ -1,5 +1,5 @@
 <template><div><h2 id="searchform-搜索表单" tabindex="-1"><a class="header-anchor" href="#searchform-搜索表单" aria-hidden="true">#</a> SearchForm 搜索表单</h2>
-<p>基于<a href="./form-fields">FormFields</a>组件和<element-link component="Form"></element-link>组件封装的搜索表单。用于列表的搜索条件。</p>
+<p>基于<a href="./form-fields">FormFields</a>组件和<ui-lib-link component="Form"></ui-lib-link>组件封装的搜索表单。用于列表的搜索条件。</p>
 <h3 id="基础用法" tabindex="-1"><a class="header-anchor" href="#基础用法" aria-hidden="true">#</a> 基础用法</h3>
 <p>建议使用按钮触发数据变动，这样可以避免短时间内多次调用数据接口。</p>
 <comp-demo name="Base"><div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>

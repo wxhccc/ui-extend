@@ -40,7 +40,7 @@
 
 
 ::: tip 提示
-Layout组件文档参照 <element-link component="Layout"></element-link>
+Layout组件文档参照 <ui-lib-link component="Layout"></ui-lib-link>
 :::
 
 

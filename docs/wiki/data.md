@@ -1,5 +1,5 @@
 ---
-sidebarDepth: 3
+sidebarDepth: 1
 ---
 
 ## 数据结构

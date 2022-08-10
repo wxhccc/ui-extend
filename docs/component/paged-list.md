@@ -3,7 +3,7 @@
 分页组件和列表数据插槽的高阶封装，集成分页请求，数据处理，自动发送等功能，用于简化分页场景需求。
 
 ::: tip 提示
-Pagination组件文档参照 <element-link component="Pagination"></element-link>
+Pagination组件文档参照 <ui-lib-link component="Pagination"></ui-lib-link>
 :::
 
 ### 无序列表（ul）

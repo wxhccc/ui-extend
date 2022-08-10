@@ -349,43 +349,12 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">value/v-model</td>
+<td style="text-align:left">modelValue/v-model</td>
 <td style="text-align:left">any</td>
 <td style="text-align:left">绑定值</td>
 <td style="text-align:left">--</td>
 <td style="text-align:left">--</td>
 </tr>
-<tr>
-<td style="text-align:left">field</td>
-<td style="text-align:left">object</td>
-<td style="text-align:left">表单域配置对象。具体字段见<a href="#field">field</a></td>
-<td style="text-align:left">--</td>
-<td style="text-align:left">--</td>
-</tr>
-<tr>
-<td style="text-align:left">lib-prefix</td>
-<td style="text-align:left">string</td>
-<td style="text-align:left">ui库组件前缀，例如'element-ui'前缀为'El'. 使用字符串生成带子组件的表单域组件时会用到。</td>
-<td style="text-align:left">--</td>
-<td style="text-align:left">'El'</td>
-</tr>
-</tbody>
-</table>
-<h3 id="field" tabindex="-1"><a class="header-anchor" href="#field" aria-hidden="true">#</a> field</h3>
-<div class="custom-container warning"><p class="custom-container-title">注意</p>
-<p>配置参数是<code v-pre>field</code>对象的键名, 不能使用短横线写法.</p>
-</div>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">参数</th>
-<th style="text-align:left">类型</th>
-<th style="text-align:left">说明</th>
-<th style="text-align:left">可选值</th>
-<th style="text-align:left">默认值</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td style="text-align:left">component</td>
 <td style="text-align:left">string(ComponentName)<br/>/Component</td>
@@ -464,7 +433,7 @@
 <td style="text-align:left">--</td>
 </tr>
 <tr>
-<td style="text-align:left">dataItemContent</td>
+<td style="text-align:left">dataItemRenader</td>
 <td style="text-align:left">Component<br/>/() =&gt; VNode</td>
 <td style="text-align:left">表单域组件子组件默认插槽内容，可以使用组件或VNode渲染函数。</td>
 <td style="text-align:left">--</td>
@@ -473,14 +442,7 @@
 <tr>
 <td style="text-align:left">slots</td>
 <td style="text-align:left">object</td>
-<td style="text-align:left">表单域组件的具名插槽配置对象。对象key为插槽名称，值为配置对象，例如<code v-pre>{ header: {...} }</code>。如果直接写配置对象会当作默认插处理。插槽配置对象说明见<a href="#slot-object">slot</a></td>
-<td style="text-align:left">--</td>
-<td style="text-align:left">--</td>
-</tr>
-<tr>
-<td style="text-align:left">scopedSlots</td>
-<td style="text-align:left">object</td>
-<td style="text-align:left">表单域组件的作用域域插槽配置对象。对象key为插槽名称，值为返回VNode的函数，具体见<a href="https://github.com/vuejs/jsx" target="_blank" rel="noopener noreferrer">vue-jsx<ExternalLinkIcon/></a></td>
+<td style="text-align:left">表单域组件的插槽配置对象。对象key为插槽名称，值为配置对象，例如<code v-pre>{ header: Slot }</code>。如果直接写配置对象会当作默认插处理。插槽配置对象说明见<a href="#slot-object">slot</a></td>
 <td style="text-align:left">--</td>
 <td style="text-align:left">--</td>
 </tr>

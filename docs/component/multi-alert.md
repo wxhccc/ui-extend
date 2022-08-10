@@ -18,7 +18,7 @@ Alert组件扩展，以支持组件内多组信息的显示。
 :::
 
 ::: tip 提示
-Alert组件文档参照 <element-link component="Alert"></element-link>
+Alert组件文档参照 <ui-lib-link component="Alert"></ui-lib-link>
 :::
 
 

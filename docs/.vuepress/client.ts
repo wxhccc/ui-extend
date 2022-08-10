@@ -1,7 +1,7 @@
 import { defineClientConfig } from '@vuepress/client'
 import ElementPlus, { version } from 'element-plus'
 import components from './components'
-import UiExtend from '../../dist/index.esm'
+import UiExtend from '../../'
 import '../../dist/style.css'
 
 import 'element-plus/dist/index.css'

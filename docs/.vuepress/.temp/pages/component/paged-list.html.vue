@@ -1,7 +1,7 @@
 <template><div><h2 id="pagedlist-分页列表" tabindex="-1"><a class="header-anchor" href="#pagedlist-分页列表" aria-hidden="true">#</a> PagedList 分页列表</h2>
 <p>分页组件和列表数据插槽的高阶封装，集成分页请求，数据处理，自动发送等功能，用于简化分页场景需求。</p>
 <div class="custom-container tip"><p class="custom-container-title">提示</p>
-<p>Pagination组件文档参照 <element-link component="Pagination"></element-link></p>
+<p>Pagination组件文档参照 <ui-lib-link component="Pagination"></ui-lib-link></p>
 </div>
 <h3 id="无序列表-ul" tabindex="-1"><a class="header-anchor" href="#无序列表-ul" aria-hidden="true">#</a> 无序列表（ul）</h3>
 <comp-demo name="Ul"><div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>

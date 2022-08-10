@@ -49,7 +49,7 @@
 :::
 
 ::: tip 提示
-FormItem组件文档参照 <element-link component="FormItem"></element-link>
+FormItem组件文档参照 <ui-lib-link component="FormItem"></ui-lib-link>
 :::
 
 

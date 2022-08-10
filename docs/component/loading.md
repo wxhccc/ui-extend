@@ -3,7 +3,7 @@
 加载组件，渲染时会在父组件内生成一个显示加载中状态的遮层，也可选择生成全屏遮层。
 
 ::: tip 说明
-目前组件是Element的Loading指令的服务封装，支持服务的大部分配置项。Loading文档参照 <element-link component="Loading"></element-link>
+目前组件是Element的Loading指令的服务封装，支持服务的大部分配置项。Loading文档参照 <ui-lib-link component="Loading"></ui-lib-link>
 
 封装的目的是本项目后期多UI库的兼容。用户项目内建议遵循对应UI库文档
 :::

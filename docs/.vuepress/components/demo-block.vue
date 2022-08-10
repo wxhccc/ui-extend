@@ -273,7 +273,10 @@ export default { name: 'DemoBlock' }
   }
 
   .demo-block-control {
-    border-top: solid 1px #eaeefb;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
     height: 44px;
     box-sizing: border-box;
     background-color: #fff;
@@ -281,9 +284,9 @@ export default { name: 'DemoBlock' }
     border-bottom-right-radius: 4px;
     text-align: center;
     margin-top: -1px;
+    border-top: solid 1px #eaeefb;
     color: #d3dce6;
     cursor: pointer;
-    position: relative;
   
     &.is-fixed {
       position: fixed;
@@ -293,19 +296,10 @@ export default { name: 'DemoBlock' }
 
     i {
       font-size: 16px;
-      line-height: 44px;
-      transition: .3s;
-      &.hovering {
-        transform: translateX(-40px);
-      }
     }
 
     > span {
-      position: absolute;
-      transform: translateX(-30px);
       font-size: 14px;
-      line-height: 44px;
-      transition: .3s;
       display: inline-block;
     }
 
@@ -321,7 +315,7 @@ export default { name: 'DemoBlock' }
     }
     
     .control-button {
-      line-height: 26px;
+      line-height: 36px;
       position: absolute;
       top: 0;
       right: 0;

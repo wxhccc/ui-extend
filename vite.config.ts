@@ -9,7 +9,10 @@ const formatFileMap = {
 }
 
 export default defineConfig({
-  plugins: [vue(), dts({ rollupTypes: true, skipDiagnostics: false })],
+  plugins: [
+    vue()
+    //  dts({ rollupTypes: true, skipDiagnostics: false })
+  ],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src')

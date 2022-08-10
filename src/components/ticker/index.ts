@@ -17,25 +17,40 @@ export default defineComponent({
     duration: vueTypeProp<number>(Number, 60),
     interval: vueTypeProp<number>(Number, 1)
   },
-  emits: ['on-timeout'],
+  emits: ['timeout'],
   setup(props, { emit, slots }) {
     const durationMil = ref(props.duration > 0 ? props.duration * 1000 : 0)
+    let lastTime = 0
 
     const text = computed(() => {
       const duraSec = durationMil.value / 1000
-      return `${durationMil.value % 1000 === 0 ? duraSec : duraSec.toFixed(1)}s`
+      const isSecond = tickerInterval.value % 1000 === 0
+      return `${
+        durationMil.value % 1000 === 0
+          ? duraSec
+          : isSecond
+          ? Math.round(duraSec)
+          : duraSec.toFixed(1)
+      }s`
     })
 
     const tickerInterval = computed(() => (props.interval ? props.interval * 1000 : 1000))
 
     const updateText = () => {
-      durationMil.value -= tickerInterval.value
-      if (durationMil.value) {
-        emit('on-timeout')
+      const trueInterval = +new Date() - lastTime
+      lastTime = +new Date()
+      const interval =
+        trueInterval > 1.5 * tickerInterval.value ? trueInterval : tickerInterval.value
+      const newValue = durationMil.value - interval
+      durationMil.value = newValue >= 0 ? newValue : 0
+      if (durationMil.value === 0) {
+        emit('timeout')
         timer.removeTask(updateText)
       }
     }
     const createTicker = () => {
+      console.log(props)
+      lastTime = +new Date()
       timer.addTask(updateText, tickerInterval.value)
     }
 

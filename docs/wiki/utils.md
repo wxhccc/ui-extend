@@ -13,15 +13,16 @@ import { loadjs, vwp } from '@wxhccc/ui-extend'
 
 ### loadjs
 
-简单的动态js脚步引入函数，返回promise对象
+简单的动态js脚步引入函数，返回promise对象，适用于没有npm包或者希望懒加载cdn资源的场景。
 
-**语法**: `loadjs(url: string)`
+**类型定义**: `loadjs(url: string)`
+```ts
+function loadjs(url: string): Promise<void>
+```
 
 **参数**:
 
-* `url` {string} 脚步地址。
-
-**返回值**: promise
+* `url` { string } js脚本地址。
 
 
 **示例**:
@@ -39,14 +40,15 @@ loadjs('https://www.example.com/xxxxxxxx.js').then(() => {
 
 `@wxhccc/es-util`库的`wp` 函数的vue封装，提供ref的支持
 
-**语法**: `vwp<T>(promise: Promise<T>, lock?: WpOptions['lock'] | Ref<boolean>)`
+**类型定义**: 
+``` ts
+declare const vwp = <T>(promise: Promise<T>, lock?: WpOptions['lock'] | Ref<boolean>): Promise<[null, T] | [Error, undefined]>
+```
 
 **参数**:
 
-* `promise` {Promise} promise对象
-* `lock` { WpOptions['lock'] | Ref\<boolean> } 格式化字符串，默认值为：`0,0`
-
-**返回值**: 
+* `promise`   promise对象
+* `lock`      格式化字符串，默认值为：`0,0`
 
 **示例**
 
@@ -69,15 +71,15 @@ const getApiData = async () => {
 
 解析可能是函数化返回的变量
 
-**语法**: 
-`resolveFunctional<R>(value: R | AnyFunction<R>, ...args: Parameters<AnyFunction<R>>): R`
+**类型定义**: 
+```ts
+declare const resolveFunctional = <R>(value: R | AnyFunction<R>, ...args: Parameters<AnyFunction<R>>): R
+```
 
 **参数**:
 
-* `value` {any | AnyFunction\<any>} 特定值，或者返回特定值的函数
-* `...args` {any[]} 传递给函数的参数序列
-
-**返回值**: any
+* `value` { `any | AnyFunction<any>` } 特定值，或者返回特定值的函数
+* `...args` { `any[]` } 传递给函数的参数序列
 
 **示例**
 
@@ -100,14 +102,15 @@ const trueInputProps = resolveFunctional(props.inputProps, 'text')
 
 使用`dayjs`库(时间处理库)的格式化函数格式化时间
 
-**语法**: `dateFormat(date: string | number | Date | Dayjs, format: FormatShort | string = 'default'`
+**类型定义**: 
+```ts
+function dateFormat(date: string | number | Date | Dayjs, format?: 'default' | 'date' | 'time' | string): string
+```
 
 **参数**:
 
 * `date` {string | number | Date | Dayjs} 需要转换的时间，支持Date对象，字符串格式时间，10/13位时间戳，dayjs对象
 * `format` {string} 输出时间的格式。默认值为：'YYYY-MM-DD HH:mm:ss'，支持具体格式字符串或者格式别名。default: 'YYYY-MM-DD HH:mm:ss'，date: 'YYYY-MM-DD'
-
-**返回值**: string
 
 **示例**
 

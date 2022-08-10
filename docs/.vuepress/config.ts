@@ -42,13 +42,13 @@ export default defineUserConfig({
   },
   plugins: [
     containers,
+    docsearchPlugin({
+      appId: 'Y1JKGCLRU1',
+      apiKey: 'ecacc7ad727dac935636340f33435d7e',
+      indexName: 'ui-extend'
+    }),
     registerComponentsPlugin({
       componentsDir: path.resolve(__dirname, './demo')
-    }),
-    docsearchPlugin({
-      appId: '',
-      apiKey: '',
-      indexName: ''
     })
   ]
 })

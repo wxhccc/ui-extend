@@ -57,8 +57,7 @@ export function createFFIRulesProps(
         {
           required: true,
           message: typeof required === 'string' ? required : '请输入' + label,
-          ...(type ? { type } : {}),
-          trigger: 'blur'
+          ...(type ? { type } : {})
         } as RuleObject
       ]
     : []
@@ -78,11 +77,11 @@ export function createFFIRulesProps(
  * @param extraProps FormFieldItem组件的其他props
  * @returns FormFieldItem组件的props
  */
-export function createFormFieldItem(
+export function createFormFieldItem<FP extends AnyObject = any, V = any>(
   component: CustomComponent,
   labelOrProps?: StrOrProps<FormItemProps>,
   name?: NamePath,
-  fieldExtra: Partial<CommonFieldProps> = {},
+  fieldExtra: Partial<CommonFieldProps<V, FP>> = {},
   extraProps: Partial<FormFieldItemProps> = {}
 ): FormFieldItemProps {
   return {
@@ -109,26 +108,20 @@ export function createInputFormItem(
   labelOrProps: StrOrProps<FormItemProps>,
   name?: NamePath,
   phOrFieldProps?: StrOrProps<Partial<CommonFieldProps<string, InputProps>>>,
-  extraProps: Partial<FormFieldItemProps> = {},
-  slots?: string | Slots
+  extraProps: Partial<FormFieldItemProps> = {}
 ) {
-  const fieldSlots = (
-    slots
-      ? { slots: typeof slots === 'string' ? { append: () => h('span', slots) } : slots || {} }
-      : {}
-  ) as Slots
+  const defPlaceholder = typeof labelOrProps === 'string' ? `请输入${labelOrProps}` : ''
   return createFormFieldItem(
     UeInput,
     labelOrProps,
     name,
-    {
-      ...(typeof phOrFieldProps === 'string'
+    phOrFieldProps
+      ? typeof phOrFieldProps === 'string'
         ? {
-            placeholder: phOrFieldProps || '请输入' + labelOrProps
+            placeholder: phOrFieldProps || defPlaceholder
           }
-        : phOrFieldProps),
-      ...fieldSlots
-    },
+        : phOrFieldProps
+      : undefined,
     extraProps
   )
 }
@@ -174,7 +167,7 @@ export const createRadioGroupFormItem: CreateHasDataFormItem<
  * @returns FormFieldItem组件的props
  */
 export const createCheckboxGroupFormItem: CreateHasDataFormItem<
-  Partial<CommonFieldProps<any, CheckboxGroupProps>>
+  Partial<CommonFieldProps<StrOrNum[], CheckboxGroupProps>>
 > = (labelOrProps, name, data, fieldExtra = {}, extraProps = {}) => {
   const childComponent = markRaw(UeCheckbox)
   return createFormFieldItem(

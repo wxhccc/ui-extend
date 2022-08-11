@@ -126,7 +126,6 @@ export default defineComponent({
         : isModelCheck.value
         ? ON_UI_UPDATE_MODEL_VALUE
         : ON_UI_UPDATE_MODEL_VALUE
-
       const optionsData = !childField.value && props.data ? { options: props.data } : {}
 
       return mergeProps(props.props ? resolveProps(props.props) : {}, optionsData, {

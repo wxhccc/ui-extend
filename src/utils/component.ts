@@ -1,4 +1,5 @@
 import { PropType } from 'vue'
+import { FORM_ITEM_NAME } from './const'
 
 export function resolveProps<T extends Record<string, any> = Record<string, any>>(
   props: T | AnyFunction<T>,
@@ -17,3 +18,7 @@ export const vueTypeProp = <T>(
   default: value,
   ...(required ? { required: true } : {})
 })
+
+export const getFormItemName = <T extends { name?: NamePath; prop?: NamePath }>(item: T) => {
+  return item[FORM_ITEM_NAME]
+}

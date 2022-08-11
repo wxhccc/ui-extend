@@ -9,3 +9,5 @@ export const ON_UI_UPDATE_MODEL_VALUE = 'onUpdate:modelValue'
 export const UI_MODEL_CHECKED = 'checked'
 export const UI_UPDATE_MODEL_CHECKED = 'update:checked'
 export const ON_UI_UPDATE_MODEL_CHECKED = 'onUpdate:checked'
+
+export const FORM_ITEM_NAME = 'prop'

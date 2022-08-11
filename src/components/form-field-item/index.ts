@@ -11,7 +11,7 @@ import {
   NamePath,
   TextType
 } from './types'
-import { resolveProps, vueTypeProp } from '@/utils/component'
+import { getFormItemName, resolveProps, vueTypeProp } from '@/utils/component'
 
 export * from './types'
 
@@ -37,7 +37,7 @@ export default defineComponent({
       return Array.isArray(prevNames) ? prevNames.concat(curPath) : curPath
     }
 
-    const handleName = computed(() => props.name || props.prop)
+    const handleName = computed(() => getFormItemName(props))
     const formItemNames = computed(() => handleFormItemName(handleName.value, props.prevNames))
     const hasChild = computed(() => Array.isArray(props.children) && props.children.length > 0)
 
@@ -119,8 +119,8 @@ export default defineComponent({
       )
     }
     const getChildFormItemProps = (child: ChildFormFieldItemOption) => {
-      const { name, prop, props, field } = child
-      const handleName = name || prop
+      const { props, field } = child
+      const handleName = getFormItemName(child)
       const prevNames = handleFormItemName(handleName, formItemNames.value)
       return mergeProps((props ? resolveProps(props) : {}) as VNodeProps, {
         prop: prevNames,
@@ -136,8 +136,8 @@ export default defineComponent({
         {
           default: () =>
             children.map((child, idx) => {
-              const { key, name, prop, colProps } = child
-              const colKey: string | number = key || prop || name || idx
+              const { key, colProps } = child
+              const colKey: string | number = key || getFormItemName(child) || idx
               return h(
                 UeCol,
                 mergeProps((colProps ? resolveProps(colProps) : {}) as VNodeProps, {
@@ -154,8 +154,8 @@ export default defineComponent({
       )
     }
     const handleChildItemContent = (item: ChildFormFieldItemOption) => {
-      const { text, name, prop, field, slots } = item
-      const handleName = name || prop
+      const { text, field, slots } = item
+      const handleName = getFormItemName(item)
       if (text) {
         return handleItemText(text, handleName, handleName && handleValue.value[handleName])
       }

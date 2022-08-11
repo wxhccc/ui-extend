@@ -12,8 +12,8 @@ import {
   markRaw
 } from 'vue'
 import { cloneDeep, get, set } from 'lodash-es'
+import { getFormItemName, resolveProps, vueTypeProp } from '@/utils/component'
 import FormFieldItem from '../form-field-item'
-import { resolveProps, vueTypeProp } from '@/utils/component'
 import { FormFieldsItem, FormFieldsOption, FormFieldsProps } from './types'
 
 export * from './types'
@@ -64,8 +64,8 @@ export default defineComponent({
     })
 
     const getValue = (item: InnerFormFields) => {
-      const { name, prop, prevNames } = item
-      const handleName = prop || name
+      const { prevNames } = item
+      const handleName = getFormItemName(item)
       let prevValue = props.modelValue
       // 如果配置了prevNames，需要拼接属性来获取参数
       if (prevNames && Array.isArray(prevNames) && prevNames.length) {
@@ -79,8 +79,8 @@ export default defineComponent({
       emit('change', val)
     }
     const setValue = (item: InnerFormFields, value?: unknown, delay?: boolean) => {
-      const { name, prop, prevNames } = item
-      const handleName = prop || name
+      const { prevNames } = item
+      const handleName = getFormItemName(item)
       const cloneValues = cloneDeep(props.modelValue)
 
       const changeValue = (handleName !== undefined ? { [handleName]: value } : value) as AnyObject
@@ -105,8 +105,8 @@ export default defineComponent({
 
     const fieldItems = computed<VNodeChild>(() =>
       handledItems.value.map((item, index) => {
-        const { name, prop, key, __onChange: onChange } = item
-        const handleName = prop || name
+        const { key, __onChange: onChange } = item
+        const handleName = getFormItemName(item)
         const itemKey = `${handleName || key || index}`
 
         const userProps = (item.props ? resolveProps(item.props) : {}) as VNodeProps
@@ -146,7 +146,7 @@ export default defineComponent({
     // 级联数据项监听器
     const listenCascader = (item: InnerFormFields, handledItems: InnerFormFields[]) => {
       const { dependencies } = item
-      const cascaderField = handledItems.find((item) => (item.prop || item.name) === dependencies)
+      const cascaderField = handledItems.find((i) => getFormItemName(i) === dependencies)
       if (!cascaderField) {
         return
       }
@@ -156,8 +156,8 @@ export default defineComponent({
     }
 
     const cascaderHandler = (item: InnerFormFields, value?: unknown, init?: boolean) => {
-      const { cascadeData, spliceStart = 0, clearValue, name, prop, cascadeHandler } = item
-      const handleName = prop || name
+      const { cascadeData, spliceStart = 0, clearValue, cascadeHandler } = item
+      const handleName = getFormItemName(item)
       const modelData =
         cascadeData && Array.isArray(cascadeData[value as string])
           ? cascadeData[value as string]
@@ -194,7 +194,7 @@ export default defineComponent({
           return
         }
         item.__watchers.forEach((watcher) =>
-          watcher(props.modelValue[(item.prop || item.name) as string], true)
+          watcher(props.modelValue[getFormItemName(item) as string], true)
         )
       })
     }

@@ -1,9 +1,9 @@
-import { defineAsyncComponent, App } from 'vue'
+import type { App } from 'vue'
 import { version } from '../package.json'
 import Loading from './ui-comps/loading'
 import ActionBtns from '@/components/action-btns'
 import DataTable from '@/components/data-table'
-
+import Cropper from '@/components/cropper'
 import CommonField from '@/components/common-field'
 import FormBtns from '@/components/form-btns'
 import FormFieldItem from '@/components/form-field-item'
@@ -22,7 +22,7 @@ import TreeField from '@/components/tree-field'
 import ScrollPane from '@/components/scroll-pane'
 import TreeTransfer from '@/components/tree-transfer'
 
-const Cropper = defineAsyncComponent(() => import('@/components/cropper'))
+// const Cropper = defineAsyncComponent(() => import('@/components/cropper'))
 
 export * from '@/utils'
 export * from '@/optionals'

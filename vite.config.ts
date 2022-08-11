@@ -6,8 +6,8 @@ import { external, globals } from './script/config'
 
 export default defineConfig({
   plugins: [
-    vue()
-    //  dts({ rollupTypes: true, skipDiagnostics: false })
+    vue(),
+    dts({ rollupTypes: true, skipDiagnostics: false, include: ['src/**/*'] })
   ],
   resolve: {
     alias: {
@@ -19,7 +19,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'UiExtend',
       // the proper extensions will be added
-      fileName: 'index'
+      fileName: (format) => format === 'es' ? 'index.js' : 'index.umd.js'
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖

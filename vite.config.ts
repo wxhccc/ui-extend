@@ -1,14 +1,11 @@
-import { resolve, basename, dirname } from 'path'
+import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import dts from 'vite-plugin-dts'
 import { external, globals } from './script/config'
 
 export default defineConfig({
-  plugins: [
-    vue(),
-    dts({ rollupTypes: true, skipDiagnostics: false, include: ['src/**/*'] })
-  ],
+  plugins: [vue(), dts({ rollupTypes: true, skipDiagnostics: false, include: ['src/**/*'] })],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src')
@@ -19,7 +16,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'UiExtend',
       // the proper extensions will be added
-      fileName: (format) => format === 'es' ? 'index.js' : 'index.umd.js'
+      fileName: (format) => (format === 'es' ? 'index.js' : 'index.umd.js')
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖

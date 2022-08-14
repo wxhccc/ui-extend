@@ -105,11 +105,12 @@ const proxyMethods = useProxyInstanceMethods(treeField, ['filter'])
 defineExpose({ tree: treeField, ...proxyMethods })
 
 const { ignoreWatch } = useIgnoreWatch(
-  () => props.modelValue,
+  () => [treeField.value, props.modelValue],
   () => {
     treeField.value?.setCheckedKeys(props.modelValue)
   }
 )
+
 </script>
 <script lang="ts">
 export default { name: 'UeTreeField' }

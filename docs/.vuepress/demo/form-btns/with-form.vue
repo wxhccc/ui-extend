@@ -5,7 +5,7 @@
     </el-form-item>
     <el-form-item>
       <ue-form-btns
-        :parent-refs="$refs"
+        :form="form"
         is-validate
         :btn-keys="btnKeys"
         :submit="submitHandler"
@@ -16,19 +16,22 @@
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      formData: {
-        value: ''
-      },
-      btnKeys: ['reset', 'submit']
-    }
-  },
-  methods: {
-    submitHandler () {
+import { defineComponent, ref } from 'vue'
+export default defineComponent({
+  setup () {
+    const form = ref()
+    const formData = ref({ value: '' })
+    const btnKeys = ['reset', 'submit']
+
+    const submitHandler = () => {
       console.log('submit')
     }
+    return {
+      form,
+      formData,
+      btnKeys,
+      submitHandler
+    }
   }
-}
+})
 </script>

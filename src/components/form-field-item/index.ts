@@ -1,7 +1,6 @@
-import { computed, defineComponent, h, mergeProps, Slots, VNodeProps } from 'vue'
-import { omit } from 'lodash-es'
+import { computed, defineComponent, ref, h, mergeProps, Slots, VNodeProps } from 'vue'
 import { QuestionFilled } from '@/ui-comps/icons'
-import { UeFormItem, UeRow, UeCol, UeTooltip, UeSpace } from '@/ui-comps'
+import { UeFormItem, UeRow, UeCol, UeTooltip, UeSpace, UeFormItemProps } from '@/ui-comps'
 import { MODEL_VALUE, ON_UPDATE_MODEL_VALUE, UPDATE_MODEL_VALUE } from '@/utils/const'
 import CommomField, { CommonFieldProps } from '../common-field'
 import {
@@ -12,6 +11,7 @@ import {
   TextType
 } from './types'
 import { getFormItemName, resolveProps, vueTypeProp } from '@/utils/component'
+import { useProxyInstanceMethods } from '@/hooks'
 
 export * from './types'
 
@@ -31,11 +31,13 @@ export default defineComponent({
     children: vueTypeProp<FormFieldItemOption['children']>(Array)
   },
   emits: [UPDATE_MODEL_VALUE, 'change'],
-  setup(props, { emit, slots }) {
+  setup(props, { emit, slots, expose }) {
     const handleFormItemName = (name: NamePath = '', prevNames?: NamePath[]) => {
       const curPath = name ? [name] : []
       return Array.isArray(prevNames) ? prevNames.concat(curPath) : curPath
     }
+
+    const formItemRef = ref()
 
     const handleName = computed(() => getFormItemName(props))
     const formItemNames = computed(() => handleFormItemName(handleName.value, props.prevNames))
@@ -60,13 +62,18 @@ export default defineComponent({
 
     const formItemProps = computed(() => {
       const fiProps = props.props ? resolveProps(props.props) : {}
-      return mergeProps(fiProps as VNodeProps, {
+      return {
+        ...fiProps,
         prop: formItemNames.value
-      }) as unknown as FormItemProps
+      } as Partial<UeFormItemProps>
     })
-    const handleFormItemProps = computed(() =>
-      hasLabelTip.value ? omit(formItemProps.value, 'label') : formItemProps.value
-    )
+    const handleFormItemProps = computed(() => {
+      if (hasLabelTip.value) {
+        const { label, ...rest } = formItemProps.value
+        return rest
+      }
+      return formItemProps.value
+  })
 
     const formItemLabelSlot = computed(() => {
       return hasLabelTip.value
@@ -168,14 +175,18 @@ export default defineComponent({
       return h(UeFormItem, childFieldProps, formItemSlots)
     }
 
+    const proxyMethods = useProxyInstanceMethods(formItemRef, ['resetField', 'clearValidate'])
+
+    expose({ ...proxyMethods })
+
     return () => {
       const handleSlots = { ...formItemLabelSlot.value, ...props.slots, ...slots }
       return h(
         UeFormItem,
-        mergeProps(handleFormItemProps.value, {
+        mergeProps(handleFormItemProps.value as VNodeProps, {
           class: 'ue-form-field-item',
           key: `${handleName.value}`,
-          ref: 'formItem'
+          ref: formItemRef
         }),
         {
           ...handleSlots,

@@ -7,11 +7,10 @@ import {
   resolveComponent,
   mergeProps,
   reactive,
-  getCurrentInstance,
   VNodeProps,
   markRaw
 } from 'vue'
-import { cloneDeep, get, set } from 'lodash-es'
+import { cloneDeep, get, isFunction, set } from 'lodash-es'
 import { getFormItemName, resolveProps, vueTypeProp } from '@/utils/component'
 import FormFieldItem from '../form-field-item'
 import { FormFieldsItem, FormFieldsOption, FormFieldsProps } from './types'
@@ -38,7 +37,7 @@ export default defineComponent({
 
     const handledItems = computed<InnerFormFields[]>(() => {
       const items = props.items.filter((item) =>
-        item.hide instanceof Function ? !item.hide() : !item.hide
+        isFunction(item.hide) ? !item.hide() : !item.hide
       )
       items.forEach((item) => {
         if ('field' in item && item.field) {
@@ -120,7 +119,7 @@ export default defineComponent({
 
         if ('slotName' in item && item.slotName) {
           const slot = slots[item.slotName]
-          return slot instanceof Function ? slot() : null
+          return isFunction(slot) ? slot() : null
         } else if ('component' in item) {
           const Component =
             typeof item.component === 'string' ? resolveComponent(item.component) : item.component
@@ -162,9 +161,8 @@ export default defineComponent({
         cascadeData && Array.isArray(cascadeData[value as string])
           ? cascadeData[value as string]
           : []
-      if (cascadeHandler instanceof Function) {
-        const instance = (getCurrentInstance() || {}).proxy
-        cascadeHandler.call(instance, value, handleName, modelData, item)
+      if (isFunction(cascadeHandler)) {
+        cascadeHandler(value, handleName, modelData, item)
       } else if ('field' in item && item.field) {
         const { data } = item.field
         Array.isArray(data)

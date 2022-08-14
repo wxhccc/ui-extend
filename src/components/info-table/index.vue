@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive, computed, watch, useAttrs } from 'vue'
 import CopyClipboard from '@/components/copy-clipboard'
-import { UeForm, UeRow, UeCol, UeButton, UeImage, UeButtonProps } from '@/ui-comps'
+import { UeForm, UeRow, UeCol, UeButton, UeImage, UeTooltip, UeButtonProps } from '@/ui-comps'
 import { EyeOutlined, CheckOutlined, CloseOutlined, EditOutlined } from '@/ui-comps/icons'
 import { vueTypeProp } from '@/utils/component'
 import FormFieldItem, { FormFieldItemOption } from '../form-field-item'

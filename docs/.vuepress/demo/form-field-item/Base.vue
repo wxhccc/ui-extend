@@ -38,6 +38,7 @@ export default {
             { required: true, message: '请选择年龄' }
           ]
         },
+        prop: 'sex',
         field: {
           component: 'ElSelect',
           props: {

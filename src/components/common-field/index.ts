@@ -140,7 +140,7 @@ export default defineComponent({
       const childNodes = dataItemRenader instanceof Function ? dataItemRenader(item, index) : label
       const ChildFieldComp = childField.value as DefineComponent
 
-      return h(ChildFieldComp, { ...item, key: `${value}` }, { default: () => childNodes })
+      return h(ChildFieldComp, { ...item, index, key: `${value}` }, { default: () => childNodes })
     }
 
     const dataChildren = computed(() => {

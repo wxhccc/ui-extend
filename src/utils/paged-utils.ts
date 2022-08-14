@@ -137,8 +137,8 @@ export function usePagedLogic<
       ...(pagination === true ? {} : pagination),
       pageSize: data.pageSize,
       total: props.pagedData.total,
-      onCurrentChange: (curPage: number) => onPagedChange({ curPage }),
-      onSizeChange: (pageSize: number) => onPagedChange({ pageSize })
+      'onUpdate:currentPage': (curPage: number) => onPagedChange({ curPage }),
+      'onUpdate:pageSize': (pageSize: number) => onPagedChange({ pageSize })
     } as UePaginationProps
   })
 

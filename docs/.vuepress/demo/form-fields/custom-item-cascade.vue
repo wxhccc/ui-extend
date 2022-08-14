@@ -7,48 +7,47 @@
 </template>
 
 <script>
-import { h } from 'vue'
-const CustomField = {
+import { defineComponent, h, ref, reactive, computed, watch } from 'vue'
+import { ElFormItem, ElSelect, ElOption } from 'element-plus'
+
+const CustomField = defineComponent({
   props: {
-    value: null,
+    modelValue: null,
     formItemProps: Object,
     fieldProps: Object
   },
-  data () {
-    return {
-      cascadeData: {
-        'shanghai': [
-          { value: '01', label: '店铺主题活动' },
-          { value: '02', label: '品牌发布会' }
-        ],
-        'beijing': [
-          { value: '11', label: '地推活动' },
-          { value: '12', label: '美食节' }
-        ]
-      },
-      modelData: []
+  setup (props, { attrs, emit, expose }) {
+    const cascadeData = reactive({
+      'shanghai': [
+        { value: '01', label: '店铺主题活动' },
+        { value: '02', label: '品牌发布会' }
+      ],
+      'beijing': [
+        { value: '11', label: '地推活动' },
+        { value: '12', label: '美食节' }
+      ]
+    })
+    const modelData = ref([])
+
+    const optionNodes = computed(() => modelData.value.map(item => h(ElOption, { props: item })))
+
+    watch(() => props.value, (newValue, oldValue) => {
+      newValue !== oldValue && emit('change', newValue)
+    })
+
+    const handleCascadeChange = (value) => {
+      modelData.value = cascadeData[value] || []
     }
-  },
-  methods: {
-    handleCascadeChange (value) {
-      this.modelData = this.cascadeData[value] || []
-    }
-  },
-  watch: {
-    value (newValue, oldValue) {
-      newValue !== oldValue && this.$emit('change', newValue)
-    }
-  },
-  render () {
-    const { formItemProps, fieldProps, value, modelData } = this;
-    const optionNodes = modelData.map(item => h('ElOption', { props: item }))
-    return h('ElFormItem', { props: formItemProps }, [
-      h('ElSelect', { props: { value }, on: this.$listeners }, optionNodes)
+
+    expose({ handleCascadeChange })
+
+    return () => h(ElFormItem, props.formItemProps, [
+      h(ElSelect, { modelValue: prop.modelValue, ...attrs }, optionNodes)
     ])
   }
-}
+})
 
-export default {
+export default defineComponent({
   data () {
     return {
       formData: {},
@@ -76,7 +75,7 @@ export default {
               label: '活动内容',
             }
           },
-          cascadeModel: 'region',
+          dependencies: 'region',
           /* 函数调用时会绑定FormFields组件内的this，可以通过$refs拿到本表单项组件实例. */
           cascadeHandler (value, prop, modelData, item) {
             /* item是当前对象，这里可以修改item的props将数据传入组件，建议修改数据方式。
@@ -92,7 +91,7 @@ export default {
           props: {
             label: '活动奖励'
           },
-          cascadeModel: 'content',
+          dependencies: 'content',
           cascadeData: {
             '01': [
               { value: '奖品1', label: '奖品1' },
@@ -122,5 +121,5 @@ export default {
       ]
     }
   }
-}
+})
 </script>

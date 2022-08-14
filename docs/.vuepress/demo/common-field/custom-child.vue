@@ -14,19 +14,20 @@
 </template>
 
 <script>
+import { h, defineComponent, markRaw } from 'vue'
 
-const OptionLabel = {
+const OptionLabel = markRaw(defineComponent({
   props: {
-    item: Object,
+    label: String,
     index: Number
   },
-  render (h) {
-    const { item, index } = this;
-    return h('span', { style: { color: 'red' } }, [item.label + index])
+  setup (props) {
+    const { label, index } = props;
+    return () => h('span', { style: { color: 'red' } }, label + index)
   }
-}
+}))
 
-export default {
+export default defineComponent({
   data () {
     return {
       selectValue: '',
@@ -40,7 +41,7 @@ export default {
           { value: '选项4', label: '龙须面' },
           { value: '选项5', label: '北京烤鸭' }
         ],
-        dataItemContent: OptionLabel
+        childComponent: OptionLabel
       },
       radioValue: 1,
       radioField: {
@@ -51,11 +52,11 @@ export default {
           { value: '选项2', label: '双皮奶' },
           { value: '选项3', label: '蚵仔煎' }
         ],
-        dataItemContent (h, item, index) {
+        dataItemRenader (item, index) {
           return h('span', { style: { color: 'red' } }, [item.label + index]);
         }
       }
     }
   }
-}
+})
 </script>

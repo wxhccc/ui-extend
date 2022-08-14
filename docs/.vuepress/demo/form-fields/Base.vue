@@ -4,17 +4,18 @@
     <ue-form-fields :items="items" v-model="formData">
     </ue-form-fields>
     <el-form-item>
-      <ue-form-btns :parent-refs="$refs" is-validate></ue-form-btns>
+      <ue-form-btns :form="form" is-validate></ue-form-btns>
     </el-form-item>
   </el-form>
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      formData: {},
-      items: [
+import { defineComponent, ref } from 'vue'
+export default defineComponent({
+  setup () {
+    const form = ref()
+    const formData = ref({})
+    const items = [
         {
           prop: 'name',
           props: {
@@ -119,7 +120,7 @@ export default {
           }
         }
       ]
-    }
+    return { form, formData, items }
   }
-}
+})
 </script>

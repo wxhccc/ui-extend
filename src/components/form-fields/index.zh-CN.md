@@ -20,7 +20,7 @@
 | props          | object/function                              | 表单项组绑定参数对象或返回对象的函数。会自己绑定到组件上。                                                                                       | --     | --        |
 | prop           | string/number                                | 表单项绑定值在`value`中对应的键名。使用`children`字段时可缺省，`children`数组对象中的`prop`属性会作为键名，具体见`FormFieldItem`组件。           | --     | --        |
 | key            | string/number                                | 表单项组件的`key`，缺省时使用`prop`属性。如果`prop`缺省时会使用数组索引，为了性能`prop`缺省时请设置`key`                                         | --     | --        |
-| cascadeModel   | string/number                                | 当前表单项需要监听的表单项的`prop`属性。                                                                                                         | --     | --        |
+| dependencies   | string/number                                | 当前表单项需要监听的表单项的`prop`属性。                                                                                                         | --     | --        |
 | cascadeData    | object                                       | 指定结构的级联数据。具体结构说明见[级联数据结构](/wiki/data/#数据级联)                                                                                               | --     | --        |
 | cascadeHandler | Function(changeValue, prop, modelData, item) | 自定义级联处理逻辑。参数分别为被监听项改变后的值，当前表单项的prop，匹配到的级联数据数组，当前表单项原始数据对象。**函数会绑定组件上下文允许**。 | --     | --        |
 | spliceStart    | number                                       | `field.data`字段在更新时，开始替换的索引值                                                                                                       | --     | 0         |

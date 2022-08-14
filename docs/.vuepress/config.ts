@@ -35,7 +35,8 @@ export default defineUserConfig({
     sidebarDepth: 0,
     navbar: navbar(),
     sidebar: sidebar(),
-    repo: 'wxhccc/ui-extend'
+    repo: 'wxhccc/ui-extend',
+    editLink: false
   }),
   extendsMarkdown: md => {
     md.use(mdInclude, path.resolve(__dirname, '../../src/components/'))

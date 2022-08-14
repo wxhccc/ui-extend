@@ -12,18 +12,16 @@
 </template>
 
 <script>
+import { h } from 'vue'
 
 const SelectEmpty = {
   props: {
     icon: null,
   },
-  render (h) {
-    return h('div',
+  setup () {
+    return () => h('div',
       { style: { color: 'red', padding: '10px 12px' } },
-      [
-        h('i', { class: this.icon }),
-        '暂无数据'
-      ]
+      '暂无数据'
     )
   }
 }
@@ -36,16 +34,7 @@ export default {
         component: 'ElInput',
         props: { size: 'small' },
         slots: {
-          'append': {
-            props: { icon: 'el-icon-search' },
-            events: {
-              click: this.searchHandler
-            },
-            component (h, vdo, slotName) {
-              // vdo是利用props和events整理后的Vue Data Object。也可以直接在函数里传入。
-              return h('ElButton', vdo, [''])
-            }
-          } 
+          append: () => h('ElButton', { onClick: this.searchHandler }, '搜索')
         }
       },
       selectValue: '',
@@ -54,10 +43,7 @@ export default {
         props: () => ({ size: 'small' }),
         data: [],
         slots: {
-          'empty': {
-            props: { icon: 'el-icon-search' },
-            component: SelectEmpty
-          } 
+          empty: () => h(SelectEmpty)
         }
       }
     }

@@ -49,7 +49,6 @@ export default defineComponent({
       }
     }
     const createTicker = () => {
-      console.log(props)
       lastTime = +new Date()
       timer.addTask(updateText, tickerInterval.value)
     }

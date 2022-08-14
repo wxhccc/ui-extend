@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { UeButton, UeCheckbox, UeScrollbar } from '@/ui-comps'
 import UeSearchInput from '@/components/search-input'
 import UeTreeField from '@/components/tree-field'
@@ -28,13 +28,14 @@ const filterTreeList = (
       treeNodes.forEach((item) => {
         const { children, ...props } = item
         const keyValue = item[rowKey]
+        const isKeyIn = keys.includes(keyValue)
         if (mode !== 'disabled') {
-          const isKeyIn = keys.includes(keyValue)
           if ((mode === 'filter' && isKeyIn) || (mode === 'reverse' && !isKeyIn)) {
             return
           }
+        } else if (!isKeyIn) {
+          newListKeys.push(keyValue)
         }
-        newListKeys.push(keyValue)
         arr.push({
           ...props,
           ...(mode === 'disabled' ? { disabled: keys.includes(keyValue) } : {}),
@@ -108,6 +109,15 @@ const handleTitles = computed(() => {
   const [left, right] = Array.isArray(titles) ? titles : titles === false ? [false, false] : []
   return { left, right }
 })
+
+const leftChoseNum = computed(() => {
+  const { buttonTrigger, modelValue = [] } = props
+  if (!buttonTrigger) {
+    return targetKeys.value.length
+  }
+  return selectedKeys.value.filter((i) => !modelValue.includes(i)).length
+})
+
 const handleShowFilter = computed(() => ({
   left: resolveFunctional(props.showFilter, 'left'),
   right: resolveFunctional(props.showFilter, 'right')
@@ -148,7 +158,7 @@ const onMoveKeys = (direction: Direction) => {
   let newValue: StrOrNum[] = []
   const { modelValue, buttonTrigger } = props
   if (direction === 'right') {
-    newValue = [...selectedKeys.value, ...modelValue]
+    newValue = Array.from(new Set([...selectedKeys.value, ...modelValue]))
     selectedKeys.value = []
     if (!buttonTrigger) {
       targetKeys.value = newValue
@@ -166,6 +176,8 @@ const onMoveKeys = (direction: Direction) => {
 }
 const selectAllToggle = (direction: Direction) => {
   if (direction === 'left') {
+    const { modelValue = [] } = props
+    const unselectedKeys = leftAllKeys.value.filter(i => !modelValue.includes(i))
     selectedKeys.value =
       selectedKeys.value.length === leftAllKeys.value.length ? [] : [...leftAllKeys.value]
   } else {
@@ -183,6 +195,15 @@ const onTreeFieldValueChange = (direction: Direction) => {
   }
   onMoveKeys(direction === 'left' ? 'right' : 'left')
 }
+
+watch(() => props.modelValue, () => {
+  const { modelValue, buttonTrigger } = props
+  if (!buttonTrigger && modelValue?.length) {
+    targetKeys.value = [...modelValue]
+  }
+}, {
+  immediate: true
+})
 </script>
 <script lang="ts">
 export default { name: 'UeTreeTransfer' }
@@ -203,7 +224,7 @@ export default { name: 'UeTreeTransfer' }
         ></ue-checkbox>
         <span class="ue-tree-transfer-list-header-title">{{ handleTitles.left }}</span>
         <span class="ue-tree-transfer-list-header-selected">
-          {{ selectedKeys.length }}/{{ leftAllKeys.length }}
+          {{ leftChoseNum }}/{{ leftAllKeys.length }}
         </span>
       </div>
       <div v-if="handleShowFilter.left" class="ue-tree-transfer-list-search">
@@ -215,6 +236,7 @@ export default { name: 'UeTreeTransfer' }
       <div class="ue-tree-transfer-list-body">
         <ue-scrollbar>
           <ue-tree-field
+            v-if="leftTreeData.length"
             ref="leftTree"
             v-bind="twoTreeProps.left"
             v-model="selectedKeys"
@@ -223,6 +245,7 @@ export default { name: 'UeTreeTransfer' }
             :data="leftTreeData"
             @update:model-value="onTreeFieldValueChange('left')"
           />
+          <slot v-else name="leftEmpty"></slot>
         </ue-scrollbar>
       </div>
     </div>
@@ -268,6 +291,7 @@ export default { name: 'UeTreeTransfer' }
       <div class="ue-tree-transfer-list-body">
         <ue-scrollbar>
           <ue-tree-field
+            v-if="rightTreeData.length"
             ref="rightTree"
             v-bind="twoTreeProps.right"
             v-model="targetKeys"
@@ -276,6 +300,7 @@ export default { name: 'UeTreeTransfer' }
             :data="rightTreeData"
             @update:model-value="onTreeFieldValueChange('right')"
           />
+          <slot v-else name="rightEmpty"></slot>
         </ue-scrollbar>
       </div>
     </div>

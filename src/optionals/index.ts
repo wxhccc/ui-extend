@@ -1,4 +1,4 @@
-import { h, markRaw, Slots } from 'vue'
+import { markRaw } from 'vue'
 import {
   UeInput,
   UeSelect,
@@ -20,6 +20,7 @@ import {
 } from '@/ui-comps'
 import { CommonFieldProps } from '@/components/common-field'
 import { FormFieldItemProps } from '@/components/form-field-item/types'
+import { FORM_ITEM_NAME } from '@/utils/const'
 
 export type CustomComponent = CommonFieldProps['component']
 export type StrOrProps<P extends AnyObject = AnyObject> = string | P
@@ -90,7 +91,7 @@ export function createFormFieldItem<FP extends AnyObject = any, V = any>(
       component: typeof component === 'string' ? component : markRaw(component),
       ...fieldExtra
     },
-    name,
+    [FORM_ITEM_NAME]: name,
     ...extraProps
   } as FormFieldItemProps
 }

@@ -7,20 +7,22 @@
 </template>
 
 <script>
-import { h } from 'vue'
-const CustomField = {
+import { defineComponent, h, resolveComponent } from 'vue'
+import { ElFormItem } from 'element-plus'
+const CustomField = defineComponent({
   props: {
-    value: Array,
     formItemProps: Object,
     fieldProps: Object
   },
-  render () {
-    const { formItemProps, fieldProps, value } = this;
-    return h('ElFormItem', { props: formItemProps }, [
-      h('UeTreeField', { props: { ...fieldProps, value }, on: this.$listeners })
-    ])
+  setup (props, { attrs }) {
+    return () => {
+      const UeTreeField = resolveComponent('UeTreeField')
+      return h(ElFormItem, props.formItemProps, [
+        h(UeTreeField, { ...props.fieldProps, ...attrs })
+      ])
+    }
   }
-}
+})
 
 export default {
   data () {

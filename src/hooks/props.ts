@@ -41,7 +41,7 @@ export const useVModel = <
   }
 
   return computed({
-    get: () => (typeof props[key] !== undefined ? props[key] : innerValue.value),
+    get: () => (props && typeof props[key] !== undefined ? props[key] : innerValue.value),
     set: (value) => {
       if (supportInner) {
         innerValue.value = value

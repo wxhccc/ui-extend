@@ -1,3 +1,1 @@
-import { defineAsyncComponent } from 'vue'
-
-export default defineAsyncComponent(() => import('./index.vue'))
+export { default as default } from './index.vue'

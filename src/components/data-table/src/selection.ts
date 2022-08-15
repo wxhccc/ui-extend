@@ -4,7 +4,6 @@ import { vueTypeProp } from '@/utils/component'
 import { DataTableColumn } from '../types'
 
 export default defineComponent({
-  inject: ['getSelectItemValue', 'handleRadioChange'],
   props: {
     column: vueTypeProp<DataTableColumn>(Object),
     scope: vueTypeProp<{ row: any; $index: number }>(Object),

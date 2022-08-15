@@ -2,6 +2,7 @@ import { onMounted, Ref, watch, onBeforeUnmount, ComponentPublicInstance } from 
 import { createRAFTimer, TimerCallback, TimerInstance } from '@wxhccc/es-util'
 import { CompStorage } from '@/utils/storage'
 import { IOCallback, useIntersectionObserver } from './observers'
+import { isFunction } from 'lodash'
 
 export * from './observers'
 
@@ -119,7 +120,7 @@ export const useProxyInstanceMethods = <C = ComponentPublicInstance, K extends k
         return
       }
       const method = instanceRef.value[name as keyof C]
-      return method instanceof Function ? method(...args) : undefined
+      return isFunction(method) ? method(...args) : undefined
     }) as unknown as C[K]
     return acc
   }, {} as Record<K, C[K]>)

@@ -3,7 +3,7 @@ import { version } from '../package.json'
 import Loading from './ui-comps/loading'
 import ActionBtns from '@/components/action-btns'
 import DataTable from '@/components/data-table'
-import Cropper from '@/components/cropper'
+// import Cropper from '@/components/cropper'
 import CommonField from '@/components/common-field'
 import FormBtns from '@/components/form-btns'
 import FormFieldItem from '@/components/form-field-item'
@@ -30,7 +30,7 @@ export * from '@/optionals'
 const components = {
   Loading,
   ActionBtns,
-  Cropper,
+  // Cropper,
   CommonField,
   FormBtns,
   FormFieldItem,
@@ -59,7 +59,7 @@ const install = function (app: App) {
 export {
   Loading,
   ActionBtns,
-  Cropper,
+  // Cropper,
   CommonField,
   FormBtns,
   FormFieldItem,

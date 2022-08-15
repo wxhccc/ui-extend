@@ -42,7 +42,7 @@ const CustomField = defineComponent({
     expose({ handleCascadeChange })
 
     return () => h(ElFormItem, props.formItemProps, [
-      h(ElSelect, { modelValue: prop.modelValue, ...attrs }, optionNodes)
+      h(ElSelect, { modelValue: props.modelValue, ...attrs }, optionNodes)
     ])
   }
 })

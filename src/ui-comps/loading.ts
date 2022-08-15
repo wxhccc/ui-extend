@@ -28,7 +28,7 @@ const Loading = defineComponent({
 
     const createService = () => {
       const instance = getCurrentInstance()
-      const parentEl = instance?.parent?.vnode.el as HTMLElement | undefined
+      const parentEl = instance?.parent?.vnode?.el as HTMLElement | undefined
       service.value = ElLoading.service({
         target: props.body || !parentEl ? document.body : parentEl,
         ...props

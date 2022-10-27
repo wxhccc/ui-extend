@@ -14,20 +14,33 @@ sidebarDepth: 1
 
 | npm库      | 按需引入时是否必需 | 安装指令              | 相关组件      |
 | :--------- | :----------------- | :-------------------- | :------------ |
-| element-ui | 是                 | `npm i element-ui -S` | --            |
-| lodash     | 是                 | `npm i lodash -S`     | --            |
-| cropperjs  | 否                 | `npm i cropperjs -S`  | `Cropper`     |
-| video.js   | 否                 | `npm i video.js -S`   | `VideoPlayer` |
-| viewerjs   | 否                 | `npm i viewerjs -S`   | `Viewer`      |
+| element-plus | 是                 | `npm i element-plus` | --            |
+| lodash/lodash-es     | 是                 | `npm i lodash`     | --            |
+| cropperjs  | 否                 | `npm i cropperjs`  | `Cropper`     |
+| video.js   | 否                 | `npm i video.js`   | `VideoPlayer` |
 
 
 ## npm 安装
 
 推荐使用 npm 的方式安装，它能更好地和[webpack](https://webpack.js.org)打包工具配合使用。
 
+
+<CodeGroup>
+  <CodeGroupItem title="YARN" active>
+
+```bash
+yarn add @wxhccc/ui-extend
 ```
-npm i @wxhccc/ui-extend -S
+
+  </CodeGroupItem>
+  <CodeGroupItem title="NPM" >
+
+```bash
+npm i @wxhccc/ui-extend
 ```
+
+  </CodeGroupItem>
+</CodeGroup>
 
 ## CDN
 
@@ -40,5 +53,5 @@ npm i @wxhccc/ui-extend -S
 ```
 
 ::: tip 友情提示
-建议用cdn引入方式时在链接地址上锁定版本，以避免组件库升级时带来的兼容性方面的影响。锁定版本的方法见[unpkg.com](https://unpkg.com)
+建议用cdn引入方式时在链接地址上锁定版本，以避免组件库升级时带来的兼容性方面的影响。锁定版本的方法见[unpkg.com](https://unpkg.com.vue)
 :::

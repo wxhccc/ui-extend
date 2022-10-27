@@ -1,0 +1,33 @@
+{
+  "name": "@wxhccc/ue-shared",
+  "version": "1.0.0-beta.1",
+  "description": "a library contains some componets base on element-plus",
+  "type": "module",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/wxhccc/ui-extend.git"
+  },
+  "keywords": [
+    "ui-extend",
+    "vue",
+    "utils",
+    "shared"
+  ],
+  "files": ["dist"],
+  "author": "wxhccc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wxhccc/ui-extend/issues"
+  },
+  "sideEffects": false,
+  "homepage": "https://wxhccc.github.io/ui-extend/",
+  "dependencies": {
+    "store2": "^2.9.0"
+  }
+}

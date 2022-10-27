@@ -1,0 +1,53 @@
+{
+  "name": "@wxhccc/ue-element",
+  "version": "1.0.0-beta.1",
+  "description": "a library contains some componets base on element-plus",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/wxhccc/ui-extend.git"
+  },
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build"
+  },
+  "main": "dist/index.umd.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./dist/*": "./dist/*"
+  },
+  "keywords": [
+    "ui-extend",
+    "vue",
+    "components",
+    "element-ui",
+    "utils"
+  ],
+  "author": "wxhccc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wxhccc/ui-extend/issues"
+  },
+  "homepage": "https://wxhccc.github.io/ui-extend/",
+  "dependencies": {
+    "cropperjs": "^1.5.3",
+    "@wxhccc/ue-shared": "workspace:^"
+  },
+  "devDependencies": {
+    "async-validator": "^4.2.5"
+  },
+  "peerDependencies": {
+    "@element-plus/icons-vue": "^2.0.6",
+    "cropperjs": "^1.5.3",
+    "element-plus": "^2.2.11",
+    "video.js": "^7.0.0",
+    "vue": "^3.2.40"
+  },
+  "files": ["dist"]
+}

@@ -4,12 +4,12 @@
 
 ### 基础用法
 
-:::demo Base
-<<< @/docs/.vuepress/components/demo/search-input/Base.vue
+:::demo base no-limit-lib
+@[code](@demo/search-input/$LIB_DIR/base.vue)
 :::
 
 ::: tip 提示
-Input组件文档参照 <element-link component="Input"></element-link>
+Input组件文档参照 <ui-lib-link component="Input"></ui-lib-link>
 :::
 
 

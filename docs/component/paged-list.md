@@ -3,20 +3,33 @@
 分页组件和列表数据插槽的高阶封装，集成分页请求，数据处理，自动发送等功能，用于简化分页场景需求。
 
 ::: tip 提示
-Pagination组件文档参照 <element-link component="Pagination"></element-link>
+Pagination组件文档参照 <ui-lib-link component="Pagination"></ui-lib-link>
 :::
 
-### 无序列表（ul）
+### 分页列表 (有总数)
 
-::: demo Ul
-<<< @/docs/.vuepress/components/demo/paged-list/Ul.vue
+::: demo base
+@[code](@demo/paged-list/$LIB_DIR/base.vue)
 :::
+
+### 分页列表 (无总数)
+
+适用于无法查询到总记录数的情况
+
+::: demo no-total
+@[code](@demo/paged-list/$LIB_DIR/no-total.vue)
+:::
+
+<libs-content>
+  <template #element>
 
 ### 分页表格（table）
 
-::: demo Table
-<<< @/docs/.vuepress/components/demo/paged-list/Table.vue
+::: demo table
+@[code](@demo/paged-list/$LIB_DIR/table.vue)
 :::
+  </template>
+</libs-content>
 
 ### 分页列表恢复
 
@@ -24,8 +37,8 @@ Pagination组件文档参照 <element-link component="Pagination"></element-link
 
 此外本来也展示了如何进行请求时序控制
 
-::: demo Restore 恢复必须要设置`created-auto-send`为true，才会在组件创建时将记录数据传递给请求接口
-<<< @/docs/.vuepress/components/demo/paged-list/Restore.vue
+::: demo restore 恢复必须要设置`created-auto-send`为true，才会在组件创建时将记录数据传递给请求接口
+@[code](@demo/paged-list/$LIB_DIR/restore.vue)
 :::
 
 !!!include(paged-list/index.zh-CN.md)!!!

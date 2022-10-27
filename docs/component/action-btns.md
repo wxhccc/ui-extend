@@ -10,12 +10,12 @@
 
 此示例包含各种情况下的按钮处理。
 
-::: demo All
-<<< @/docs/.vuepress/components/demo/action-btns/All.vue
+::: demo all
+@[code](@demo/action-btns/$LIB_DIR/all.vue)
 :::
 
 ::: tip 提示
-Button组件文档参照 <element-link component="Button"></element-link>
+Button组件文档参照 <ui-lib-link component="Button"></ui-lib-link>
 :::
 
 

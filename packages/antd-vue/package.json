@@ -1,0 +1,51 @@
+{
+  "name": "@wxhccc/ue-antd-vue",
+  "version": "1.0.0-alpha.2",
+  "description": "a library contains some componets base on ohter ui library.",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "docs"
+  ],
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build"
+  },
+  "main": "dist/index.umd.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./dist/*": "./dist/*"
+  },
+  "keywords": [
+    "ui-extend",
+    "vue",
+    "components",
+    "ant-design-vue",
+    "utils"
+  ],
+  "author": "wxhccc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wxhccc/ui-extend/issues"
+  },
+  "homepage": "https://wxhccc.github.io/ui-extend/",
+  "dependencies": {
+    "cropperjs": "^1.5.3",
+    "@wxhccc/ue-shared": "workspace:^"
+  },
+  "peerDependencies": {
+    "@ant-design/icons-vue": "^6.1.0",
+    "ant-design-vue": "^3.2.11",
+    "video.js": "^7.0.0",
+    "vue": "^3.2.40"
+  },
+  "files": [
+    "dist"
+  ]
+}

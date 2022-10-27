@@ -4,8 +4,8 @@
 
 ### 基础用法
 
-::: demo Base
-<<< @/docs/.vuepress/components/demo/common-list-page/Base.vue
+::: demo base
+@[code](@demo/common-list-page/$LIB_DIR/base.vue)
 :::
 
 ### 多tabs搜索表单
@@ -15,15 +15,15 @@
 :::
 
 ::: demo mult-tabs 设置`searchForms`为包含多个表单配置对象的数组即可生成tab。可以通过设置`tabFormKey`来将tab的值合并到请求参数对象中。
-<<< @/docs/.vuepress/components/demo/common-list-page/mult-tabs.vue
+@[code](@demo/common-list-page/$LIB_DIR/mult-tabs.vue)
 :::
 
 ### 带操作行的表格
 
 操作行可以使用表单项组件来做简单的查询，复杂表单还是建议使用`searchForms`。
 
-::: demo Operation
-<<< @/docs/.vuepress/components/demo/common-list-page/Operation.vue
+::: demo operation
+@[code](@demo/common-list-page/$LIB_DIR/operation.vue)
 :::
 
 ### 列表页数据缓存及恢复
@@ -31,16 +31,7 @@
 本例会用两个会销毁的tab容器模拟页面间的切换，数据恢复只有本组件创建时才会生效，如果同页面内希望恢复，可以通过修改组件的key让组件重新渲染。 
 
 ::: demo page-restore 恢复必须要设置`created-auto-send`为true，才会在组件创建时将记录数据传递给请求接口
-<<< @/docs/.vuepress/components/demo/common-list-page/page-restore.vue
-:::
-
-### 数据导出功能
-
-组件提供了一个导出按钮，如果提供了`exportUrl`参数，点击按钮会打开新标签页用于下载导出文件。
-可以通过`currentSearchParams.sync`同步当前表单搜索条件，用于控制导出数据范围。
-
-::: demo export-url 可以通过`export-options`参数设置导出按钮的样式和文字，也可以绑定事件。
-<<< @/docs/.vuepress/components/demo/common-list-page/export-url.vue
+@[code](@demo/common-list-page/$LIB_DIR/page-restore.vue)
 :::
 
 ::: tip 使用提示

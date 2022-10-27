@@ -1,5 +1,152 @@
+
+<script setup lang="ts">
+import { ref, watch, computed, useSlots, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { usePageData } from '@vuepress/client'
+import { CaretBottom, CaretTop } from '@element-plus/icons-vue'
+import codeStrParse from '../utils/strip-code'
+
+const el = ref<HTMLDivElement>()
+const meta = ref<HTMLDivElement>()
+const control = ref<HTMLDivElement>()
+const pageData = usePageData()
+const slots = useSlots()
+const codepen= ref({
+  script: '',
+  html: '',
+  style: ''
+})
+const hovering = ref(false)
+const isExpanded = ref(false)
+const fixedControl = ref(false)
+const scrollParent = ref<Window | null>(null)
+const controlBarStyle = ref({ width: '858px' })
+
+const lang = computed(() => 'zh-CN')
+const langConfig = computed(() => ({
+  'hide-text': '显示代码',
+  'show-text': '隐藏代码',
+  'tooltip-text': '前往codepen.io运行示例',
+  'button-text': '在线运行'
+}))
+
+const compNameClass = computed(() => pageData.value.path.split('/').pop()?.split('.')[0])
+const blockClass = computed(() => `demo-${ lang.value } demo-${ compNameClass.value }`)
+
+const controlText = computed(() => langConfig.value[isExpanded.value ? 'hide-text' : 'show-text'])
+
+
+const codeAreaHeight = computed(() => {
+  const description = el.value?.getElementsByClassName('description')
+  const highlight = el.value?.getElementsByClassName('highlight')
+  const highlightHeight = highlight ? highlight[0].clientHeight : 0
+  if (description && description.length > 0) {
+    return description[0].clientHeight +
+      highlightHeight + 20
+  }
+  return highlightHeight
+})
+const getCodeStrs = () => {
+  const { highlight } = slots
+  const [element] = highlight ? highlight() : []
+  if (element) {
+    const content = (element as any).textContent;
+    codepen.value = codeStrParse(content)
+  }
+}
+const goCodepen = () => {
+  const { script, html, style } = codepen.value
+  const { $elVersion = '2.2.10', $ueVersion = '1.0.0' } = {}
+  const tag = 'script'
+  const resourcesTpl = [
+    `<${tag} src="//unpkg.com/vue/dist/vue.js"></${tag}>`,
+    `<${tag} src="//unpkg.com/element-ui@${ $elVersion }/lib/index.js"></${tag}>`,
+    `<${tag} src="//unpkg.com/@wxhccc/ui-extend@${ $ueVersion }/lib/index.js"></${tag}>`
+  ].join('\n');
+  let jsTpl = (script || '').replace(/export default/, 'var Main =').trim();
+  let htmlTpl = `${resourcesTpl}\n<div id="app">\n${html.trim()}\n</div>`;
+  let cssTpl = `@import url("//unpkg.com/element-ui@${ $elVersion }/lib/theme-chalk/index.css");\n${(style || '').trim()}\n`;
+  jsTpl = jsTpl
+    ? jsTpl + '\nvar Ctor = Vue.extend(Main)\nnew Ctor().$mount(\'#app\')'
+    : 'new Vue().$mount(\'#app\')';
+  const data = {
+    js: jsTpl,
+    css: cssTpl,
+    html: htmlTpl
+  };
+  const form = (document.getElementById('fiddle-form') || document.createElement('form')) as HTMLFormElement
+  while (form.firstChild) {
+    form.removeChild(form.firstChild);
+  }
+  form.method = 'POST';
+  form.action = 'https://codepen.io/pen/define/';
+  form.target = '_blank';
+  form.style.display = 'none';
+
+  const input = document.createElement('input');
+  input.setAttribute('name', 'data');
+  input.setAttribute('type', 'hidden');
+  input.setAttribute('value', JSON.stringify(data));
+
+  form.appendChild(input);
+  document.body.appendChild(form);
+
+  form.submit()
+}
+
+const scrollHandler = () => {
+  const { top = 0, bottom = 0, left = 0 } = meta.value?.getBoundingClientRect() || {}
+  const docHeight = document.documentElement.clientHeight
+  fixedControl.value = bottom > docHeight && (top + 44) <= docHeight
+  const controlEl = control.value
+  if (controlEl) {
+    controlEl.style.left = fixedControl.value ? `${ left }px` : '0'
+  }
+}
+
+const removeScrollHandler = () => {
+  scrollParent.value?.removeEventListener('scroll', scrollHandler);
+}
+
+watch(isExpanded, (val) => {
+
+  meta.value && (meta.value.style.height = val ? `${ codeAreaHeight.value + 1 }px` : '0')
+  if (!val) {
+    fixedControl.value = false;
+    control.value && (control.value.style.left = '0')
+    removeScrollHandler()
+    return;
+  }
+  window.setTimeout(() => {
+    scrollParent.value = window;
+    scrollParent.value.addEventListener('scroll', scrollHandler);
+    scrollHandler()
+  }, 200);
+})
+
+onMounted(() => {
+  getCodeStrs()
+  nextTick(() => {
+    if (!el.value) {
+      return
+    }
+    const highlight = (el.value.getElementsByClassName('highlight')[0] as HTMLDivElement)
+    if (el.value?.getElementsByClassName('description').length === 0 && highlight) {
+      highlight.style.width = '100%';
+      highlight.style.borderRight = 'none';
+    }
+    controlBarStyle.value = { width: el.value.offsetWidth + 'px' }
+  })
+})
+
+onBeforeUnmount(removeScrollHandler)
+
+</script>
+<script lang="ts">
+export default { name: 'DemoBlock' }
+</script>
 <template>
   <div
+    ref="el"
     class="demo-block"
     :class="[blockClass, { 'hover': hovering }]"
     @mouseenter="hovering = true"
@@ -8,7 +155,7 @@
       <slot name="source"></slot>
     </div>
     <div class="meta" ref="meta">
-      <div class="description" v-if="$slots.default">
+      <div v-if="$slots.default" class="description">
         <slot></slot>
       </div>
       <div class="highlight">
@@ -22,7 +169,10 @@
       :style="fixedControl ? controlBarStyle : {}"
       @click="isExpanded = !isExpanded">
       <transition name="arrow-slide">
-        <i :class="[iconClass, { 'hovering': hovering }]"></i>
+        <el-icon :class="{ 'hovering': hovering }">
+          <caret-top v-if="isExpanded"></caret-top>
+          <caret-bottom v-else></caret-bottom>
+        </el-icon>
       </transition>
       <transition name="text-slide">
         <span v-show="hovering">{{ controlText }}</span>
@@ -31,8 +181,7 @@
         <transition name="text-slide">
           <el-button
             v-show="hovering || isExpanded"
-            size="small"
-            type="text"
+            link
             class="control-button"
             @click.stop="goCodepen">
             {{ langConfig['button-text'] }}
@@ -50,6 +199,7 @@
   transition: .2s;
   table {
     margin: 0;
+    display: table;
   }
   &.hover {
     box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .5);
@@ -123,7 +273,10 @@
   }
 
   .demo-block-control {
-    border-top: solid 1px #eaeefb;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
     height: 44px;
     box-sizing: border-box;
     background-color: #fff;
@@ -131,9 +284,9 @@
     border-bottom-right-radius: 4px;
     text-align: center;
     margin-top: -1px;
+    border-top: solid 1px #eaeefb;
     color: #d3dce6;
     cursor: pointer;
-    position: relative;
   
     &.is-fixed {
       position: fixed;
@@ -143,19 +296,10 @@
 
     i {
       font-size: 16px;
-      line-height: 44px;
-      transition: .3s;
-      &.hovering {
-        transform: translateX(-40px);
-      }
     }
 
     > span {
-      position: absolute;
-      transform: translateX(-30px);
       font-size: 14px;
-      line-height: 44px;
-      transition: .3s;
       display: inline-block;
     }
 
@@ -171,7 +315,7 @@
     }
     
     .control-button {
-      line-height: 26px;
+      line-height: 36px;
       position: absolute;
       top: 0;
       right: 0;
@@ -182,158 +326,3 @@
   }
 }
 </style>
-
-<script>
-import codeStrParse from '../utils/strip-code'
-export default {
-  data() {
-    return {
-      codepen: {
-        script: '',
-        html: '',
-        style: ''
-      },
-      hovering: false,
-      isExpanded: false,
-      fixedControl: false,
-      scrollParent: null,
-      controlBarStyle: { width: '858px' }
-    };
-  },
-
-  computed: {
-    lang() {
-      return 'zh-CN';
-    },
-
-    langConfig() {
-      return {
-        'hide-text': '显示代码',
-        'show-text': '隐藏代码',
-        'tooltip-text': '前往codepen.io运行示例',
-        'button-text': '在线运行'
-      }
-    },
-
-    compNameClass () {
-      return this.$router.currentRoute.path.split('/').pop().split('.')[0];
-    },
-
-    blockClass() {
-      return `demo-${ this.lang } demo-${ this.compNameClass }`;
-    },
-
-    iconClass() {
-      return this.isExpanded ? 'el-icon-caret-top' : 'el-icon-caret-bottom';
-    },
-
-    controlText() {
-      return this.isExpanded ? this.langConfig['hide-text'] : this.langConfig['show-text'];
-    },
-
-    codeArea() {
-      return this.$el.getElementsByClassName('meta')[0];
-    },
-
-    codeAreaHeight() {
-      if (this.$el.getElementsByClassName('description').length > 0) {
-        return this.$el.getElementsByClassName('description')[0].clientHeight +
-          this.$el.getElementsByClassName('highlight')[0].clientHeight + 20;
-      }
-      return this.$el.getElementsByClassName('highlight')[0].clientHeight;
-    }
-  },
-
-  watch: {
-    isExpanded(val) {
-      this.codeArea.style.height = val ? `${ this.codeAreaHeight + 1 }px` : '0';
-      if (!val) {
-        this.fixedControl = false;
-        this.$refs.control.style.left = '0';
-        this.removeScrollHandler();
-        return;
-      }
-      setTimeout(() => {
-        this.scrollParent = window;
-        this.scrollParent && this.scrollParent.addEventListener('scroll', this.scrollHandler);
-        this.scrollHandler();
-      }, 200);
-    }
-  },
-
-  mounted() {
-    this.getCodeStrs()
-    this.$nextTick(() => {
-      let highlight = this.$el.getElementsByClassName('highlight')[0];
-      if (this.$el.getElementsByClassName('description').length === 0) {
-        highlight.style.width = '100%';
-        highlight.borderRight = 'none';
-      }
-      this.controlBarStyle = { width: this.$el.offsetWidth + 'px' }
-    });
-  },
-
-  beforeDestroy() {
-    this.removeScrollHandler();
-  },
-
-  methods: {
-    getCodeStrs () {
-      const { highlight } = this.$slots;
-      if (highlight && highlight[0]) {
-        const content = highlight[0].elm.textContent;
-        this.codepen = codeStrParse(content)
-      }
-    },
-    goCodepen() {
-      // since 2.6.2 use code rather than jsfiddle https://blog.codepen.io/documentation/api/prefill/
-      const { codepen: { script, html, style }, $elVersion, $ueVersion } = this;
-      const resourcesTpl = [
-        '<scr' + 'ipt src="//unpkg.com/vue/dist/vue.js"></scr' + 'ipt>',
-        '<scr' + `ipt src="//unpkg.com/element-ui@${ $elVersion }/lib/index.js"></scr` + 'ipt>',
-        '<scr' + `ipt src="//unpkg.com/@wxhccc/ui-extend@${ $ueVersion }/lib/index.js"></scr` + 'ipt>'
-      ].join('\n');
-      let jsTpl = (script || '').replace(/export default/, 'var Main =').trim();
-      let htmlTpl = `${resourcesTpl}\n<div id="app">\n${html.trim()}\n</div>`;
-      let cssTpl = `@import url("//unpkg.com/element-ui@${ $elVersion }/lib/theme-chalk/index.css");\n${(style || '').trim()}\n`;
-      jsTpl = jsTpl
-        ? jsTpl + '\nvar Ctor = Vue.extend(Main)\nnew Ctor().$mount(\'#app\')'
-        : 'new Vue().$mount(\'#app\')';
-      const data = {
-        js: jsTpl,
-        css: cssTpl,
-        html: htmlTpl
-      };
-      const form = document.getElementById('fiddle-form') || document.createElement('form');
-      while (form.firstChild) {
-        form.removeChild(form.firstChild);
-      }
-      form.method = 'POST';
-      form.action = 'https://codepen.io/pen/define/';
-      form.target = '_blank';
-      form.style.display = 'none';
-
-      const input = document.createElement('input');
-      input.setAttribute('name', 'data');
-      input.setAttribute('type', 'hidden');
-      input.setAttribute('value', JSON.stringify(data));
-
-      form.appendChild(input);
-      document.body.appendChild(form);
-
-      form.submit();
-    },
-
-    scrollHandler() {
-      const { top, bottom, left } = this.$refs.meta.getBoundingClientRect();
-      this.fixedControl = bottom > document.documentElement.clientHeight &&
-        top + 44 <= document.documentElement.clientHeight;
-      this.$refs.control.style.left = this.fixedControl ? `${ left }px` : '0';
-    },
-
-    removeScrollHandler() {
-      this.scrollParent && this.scrollParent.removeEventListener('scroll', this.scrollHandler);
-    }
-  }
-};
-</script>

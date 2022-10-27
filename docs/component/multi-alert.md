@@ -4,8 +4,8 @@ Alert组件扩展，以支持组件内多组信息的显示。
 
 ### 基础用法
 
-::: demo Base
-<<< @/docs/.vuepress/components/demo/multi-alert/Base.vue
+::: demo base no-limit-lib
+@[code](@demo/multi-alert/base.vue)
 :::
 
 ### 透传属性和事件绑定给原始组件
@@ -14,11 +14,11 @@ Alert组件扩展，以支持组件内多组信息的显示。
 :::
 
 ::: demo alert-props 显示图标属性虽然能生效，但不太适合多模块场景
-<<< @/docs/.vuepress/components/demo/multi-alert/alert-props.vue
+@[code](@demo/multi-alert/$LIB_DIR/alert-props.vue)
 :::
 
 ::: tip 提示
-Alert组件文档参照 <element-link component="Alert"></element-link>
+Alert组件文档参照 <ui-lib-link component="Alert"></ui-lib-link>
 :::
 
 

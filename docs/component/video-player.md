@@ -7,13 +7,13 @@
 本示例裁剪后将在新窗口打开裁剪后的图片
 
 ::: demo Base
-<<< @/docs/.vuepress/components/demo/video-player/Base.vue
+@[code](@demo/video-player/$LIB_DIR/Base.vue)
 :::
 
 <!-- ### 使用视频指定帧作为预览图
 
 ::: demo frame-poster
-<<< @/docs/.vuepress/components/demo/video-player/frame-poster.vue
+@[code](@demo/video-player/$LIB_DIR/frame-poster.vue)
 ::: -->
 
 ::: tip 说明

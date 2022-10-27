@@ -1,0 +1,55 @@
+<template>
+  <el-row :gutter="20">
+    <el-col :span="8">
+      <ue-common-field v-bind="inputField" v-model="inputValue">
+      </ue-common-field>
+    </el-col>
+    <el-col :span="12" :offset="4">
+      <ue-common-field v-bind="selectField" v-model="selectValue">
+      </ue-common-field>
+    </el-col>
+  </el-row>
+</template>
+
+<script>
+import { defineComponent, h } from 'vue'
+
+const SelectEmpty = {
+  props: {
+    icon: null,
+  },
+  setup () {
+    return () => h('div',
+      { style: { color: 'red', padding: '10px 12px' } },
+      '暂无数据'
+    )
+  }
+}
+
+export default defineComponent({
+  data () {
+    return {
+      inputValue: '',
+      inputField: {
+        component: 'ElInput',
+        slots: {
+          append: () => h('ElButton', { onClick: this.searchHandler }, '搜索')
+        }
+      },
+      selectValue: '',
+      selectField: {
+        component: 'ElSelect',
+        data: [],
+        slots: {
+          empty: () => h(SelectEmpty)
+        }
+      }
+    }
+  },
+  methods: {
+    searchHandler () {
+      console.log(this.inputValue)
+    }
+  }
+})
+</script>

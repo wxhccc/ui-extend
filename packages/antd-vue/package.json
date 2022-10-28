@@ -1,6 +1,6 @@
 {
   "name": "@wxhccc/ue-antd-vue",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "a library contains some componets base on ohter ui library.",
   "type": "module",
   "workspaces": [

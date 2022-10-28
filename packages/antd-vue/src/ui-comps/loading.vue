@@ -9,7 +9,7 @@ import {
 import { Spin, SpinProps } from 'ant-design-vue'
 import { pickBy } from 'lodash-es'
 import { vueTypeProp } from '@wxhccc/ue-shared'
-import { spinProps } from 'ant-design-vue/lib/spin'
+import { spinProps } from 'ant-design-vue/es/spin'
 
 export interface LoadingProps extends SpinProps {
   body?: boolean

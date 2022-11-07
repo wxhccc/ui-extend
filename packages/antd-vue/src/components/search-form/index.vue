@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { pick, cloneDeep, isFunction } from 'lodash-es'
+import { ref, computed, useAttrs } from 'vue'
+import { cloneDeep, isFunction } from 'lodash-es'
 import { awaitWrapper } from '@wxhccc/es-util'
-import { resolveFunctional, useIgnoreWatch, vueTypeProp, useProxyInstanceMethods, useStorage } from '@wxhccc/ue-shared'
-import { UeForm, UeButton, ueFormProps, UeFormInstance, UeFormProps } from '@/ui-comps'
+import { resolveFunctional, useIgnoreWatch, attrsToProps, vueTypeProp, useProxyInstanceMethods, useStorage } from '@wxhccc/ue-shared'
+import { UeForm, UeButton, UeFormInstance, UeFormProps } from '@/ui-comps'
 import UeFormFields from '@/components/form-fields'
 import { FormFieldsItem } from '@/components/form-fields/types'
 import { SearchFormProps, SearchButtonOptions } from './type'
@@ -11,7 +11,6 @@ import { SearchFormProps, SearchButtonOptions } from './type'
 const storeSession = useStorage('SearchForm')
 
 const props = defineProps({
-  ...ueFormProps,
   items: vueTypeProp<SearchFormProps['items']>(Array, () => [], true),
   modelValue: vueTypeProp<SearchFormProps['modelValue']>(Object, () => ({})),
   searching: Boolean,
@@ -31,6 +30,8 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: AnyObject): void
   (e: 'change', value: AnyObject): void
 }>()
+
+const attrs = useAttrs()
 
 const form = ref<UeFormInstance>()
 
@@ -58,7 +59,7 @@ const getInitFormData = () => {
 
 const formData = ref(getInitFormData())
 
-const formProps = computed(() => pick(props, Object.keys(ueFormProps)))
+const formProps = computed(() => attrsToProps(attrs))
 
 const handleValue = computed({
   get(): AnyObject {
@@ -87,7 +88,8 @@ const btnItemOpts = computed((): SearchButtonOptions => {
 })
 
 const formRules = computed((): UeFormProps['rules'] => {
-  const { rules, formRulesCreator } = props
+  const { formRulesCreator } = props
+  const { rules } = formProps.value
   if (rules) {
     return rules
   }

@@ -4,12 +4,11 @@ import {
   computed,
   ref,
   h,
-  inject
+  inject,
+  useAttrs
 } from 'vue'
 import { Spin, SpinProps } from 'ant-design-vue'
-import { pickBy } from 'lodash-es'
 import { vueTypeProp } from '@wxhccc/ue-shared'
-import { spinProps } from 'ant-design-vue/es/spin'
 
 export interface LoadingProps extends SpinProps {
   body?: boolean
@@ -17,18 +16,19 @@ export interface LoadingProps extends SpinProps {
 
 export default defineComponent({
   name: 'UeLoading',
+  inheritAttrs: false,
   props: {
-    ...spinProps,
     body: vueTypeProp<boolean>(Boolean)
   },
   setup(props) {
     const el = ref<HTMLDivElement>()
+    const attrs = useAttrs()
 
     const injectProps = inject<LoadingProps>('UeLoadingOptions')
 
     const handleProps = computed(() => {
-      const { body, ...rest } = props
-      return { ...injectProps, ...pickBy(rest, (v) => v !== undefined) }
+      const { class: className, ...rest } = attrs
+      return { ...injectProps, ...rest }
     })
 
     return () =>
@@ -36,7 +36,7 @@ export default defineComponent({
         'div',
         {
           ref: el,
-          class: ['ue-loading', props.body ? 'ue-loading-body-root' : 'ue-loading-relative-root']
+          class: ['ue-loading', props.body ? 'ue-loading-body-root' : 'ue-loading-relative-root', attrs.class]
         },
         h(Spin, handleProps.value)
       )

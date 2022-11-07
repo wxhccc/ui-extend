@@ -1,4 +1,4 @@
-import { Select } from 'ant-design-vue'
+import { Select, Form } from 'ant-design-vue'
 
 export {
   Button as UeButton,
@@ -29,10 +29,6 @@ export {
 } from 'ant-design-vue'
 
 export const { Option: UeOption } = Select
-
-import { formProps } from 'ant-design-vue/es/form/index'
-
-export const ueFormProps = formProps() as Pick<ReturnType<typeof formProps>, 'rules'>
 
 export type {
   ButtonProps as UeButtonProps,

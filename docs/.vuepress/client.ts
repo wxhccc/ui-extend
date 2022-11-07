@@ -21,6 +21,8 @@ export default defineClientConfig({
     }
     app.config.globalProperties.CUR_LIB_NAME = `@wxhccc/ue-${__CURRENT_LIB__}`
     app.config.globalProperties.UI_LIB = __CURRENT_LIB__ === 'antd-vue' ? 'ant-design-vue' : 'element-plus'
-    components.forEach(item => app.component(item.name, item))
+    // if (!__VUEPRESS_SSR__) {
+      components.forEach(item => app.component(item.name, item))
+    // }
   }
 })

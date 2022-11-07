@@ -11,7 +11,7 @@ export const navbar = (lib: 'antd-vue' | 'element'): NavbarConfig => {
         {
           text: otherLib,
           target: '__blank',
-          link: `/../${otherLib}`
+          link: `/../${lib}`
         }
       ]
     },

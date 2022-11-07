@@ -1,4 +1,5 @@
 import { h, defineComponent, computed } from 'vue'
+import { ClientOnly } from '@vuepress/client'
 
 export default defineComponent({
   name: 'UiLibLink',
@@ -29,6 +30,6 @@ export default defineComponent({
       return result
     })
 
-    return () => h('a', { href: linkInfo.value.href, target: '_blank' }, linkInfo.value.text)
+    return () => h(ClientOnly, { default: () => h('a', { href: linkInfo.value.href, target: '_blank' }, linkInfo.value.text) })
   }
 })

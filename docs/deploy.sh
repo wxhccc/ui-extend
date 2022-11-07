@@ -1,8 +1,11 @@
 set -e
 
-npm run docs:build
+pnpm run build
 
-cd docs/.vuepress/dist
+cd .vuepress
+cp index.html dist/index.html
+
+cd dist
 
 git init
 git add -A

@@ -2,13 +2,18 @@
 sidebarDepth: 3
 ---
 
+::: warning 注意
+下文中 `ui-extend` 不是真实包名，指代当前ui库相关的库: {{ CUR_LIB_NAME }}
+:::
+
 ## 使用方法
 
 ``` ts
 // 引入cjs文件
-import { loadjs, vwp } from '@wxhccc/ui-extend'
+import { loadjs, vwp } from 'ui-extend'
 
 ```
+
 ## 方法
 
 ### loadjs
@@ -28,7 +33,7 @@ function loadjs(url: string): Promise<void>
 **示例**:
 
 ```js
-import { loadjs } from '@wxhccc/ui-extend'
+import { loadjs } from 'ui-extend'
 
 loadjs('https://www.example.com/xxxxxxxx.js').then(() => {
   // 这里的代码可以使用动态脚步的内容
@@ -54,7 +59,7 @@ declare const vwp = <T>(promise: Promise<T>, lock?: WpOptions['lock'] | Ref<bool
 
 ```ts
 import { ref } from 'vue'
-import { vwp } from '@wxhccc/ui-extend'
+import { vwp } from 'ui-extend'
 
 const loading = ref(false)
 
@@ -84,7 +89,7 @@ declare const resolveFunctional = <R>(value: R | AnyFunction<R>, ...args: Parame
 **示例**
 
 ``` ts
-import { resolveFunctional } from '@wxhccc/ui-extend'
+import { resolveFunctional } from 'ui-extend'
 
 /** 组件的props对象类型 */
 type InputProps = xxx
@@ -115,7 +120,7 @@ function dateFormat(date: string | number | Date | Dayjs, format?: 'default' | '
 **示例**
 
 ```js
-import { dateFormat } from '@wxhccc/ui-extend'
+import { dateFormat } from 'ui-extend'
 
 dateFormat(new Date())
 // log '2019-08-29 11:12:13'

@@ -4,7 +4,7 @@ sidebarDepth: 1
 
 ## 前置准备
 
-本组件库是基于多个npm库封装的，并且这些npm库可能在你的项目里是本身就已经安装了或者您期望自行安装的。
+本组件库依赖多个npm库，并且这些npm库可能在你的项目里是本身就已经安装了或者推荐用户期望自行安装的。
 
 基于这方面考虑，本组件库默认提供的是不包含这些第三方npm库的代码，同时以[Peer dependencies](https://docs.npmjs.com/files/package.json#peerdependencies)的形式将这些第三库列举出来。
 
@@ -12,46 +12,58 @@ sidebarDepth: 1
 
 **ps: npm方式全局引入时都是必须安装的。cdn方式引入文件包含除element-ui均已包含**
 
-| npm库      | 按需引入时是否必需 | 安装指令              | 相关组件      |
-| :--------- | :----------------- | :-------------------- | :------------ |
-| element-plus | 是                 | `npm i element-plus` | --            |
-| lodash/lodash-es     | 是                 | `npm i lodash`     | --            |
-| cropperjs  | 否                 | `npm i cropperjs`  | `Cropper`     |
-| video.js   | 否                 | `npm i video.js`   | `VideoPlayer` |
+| npm库            | 按需引入时是否必需 | 相关组件      |
+| :--------------- | :----------------- | :------------ |
+| {{ UI_LIB }}     | 是                 | --            |
+| lodash/lodash-es | 是                 | --            |
+| cropperjs        | 否                 | `Cropper`     |
+| video.js         | 否                 | `VideoPlayer` |
 
 
-## npm 安装
+## 安装
 
-推荐使用 npm 的方式安装，它能更好地和[webpack](https://webpack.js.org)打包工具配合使用。
+推荐使用 npm 的方式安装，它能更好地和webpack/vite等打包工具配合使用。
 
 
 <CodeGroup>
   <CodeGroupItem title="YARN" active>
+<libs-content>
+  <template #antd-vue>
 
 ```bash
-yarn add @wxhccc/ui-extend
+yarn add @wxhccc/ue-antd-vue
 ```
+
+  </template>
+  <template #element>
+
+```bash
+yarn add @wxhccc/ue-element
+```
+
+  </template>
+</libs-content>
 
   </CodeGroupItem>
   <CodeGroupItem title="NPM" >
 
+<libs-content>
+  <template #antd-vue>
+
 ```bash
-npm i @wxhccc/ui-extend
+npm i @wxhccc/ue-antd-vue
 ```
+
+  </template>
+  <template #element>
+
+```bash
+npm i @wxhccc/ue-element
+```
+
+  </template>
+</libs-content>
 
   </CodeGroupItem>
 </CodeGroup>
 
-## CDN
-
-可以通过推[unpkg.com/@wxhccc/ui-extend](https://unpkg.com/@wxhccc/ui-extend)获取到cdn资源，在页面上引入即可开始使用。
-
-``` html
-<!-- 必须先引入element-ui组件库 -->
-<!-- 引入组件库 -->
-<script src="https://unpkg.com/@wxhccc/ui-extend/lib/index.js"></script>
-```
-
-::: tip 友情提示
-建议用cdn引入方式时在链接地址上锁定版本，以避免组件库升级时带来的兼容性方面的影响。锁定版本的方法见[unpkg.com](https://unpkg.com.vue)
-:::

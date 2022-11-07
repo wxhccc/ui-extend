@@ -1,4 +1,4 @@
-import { NavbarGroup } from "vuepress"
+import type { NavbarGroup } from "vuepress"
 
 export function versionCompare (origin: string, target: string) {
   const oriVerNums = origin.split('.')

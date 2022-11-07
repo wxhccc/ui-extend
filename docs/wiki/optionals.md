@@ -2,13 +2,16 @@
 sidebarDepth: 3
 ---
 
+::: warning 注意
+下文中 `ui-extend` 不是真实包名，指代当前ui库相关的库: {{ CUR_LIB_NAME }}
+:::
+
 ## 使用方法
 
 Optionals主要是提供了**可选**的便捷函数，可以更方便得使用本组件库。
 
-
-``` js
-import { createOption } from '@wxhccc/ui-extend'
+``` ts
+import { createOption } from 'ui-extend'
 ```
 
 ## 方法列表
@@ -30,7 +33,7 @@ declare const createOption = (value: null | undefined | string | number, label?:
 **示例**:
 
 ```ts
-import { createOption } from '@wxhccc/ui-extend'
+import { createOption } from 'ui-extend'
 
 createOption('')
 // log { value: '', label: '全部' }
@@ -76,7 +79,7 @@ function createFFIRulesProps(
 **示例**
 
 ```ts
-import { createFFIRulesProps } from '@wxhccc/ui-extend'
+import { createFFIRulesProps } from 'ui-extend'
 
 createFFIRulesProps('姓名')
 /** log 
@@ -127,7 +130,7 @@ function createFormFieldItem <FP, V>(
 **示例**
 
 ```ts
-import { createFormFieldItem } from '@wxhccc/ui-extend'
+import { createFormFieldItem } from 'ui-extend'
 
 import CustomField from '...'
 
@@ -183,7 +186,7 @@ function createInputFormItem(
 **示例**
 
 ```ts
-import { createInputFormItem } from '@wxhccc/ui-extend'
+import { createInputFormItem } from 'ui-extend'
 
 const props = createFFIRulesProps('金额', true)
 

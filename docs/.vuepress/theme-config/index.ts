@@ -2,8 +2,7 @@ import { NavbarConfig, SidebarConfig } from 'vuepress'
 import { verNavCreator } from '../utils/versions'
 
 export const navbar = (lib: 'antd-vue' | 'element'): NavbarConfig => {
-  const curLib = lib === 'antd-vue' ? 'ant-design-vue' : 'element-plus'
-  const otherLib = lib === 'antd-vue' ? 'element-plus' : 'ant-design-vue'
+  const [curLib, otherLib] = lib === 'antd-vue' ? ['ant-design-vue', 'element-plus'] : ['element-plus', 'ant-design-vue']
   return [
     {
       text: curLib,
@@ -11,7 +10,7 @@ export const navbar = (lib: 'antd-vue' | 'element'): NavbarConfig => {
         {
           text: otherLib,
           target: '__blank',
-          link: `/../${lib}`
+          link: `https://wxhccc.github.io/ui-extend/${lib === 'antd-vue' ? 'element' : 'antd-vue'}/`
         }
       ]
     },

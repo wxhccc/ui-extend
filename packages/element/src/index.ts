@@ -1,6 +1,7 @@
 import type { App } from 'vue'
 import { version } from '../package.json'
 import Loading from './ui-comps/loading.vue'
+import CopyClipboard from '@/components/copy-clipboard'
 import ActionBtns from '@/components/action-btns'
 import DataTable from '@/components/data-table'
 import MediaContainer from '@/components/media-container'
@@ -29,6 +30,7 @@ export * from '@/optionals'
 const components = {
   Loading,
   ActionBtns,
+  CopyClipboard,
   MediaContainer,
   CommonField,
   FormBtns,
@@ -61,6 +63,7 @@ const install = function (app: App) {
 export {
   Loading,
   ActionBtns,
+  CopyClipboard,
   MediaContainer,
   CommonField,
   FormBtns,

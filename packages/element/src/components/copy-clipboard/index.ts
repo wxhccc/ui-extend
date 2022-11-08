@@ -52,7 +52,7 @@ export default defineComponent({
         { content: title.value, placement: 'top', 'onUpdate:visible': onVisibleChange },
         {
           default: () =>
-            h('div', { onClick: copyText }, slots.default ? slots.default() : defaultBtn)
+            h('span', { onClick: copyText }, slots.default ? slots.default() : defaultBtn)
         }
       )
   }

@@ -1,8 +1,11 @@
 set -e
 
+rm -rf .vuepress/dist
+
 pnpm run build
 
 cd .vuepress
+
 cp index.html dist/index.html
 
 cd dist

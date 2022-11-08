@@ -1,6 +1,7 @@
 export default [
   'Loading',
   'ActionBtns',
+  'CopyClipboard',
   'Ticker',
   'MultiAlert',
   'MediaContainer',

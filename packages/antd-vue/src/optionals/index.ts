@@ -17,9 +17,9 @@ import {
   FORM_ITEM_NAME,
   RuleObject
 } from '@/ui-comps'
-import { mergeObj } from '@wxhccc/ue-shared'
+import { mergeObj, AnyObject, StrOrNum, NamePath, SelectOption, Option } from '@wxhccc/ue-shared'
 import { CommonFieldProps } from '@/components/common-field'
-import { FormFieldItemProps } from '@/components/form-field-item/types'
+import type { FormFieldItemProps } from '@/components/form-field-item/types'
 
 
 export type CustomComponent = CommonFieldProps['component']
@@ -119,7 +119,7 @@ export function createInputFormItem(
       ? typeof phOrFieldProps === 'string'
         ? {
             placeholder: phOrFieldProps || defPlaceholder
-          }
+          } as Partial<CommonFieldProps<string, InputProps>>
         : phOrFieldProps
       : undefined,
     extraProps
@@ -205,7 +205,7 @@ export function createSelectFormItem(
       allowClear: true,
       childComponent,
       ...(typeof phOrFieldProps === 'string' ? { placeholder: phOrFieldProps } : phOrFieldProps)
-    } as SelectProps,
+    } as any,
     extraProps
   )
 }

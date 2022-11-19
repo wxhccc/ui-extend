@@ -1,3 +1,5 @@
+import { AnyObject } from '@wxhccc/ue-shared'
+
 export {
   ElButton as UeButton,
   ElInput as UeInput,

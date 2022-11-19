@@ -2,7 +2,7 @@
 import { ref, watch, provide, computed, useAttrs } from 'vue'
 import { get, isFunction } from 'lodash-es'
 import { UeTable, UeTableProps } from '@/ui-comps'
-import { useVModel, useProxyInstanceMethods, vueTypeProp, resolveFunctional } from '@wxhccc/ue-shared'
+import { useVModel, useProxyInstanceMethods, vueTypeProp, resolveFunctional, StrOrNum } from '@wxhccc/ue-shared'
 import UeDeepColumn from './deep-column'
 import { DataTableProps, exposeMethods } from '../types'
 

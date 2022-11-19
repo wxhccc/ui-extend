@@ -1,6 +1,7 @@
 import { computed, onBeforeUnmount, onMounted, Ref, ref, shallowRef, unref, watch } from 'vue'
 import { eventTargetEmitter } from '@wxhccc/es-util'
 import { debounce, isFunction } from 'lodash-es'
+import { Size } from '../types'
 
 export type MayBeRef<T> = T | Ref<T>
 

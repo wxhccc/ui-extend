@@ -16,7 +16,7 @@ import {
   RuleObject,
   FORM_ITEM_NAME
 } from '@/ui-comps'
-import { mergeObj } from '@wxhccc/ue-shared'
+import { AnyObject, mergeObj, NamePath, SelectOption, StrOrNum, Option } from '@wxhccc/ue-shared'
 import { DataTableColumn } from '@/components/data-table'
 import { CommonFieldProps } from '@/components/common-field'
 import { FormFieldItemProps } from '@/components/form-field-item/types'
@@ -117,7 +117,7 @@ export function createInputFormItem(
       ? typeof phOrFieldProps === 'string'
         ? {
             placeholder: phOrFieldProps || defPlaceholder
-          }
+          } as Partial<CommonFieldProps<string, InputProps>>
         : phOrFieldProps
       : undefined,
     extraProps

@@ -1,3 +1,4 @@
+import { AnyObject } from '@wxhccc/ue-shared'
 import { PagedCommonProps } from '@/utils/paged-utils'
 import { DataTableProps } from '@/components/data-table/types'
 

@@ -1,4 +1,5 @@
 import { UeButtonProps, UeFormInstance, UeConfirmOptions } from '@/ui-comps'
+import { AnyFunction } from '@wxhccc/ue-shared'
 
 export type BtnType = 'submit' | 'cancel' | 'reset'
 

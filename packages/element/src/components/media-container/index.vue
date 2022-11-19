@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, reactive, shallowRef, computed, watch, onMounted, toRefs, toRef } from 'vue'
-import { useResizeObserver } from '@wxhccc/ue-shared'
+import { ref, reactive, computed, watch, toRefs, toRef } from 'vue'
+import { Size, useResizeObserver } from '@wxhccc/ue-shared'
 import { UeLoading } from '@/ui-comps'
 
 export interface MediaViewerProps {

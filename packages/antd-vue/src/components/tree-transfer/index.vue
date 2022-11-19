@@ -2,7 +2,7 @@
 import { ref, reactive, computed, watch, useAttrs } from 'vue'
 import { treeAnalyse } from '@wxhccc/es-util'
 import { cloneDeep } from 'lodash-es'
-import { attrsToProps, handleTreeKeys, resolveFunctional, vueTypeProp } from '@wxhccc/ue-shared'
+import { attrsToProps, handleTreeKeys, resolveFunctional, StrOrNum, vueTypeProp } from '@wxhccc/ue-shared'
 import {
   UeLoading,
   UeButton,

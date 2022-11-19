@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { treeAnalyse } from '@wxhccc/es-util'
-import { handleTreeKeys, resolveFunctional, vueTypeProp } from '@wxhccc/ue-shared'
+import { handleTreeKeys, resolveFunctional, StrOrNum, vueTypeProp } from '@wxhccc/ue-shared'
 import {
   UeLoading,
   UeButton,

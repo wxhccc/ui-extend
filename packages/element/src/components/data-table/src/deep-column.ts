@@ -1,6 +1,6 @@
 import { defineComponent, h, inject, computed } from 'vue'
 import { omit } from 'lodash-es'
-import { vueTypeProp } from '@wxhccc/ue-shared'
+import { AnyFunction, StrOrNum, vueTypeProp } from '@wxhccc/ue-shared'
 import { UeTableColumn } from '@/ui-comps'
 import ActionBtns from '@/components/action-btns'
 import SelectionSlot from './selection'

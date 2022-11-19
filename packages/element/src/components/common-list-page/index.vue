@@ -4,7 +4,7 @@ import { isFunction, omit, pick } from 'lodash-es'
 import { UeButton, UeSpace } from '@/ui-comps'
 import UePagedTable, { PagedTableProps } from '@/components/paged-table'
 import UeSearchForm from '@/components/search-form'
-import { vueTypeProp, PropsTypeToDefine, useVModel, vwp } from '@wxhccc/ue-shared'
+import { vueTypeProp, PropsTypeToDefine, useVModel, vwp, AnyObject } from '@wxhccc/ue-shared'
 import { CommonListPageProps, OperationItem } from './types'
 
 const props = defineProps({

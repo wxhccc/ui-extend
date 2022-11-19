@@ -1,4 +1,5 @@
 import { DefineComponent, VNode } from 'vue'
+import { AnyObject, Functional, StrOrNum } from '@wxhccc/ue-shared'
 import { UeColProps } from '@/ui-comps'
 import { FormFieldItemOption } from '@/components/form-field-item/types'
 

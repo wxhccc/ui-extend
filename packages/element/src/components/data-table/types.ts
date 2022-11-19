@@ -1,4 +1,5 @@
 import { Slot } from 'vue'
+import { Functional, StrOrNum } from '@wxhccc/ue-shared'
 import { ActionBtnItem } from '@/components/action-btns/type'
 import { UeTableColumnProps } from '@/ui-comps'
 

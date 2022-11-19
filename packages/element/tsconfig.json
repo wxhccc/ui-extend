@@ -7,7 +7,6 @@
     } 
   },
   "include": [
-    "../global.d.ts",
     "src/**/*",
     "vite-dev/**/*"
   ]

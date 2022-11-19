@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { isFunction } from 'lodash-es'
-import { resolveFunctional, vueTypeProp } from '@wxhccc/ue-shared'
+import { Functional, resolveFunctional, vueTypeProp } from '@wxhccc/ue-shared'
 import { UeSpace, UeButton } from '@/ui-comps'
 import { useUeConfirm } from '@/utils/hooks'
 import type { ActionBtnItem, ActionBtnsProps } from './type'

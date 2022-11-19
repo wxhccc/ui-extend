@@ -11,7 +11,7 @@ import {
   markRaw
 } from 'vue'
 import { cloneDeep, get, isFunction, set } from 'lodash-es'
-import { resolveProps, vueTypeProp } from '@wxhccc/ue-shared'
+import { AnyFunction, AnyObject, resolveProps, vueTypeProp } from '@wxhccc/ue-shared'
 import FormFieldItem from '@/components/form-field-item'
 import { getFormItemFullName, getFormItemName } from '@/utils/component'
 import { FormFieldsItem, FormFieldsOption, FormFieldsProps } from './types'

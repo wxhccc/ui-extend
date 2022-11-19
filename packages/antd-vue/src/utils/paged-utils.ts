@@ -1,7 +1,7 @@
 import { SetupContext, computed, reactive, watch, isProxy, inject } from 'vue'
 import { isEqual, cloneDeep, isFunction } from 'lodash-es'
 import { ParamsSwitchMaps } from '@wxhccc/es-util'
-import { vueTypeProp, useStorage, searchFormDateSwitch } from '@wxhccc/ue-shared'
+import { vueTypeProp, useStorage, searchFormDateSwitch, AnyObject, StrOrNum } from '@wxhccc/ue-shared'
 import { LoadingProps, UePaginationProps } from '../ui-comps'
 
 export type PropKey = 'total' | 'rows' | 'pageSize' | 'curPage' | 'hasMore'

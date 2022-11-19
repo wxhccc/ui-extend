@@ -1,4 +1,5 @@
 import { Modal, ModalFuncProps } from 'ant-design-vue'
+import type { AnyFunction } from '@wxhccc/ue-shared'
 
 export type UeConfirmOptions = ModalFuncProps
 

@@ -1,3 +1,4 @@
+import { StrOrNum } from '@wxhccc/ue-shared'
 import { TreeDataNode } from '@/ui-comps'
 
 export type { TreeDataNode }

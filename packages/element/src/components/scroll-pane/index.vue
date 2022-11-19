@@ -2,7 +2,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { debounce, isFunction } from 'lodash-es'
 import { UeScrollbar, LoadingOutlined } from '@/ui-comps'
-import { vueTypeProp } from '@wxhccc/ue-shared'
+import { StrOrNum, vueTypeProp } from '@wxhccc/ue-shared'
 import { ScrollPaneProps } from './types'
 
 const defaultTips: ScrollPaneProps['tipsTexts'] = {

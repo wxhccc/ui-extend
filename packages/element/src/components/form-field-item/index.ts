@@ -10,12 +10,12 @@ import {
   MODEL_VALUE,
   ON_UPDATE_MODEL_VALUE,
   UPDATE_MODEL_VALUE,
-FORM_ITEM_NAME
+  FORM_ITEM_NAME
 } from '@/ui-comps'
-import { resolveProps, useProxyInstanceMethods, vueTypeProp } from '@wxhccc/ue-shared'
+import { NamePath, resolveProps, useProxyInstanceMethods, vueTypeProp } from '@wxhccc/ue-shared'
 import { getFormItemFullName, getFormItemName } from '@/utils/component'
 import CommomField, { CommonFieldProps } from '@/components/common-field'
-import { ChildFormFieldItemOption, FormFieldItemOption, NamePath, TextType } from './types'
+import { ChildFormFieldItemOption, FormFieldItemOption, TextType } from './types'
 
 export * from './types'
 

@@ -1,3 +1,4 @@
+import { AnyObject } from '@wxhccc/ue-shared'
 import { UeButtonProps, UeConfirmOptions } from '@/ui-comps'
 
 export type FunctionalBtnProp<T> = T | ((data: any, btn: ActionBtnItem, ...args: any[]) => T)

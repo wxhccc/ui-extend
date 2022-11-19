@@ -1,10 +1,10 @@
 import { AllowedComponentProps, Slots, VNodeTypes } from 'vue'
+import { AnyObject, Functional, NamePath } from '@wxhccc/ue-shared'
 import { UeColProps, UeFormItemProps } from '@/ui-comps'
 import { CommonFieldProps } from '@/components/common-field'
 
 export type FormItemProps = UeFormItemProps & AllowedComponentProps
 
-export type NamePath = string | number
 export type TextType = boolean | string | ((value?: any, name?: NamePath) => VNodeTypes)
 
 export interface FormFieldItemOption {

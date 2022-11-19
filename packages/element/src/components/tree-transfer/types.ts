@@ -1,3 +1,4 @@
+import { StrOrNum } from '@wxhccc/ue-shared'
 import { UeTreeProps } from '@/ui-comps'
 
 export type Direction = 'left' | 'right'

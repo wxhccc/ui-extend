@@ -37,7 +37,8 @@ export const sidebar = (lib: 'antd-vue' | 'element'): SidebarConfig => ({
           children: [
             { text: 'ActionBtns 操作按钮组', link: 'action-btns' },
             { text: 'Ticker 倒计时器', link: 'ticker' },
-            { text: 'Loading 加载组件', link: 'loading' }
+            { text: 'Loading 加载组件', link: 'loading' },
+            { text: 'CopyClipboard 复制板', link: 'copy-clipboard' },
           ]
         },
         {

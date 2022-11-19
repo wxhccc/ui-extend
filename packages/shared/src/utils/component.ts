@@ -1,5 +1,6 @@
 import { PropType, Prop } from 'vue'
 import { isFunction, mapKeys, camelCase } from 'lodash-es'
+import { AnyFunction, AnyObject } from '../types'
 
 export function resolveProps<T extends Record<string, any> = Record<string, any>>(
   props: T | AnyFunction<T>,

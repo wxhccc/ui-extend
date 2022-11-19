@@ -1,3 +1,4 @@
+import { AnyFunction } from '@wxhccc/ue-shared'
 import { ElMessageBox, ElMessageBoxOptions } from 'element-plus'
 
 export type UeConfirmOptions = ElMessageBoxOptions

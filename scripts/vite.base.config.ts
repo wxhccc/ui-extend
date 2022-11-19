@@ -14,7 +14,8 @@ const external = [
   '@wxhccc/es-util',
   'lodash-es',
   'dayjs',
-  'cropperjs'
+  'cropperjs',
+  '@wxhccc/ue-shared'
 ]
 
 const globals = {
@@ -26,7 +27,8 @@ const globals = {
   '@wxhccc/es-util': 'EsUtil',
   'lodash-es': '_',
   dayjs: 'dayjs',
-  cropperjs: 'Cropper'
+  cropperjs: 'Cropper',
+  '@wxhccc/ue-shared': 'UiExtendShared'
 }
 
 export default function () {

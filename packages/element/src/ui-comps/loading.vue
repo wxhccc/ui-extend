@@ -11,7 +11,7 @@ import {
 } from 'vue'
 import { pickBy } from 'lodash-es'
 import { ElLoading, LoadingOptions } from 'element-plus'
-import { vueTypeProp } from '@wxhccc/ue-shared'
+import { PartailPick, vueTypeProp } from '@wxhccc/ue-shared'
 
 type MaybeRef<T> = T | Ref<T>
 type NoRefOptions<T> = { [P in keyof T]: T[P] extends MaybeRef<infer V> ? V : T[P] }

@@ -1,5 +1,6 @@
 import { DefineComponent } from 'vue'
-import { FormFieldItemOption, NamePath } from '@/components/form-field-item/types'
+import { AnyObject, Functional, NamePath, Option } from '@wxhccc/ue-shared'
+import { FormFieldItemOption } from '@/components/form-field-item/types'
 
 interface FieldsBaseOption {
   /** 当前表单项是否隐藏 */

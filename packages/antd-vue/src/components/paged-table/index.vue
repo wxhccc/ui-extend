@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, ref, computed, h, watch, nextTick } from 'vue'
-import { vueTypeProp, useStorage, useResizeObserver } from '@wxhccc/ue-shared'
+import { vueTypeProp, useStorage, useResizeObserver, StrOrNum } from '@wxhccc/ue-shared'
 import ActionBtns from '../action-btns'
 import { TableRowSelection, UeTable, UeTableProps } from '@/ui-comps'
 import { Context, emits, pagedCompProps, usePagedLogic } from '@/utils/paged-utils'

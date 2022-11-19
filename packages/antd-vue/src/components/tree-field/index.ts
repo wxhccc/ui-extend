@@ -2,7 +2,7 @@ import { defineComponent, h, ref, computed } from 'vue'
 import { pickBy } from 'lodash-es'
 import { treeAnalyse, TreeKeyNode } from '@wxhccc/es-util'
 import { UeTree, UeTreeProps } from '@/ui-comps'
-import { attrsToProps, useProxyInstanceMethods, vueTypeProp, handleTreeKeys } from '@wxhccc/ue-shared'
+import { attrsToProps, useProxyInstanceMethods, vueTypeProp, handleTreeKeys, StrOrNum } from '@wxhccc/ue-shared'
 import { TreeFiledProps, TreeDataNode } from './types'
 
 type DetailValue = NonNullable<TreeFiledProps['detailValue']>

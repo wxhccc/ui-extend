@@ -1,5 +1,6 @@
 import { ref, watch, computed } from 'vue'
 import { isFunction } from 'lodash-es'
+import { AnyFunction, AnyObject } from '../types'
 
 export const useIgnoreWatch = (...args: Parameters<typeof watch>) => {
   const ignoreWatch = ref(false)

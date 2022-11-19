@@ -1,4 +1,5 @@
 import { AnalyseTreeData, TreeKeyNode } from '@wxhccc/es-util'
+import { StrOrNum } from '../types'
 
 type TreeKeyDataMap = Record<string, TreeKeyNode>
 

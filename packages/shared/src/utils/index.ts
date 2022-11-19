@@ -2,6 +2,7 @@ import { isRef, Ref } from 'vue'
 import { BoolRef, formParamsSwitchCreator, wp, WpOptions } from '@wxhccc/es-util'
 import { isFunction, mergeWith } from 'lodash-es'
 import { dateFormat } from './formatter'
+import { AnyFunction } from '../types'
 
 export * from './storage'
 export * from './formatter'

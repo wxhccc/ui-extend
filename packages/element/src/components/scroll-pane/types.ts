@@ -1,3 +1,5 @@
+import { AnyFunction } from "@wxhccc/ue-shared"
+
 export interface TipsTexts {
   /** 加载中 */
   loading?: string

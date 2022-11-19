@@ -1,5 +1,5 @@
 import { defineComponent, computed, h, inject } from 'vue'
-import { vueTypeProp } from '@wxhccc/ue-shared'
+import { AnyFunction, StrOrNum, vueTypeProp } from '@wxhccc/ue-shared'
 import { UeRadio, UeRadioProps } from '@/ui-comps'
 import { DataTableColumn } from '../types'
 

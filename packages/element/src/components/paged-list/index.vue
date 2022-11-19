@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import { useStorage } from '@wxhccc/ue-shared'
+import { AnyObject, useStorage } from '@wxhccc/ue-shared'
 import { UePagination, UeLoading } from '@/ui-comps'
 import {
   emits,

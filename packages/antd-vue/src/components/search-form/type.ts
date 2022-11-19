@@ -1,6 +1,6 @@
+import type { AnyObject } from '@wxhccc/ue-shared'
 import type { FormFieldsItem } from '@/components/form-fields/types'
 import type { UeButtonProps, UeFormProps } from '@/ui-comps'
-
 
 export interface SearchButtonOptions {
   /** 按钮属性对象 */

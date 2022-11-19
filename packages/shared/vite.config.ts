@@ -8,14 +8,16 @@ const external = [
   'vue',
   '@wxhccc/es-util',
   'lodash-es',
-  'dayjs'
+  'dayjs',
+  'store2'
 ]
 
 const globals = {
   vue: 'Vue',
   '@wxhccc/es-util': 'EsUtil',
   'lodash-es': '_',
-  dayjs: 'dayjs'
+  dayjs: 'dayjs',
+  store2: 'store'
 }
 
 export default defineConfig({

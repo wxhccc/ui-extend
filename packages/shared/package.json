@@ -1,6 +1,6 @@
 {
   "name": "@wxhccc/ue-shared",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.4",
   "description": "a library contains some componets base on element-plus",
   "type": "module",
   "main": "dist/index.cjs.js",

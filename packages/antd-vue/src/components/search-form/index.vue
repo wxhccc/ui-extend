@@ -2,7 +2,7 @@
 import { ref, computed, useAttrs } from 'vue'
 import { cloneDeep, isFunction } from 'lodash-es'
 import { awaitWrapper } from '@wxhccc/es-util'
-import { resolveFunctional, useIgnoreWatch, attrsToProps, vueTypeProp, useProxyInstanceMethods, useStorage } from '@wxhccc/ue-shared'
+import { resolveFunctional, useIgnoreWatch, attrsToProps, vueTypeProp, useProxyInstanceMethods, useStorage, AnyObject } from '@wxhccc/ue-shared'
 import { UeForm, UeButton, UeFormInstance, UeFormProps } from '@/ui-comps'
 import UeFormFields from '@/components/form-fields'
 import { FormFieldsItem } from '@/components/form-fields/types'

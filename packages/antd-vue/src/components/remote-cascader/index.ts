@@ -1,7 +1,7 @@
 import { defineComponent, h, reactive, computed, watch } from 'vue'
 import { awaitWrapper } from '@wxhccc/es-util'
 import { isFunction } from 'lodash-es'
-import { useVModel } from '@wxhccc/ue-shared'
+import { StrOrNum, useVModel } from '@wxhccc/ue-shared'
 import { vueTypeProp } from '@wxhccc/ue-shared'
 import { ON_UI_UPDATE_MODEL_VALUE, UeCascader, UeCascaderProps, UI_MODEL_VALUE, CascaderOptionType } from '@/ui-comps'
 

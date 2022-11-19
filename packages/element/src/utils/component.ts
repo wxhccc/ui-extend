@@ -1,3 +1,4 @@
+import { NamePath } from '@wxhccc/ue-shared'
 import { FORM_ITEM_NAME } from '../ui-comps/const'
 
 export const getFormItemName = <T extends { prop?: NamePath }>(item: T) => {

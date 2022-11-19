@@ -16,7 +16,7 @@ import {
   EditOutlined,
   FORM_ITEM_NAME
 } from '@/ui-comps'
-import { vueTypeProp } from '@wxhccc/ue-shared'
+import { AnyObject, StrOrNum, vueTypeProp } from '@wxhccc/ue-shared'
 import FormFieldItem, { FormFieldItemOption } from '@/components/form-field-item'
 import { InfoTableProps, CellItem } from './types'
 

@@ -3,7 +3,7 @@ import { ref, computed, useAttrs } from 'vue'
 import { pickBy } from 'lodash-es'
 import { treeAnalyse, TreeKeyNode } from '@wxhccc/es-util'
 import { UeTree, UeTreeProps } from '@/ui-comps'
-import { attrsToProps, handleTreeKeys, useIgnoreWatch, useProxyInstanceMethods, vueTypeProp } from '@wxhccc/ue-shared'
+import { attrsToProps, handleTreeKeys, StrOrNum, useIgnoreWatch, useProxyInstanceMethods, vueTypeProp } from '@wxhccc/ue-shared'
 import { TreeFiledProps, TreeDataNode } from './types'
 
 const props = defineProps({

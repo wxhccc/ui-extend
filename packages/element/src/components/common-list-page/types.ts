@@ -4,6 +4,7 @@ import { UeButtonProps } from '@/ui-comps'
 import { PagedTableProps } from '@/components/paged-table'
 import { SearchFormProps } from '@/components/search-form'
 import { PagedData } from '@/utils/paged-utils'
+import { AnyFunction, AnyObject, PartailSome } from '@wxhccc/ue-shared'
 
 export type ButtonOnClick = (item: OperationItem, loadingSwitch: BoolSwitch) => void
 

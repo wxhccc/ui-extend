@@ -1,6 +1,6 @@
 {
   "name": "@wxhccc/ue-element",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.4",
   "description": "a library contains some componets base on element-plus",
   "type": "module",
   "repository": {
@@ -36,10 +36,10 @@
   },
   "homepage": "https://wxhccc.github.io/ui-extend/",
   "dependencies": {
-    "cropperjs": "^1.5.3"
+    "cropperjs": "^1.5.3",
+    "@wxhccc/ue-shared": "workspace:^"
   },
   "devDependencies": {
-    "@wxhccc/ue-shared": "workspace:^",
     "async-validator": "^4.2.5"
   },
   "peerDependencies": {

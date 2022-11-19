@@ -12,7 +12,7 @@ import {
   resolveComponent
 } from 'vue'
 import { cloneDeep } from 'lodash-es'
-import { resolveProps, vueTypeProp } from '@wxhccc/ue-shared'
+import { AnyObject, resolveProps, vueTypeProp, Option, Functional, StrOrNum } from '@wxhccc/ue-shared'
 import { ON_UI_UPDATE_MODEL_VALUE, UI_MODEL_CHECKED, UI_MODEL_VALUE, UI_PREFIX } from '@/ui-comps'
 
 const fieldChild: Record<string, string> = {

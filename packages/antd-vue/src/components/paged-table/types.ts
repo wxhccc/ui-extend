@@ -1,7 +1,7 @@
+import { AnyObject, StrOrNum } from '@wxhccc/ue-shared'
 import { PagedCommonProps } from '@/utils/paged-utils'
 import { TbColumnProps, UeTableProps } from '@/ui-comps'
 import { ActionBtnItem } from '../action-btns/type'
-
 export interface SortConfig {
   orderby?: string
   order?: string

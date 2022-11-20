@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { usePageData } from '@vuepress/client'
+import { usePageData, ClientOnly } from '@vuepress/client'
 import { computed } from 'vue'
 import { kebabCase } from 'lodash-es'
+import DemoBlock from './demo-block.vue'
 
 const props = withDefaults(defineProps<{
   name: string
@@ -25,17 +26,19 @@ export default { name: 'CompDemo' }
 </script>
 
 <template>
-  <demo-block :class="['component-demo-block', `${componentName}-demo`]">
-    <template v-if="demoCompName" #source>
-      <component :is="demoCompName"></component>
-    </template>
-    <template #default>
-      <slot name="description"></slot>
-    </template>
-    <template #highlight>
-      <slot></slot>
-    </template>
-  </demo-block>
+  <client-only>
+    <demo-block :class="['component-demo-block', `${componentName}-demo`]">
+      <template v-if="demoCompName" #source>
+          <component :is="demoCompName"></component>
+      </template>
+      <template #default>
+        <slot name="description"></slot>
+      </template>
+      <template #highlight>
+        <slot></slot>
+      </template>
+    </demo-block>
+  </client-only>
 </template>
 
 

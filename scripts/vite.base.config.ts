@@ -35,8 +35,7 @@ export default function () {
   return {
     plugins: [vue(), dts({
       rollupTypes: true,
-      copyDtsFiles: true,
-      skipDiagnostics: false
+      staticImport: true
     })],
     build: {
       rollupOptions: {

@@ -7,9 +7,9 @@ import docsearchPlugin from '@vuepress/plugin-docsearch'
 import containers from './utils/md-containers'
 import { navbar, sidebar } from './theme-config'
 
-const { p: port, d: dist = 'dist/antd-vue' } = minimist(process.argv.slice(2))
+const { p: port, d: dist } = minimist(process.argv.slice(2))
 
-const lib = (port === 8081 || dist === 'dist/antd-vue') ? 'antd-vue' : 'element'
+const lib = (port === 8081 || (!port && dist === 'dist/antd-vue')) ? 'antd-vue' : 'element'
 
 export default defineUserConfig({
   base: `/ui-extend/${lib}/`,

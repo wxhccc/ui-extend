@@ -145,53 +145,51 @@ onBeforeUnmount(removeScrollHandler)
 export default { name: 'DemoBlock' }
 </script>
 <template>
-  <client-only>
-    <div
-      ref="el"
-      class="demo-block"
-      :class="[blockClass, { 'hover': hovering }]"
-      @mouseenter="hovering = true"
-      @mouseleave="hovering = false">
-      <div class="source">
-        <slot name="source"></slot>
+  <div
+    ref="el"
+    class="demo-block"
+    :class="[blockClass, { 'hover': hovering }]"
+    @mouseenter="hovering = true"
+    @mouseleave="hovering = false">
+    <div class="source">
+      <slot name="source"></slot>
+    </div>
+    <div class="meta" ref="meta">
+      <div v-if="$slots.default" class="description">
+        <slot></slot>
       </div>
-      <div class="meta" ref="meta">
-        <div v-if="$slots.default" class="description">
-          <slot></slot>
-        </div>
-        <div class="highlight">
-          <slot name="highlight"></slot>
-        </div>
-      </div>
-      <div
-        class="demo-block-control"
-        ref="control"
-        :class="{ 'is-fixed': fixedControl }"
-        :style="fixedControl ? controlBarStyle : {}"
-        @click="isExpanded = !isExpanded">
-        <transition name="arrow-slide">
-          <el-icon :class="{ 'hovering': hovering }">
-            <caret-top v-if="isExpanded"></caret-top>
-            <caret-bottom v-else></caret-bottom>
-          </el-icon>
-        </transition>
-        <transition name="text-slide">
-          <span v-show="hovering">{{ controlText }}</span>
-        </transition>
-        <el-tooltip effect="dark" :content="langConfig['tooltip-text']" placement="right">
-          <transition name="text-slide">
-            <el-button
-              v-show="hovering || isExpanded"
-              link
-              class="control-button"
-              @click.stop="goCodepen">
-              {{ langConfig['button-text'] }}
-            </el-button>
-          </transition>
-        </el-tooltip>
+      <div class="highlight">
+        <slot name="highlight"></slot>
       </div>
     </div>
-  </client-only>
+    <div
+      class="demo-block-control"
+      ref="control"
+      :class="{ 'is-fixed': fixedControl }"
+      :style="fixedControl ? controlBarStyle : {}"
+      @click="isExpanded = !isExpanded">
+      <transition name="arrow-slide">
+        <el-icon :class="{ 'hovering': hovering }">
+          <caret-top v-if="isExpanded"></caret-top>
+          <caret-bottom v-else></caret-bottom>
+        </el-icon>
+      </transition>
+      <transition name="text-slide">
+        <span v-show="hovering">{{ controlText }}</span>
+      </transition>
+      <el-tooltip effect="dark" :content="langConfig['tooltip-text']" placement="right">
+        <transition name="text-slide">
+          <el-button
+            v-show="hovering || isExpanded"
+            link
+            class="control-button"
+            @click.stop="goCodepen">
+            {{ langConfig['button-text'] }}
+          </el-button>
+        </transition>
+      </el-tooltip>
+    </div>
+  </div>
 </template>
 
 <style lang="scss">

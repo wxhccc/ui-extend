@@ -37,6 +37,7 @@
   "homepage": "https://wxhccc.github.io/ui-extend/",
   "dependencies": {
     "cropperjs": "^1.5.3",
+    "copy-to-clipboard": "^3.3.2",
     "@wxhccc/ue-shared": "workspace:^"
   },
   "devDependencies": {

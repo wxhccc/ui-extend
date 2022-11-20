@@ -4,10 +4,11 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    } 
+    }
   },
   "include": [
     "src/**/*",
     "vite-dev/**/*"
-  ]
+  ],
+  "exclude": ["ant-design-vue/**/*"]
 }

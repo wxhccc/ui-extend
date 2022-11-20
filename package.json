@@ -36,9 +36,6 @@
     "url": "https://github.com/wxhccc/ui-extend/issues"
   },
   "homepage": "https://wxhccc.github.io/ui-extend/",
-  "dependencies": {
-    "copy-to-clipboard": "^3.3.2"
-  },
   "devDependencies": {
     "@ant-design/icons-vue": "^6.1.0",
     "@element-plus/icons-vue": "^2.0.10",
@@ -70,7 +67,7 @@
     "video.js": "^7.20.3",
     "viewerjs": "^1.10.5",
     "vite": "^3.1.6",
-    "vite-plugin-dts": "^1.6.5",
+    "vite-plugin-dts": "^1.7.1",
     "vue": "^3.2.40",
     "vue-tsc": "^1.0.9"
   }

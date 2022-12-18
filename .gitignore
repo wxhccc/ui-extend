@@ -13,3 +13,4 @@ docs/.vuepress/dist
 *.map
 .temp
 .cache
+.yarn

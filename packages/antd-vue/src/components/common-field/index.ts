@@ -13,7 +13,7 @@ import {
 } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import { AnyObject, resolveProps, vueTypeProp, Option, Functional, StrOrNum } from '@wxhccc/ue-shared'
-import { ON_UI_UPDATE_MODEL_VALUE, UI_MODEL_CHECKED, UI_MODEL_VALUE } from '@/ui-comps'
+import { ON_UI_UPDATE_MODEL_CHECKED, ON_UI_UPDATE_MODEL_VALUE, UI_MODEL_CHECKED, UI_MODEL_VALUE } from '@/ui-comps'
 
 export interface CommonFieldProps<
   V = any,
@@ -114,7 +114,7 @@ export default defineComponent({
       const onUpdateModelValue = isModelValue.value
         ? 'onUpdate:modelValue'
         : isModelCheck.value
-        ? ON_UI_UPDATE_MODEL_VALUE
+        ? ON_UI_UPDATE_MODEL_CHECKED
         : ON_UI_UPDATE_MODEL_VALUE
       const optionsData = !ChildField.value && props.data ? { options: props.data } : {}
 

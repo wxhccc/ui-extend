@@ -9,6 +9,5 @@
   "include": [
     "src/**/*",
     "vite-dev/**/*"
-  ],
-  "exclude": ["ant-design-vue/**/*"]
+  ]
 }

@@ -36,9 +36,9 @@
   },
   "homepage": "https://wxhccc.github.io/ui-extend/",
   "dependencies": {
-    "cropperjs": "^1.5.3",
+    "@wxhccc/ue-shared": "workspace:^",
     "copy-to-clipboard": "^3.3.2",
-    "@wxhccc/ue-shared": "workspace:^"
+    "cropperjs": "^1.5.3"
   },
   "devDependencies": {
     "async-validator": "^4.2.5"
@@ -49,5 +49,7 @@
     "video.js": "^7.0.0",
     "vue": "^3.2.40"
   },
-  "files": ["dist"]
+  "files": [
+    "dist"
+  ]
 }

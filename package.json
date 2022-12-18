@@ -3,18 +3,18 @@
   "version": "1.0.0-alpha.2",
   "description": "a library contains some componets base on ohter ui library.",
   "type": "module",
+  "private": true,
   "workspaces": [
     "packages/*",
     "docs"
   ],
   "scripts": {
     "start": "yarn build && yarn docs:dev",
-    "dev:shared": "pnpm -C packages/shared run dev",
-    "build:shared": "pnpm -C packages/shared run build",
-    "dev:element": "pnpm -C packages/element run dev",
-    "build:element": "pnpm -C packages/element run build",
-    "dev:antd-vue": "pnpm -C packages/antd-vue run dev",
-    "build:antd-vue": "pnpm -C packages/antd-vue run build",
+    "build:shared": "yarn workspace @wxhccc/ue-shared run build",
+    "dev:element": "yarn workspace @wxhccc/ue-element run dev",
+    "build:element": "yarn workspace @wxhccc/ue-element run build",
+    "dev:antd-vue": "yarn workspace @wxhccc/ue-antd-vue run dev",
+    "build:antd-vue": "yarn workspace @wxhccc/ue-antd-vue run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "version-release": "sh ver-docs-deploy.sh"
   },
@@ -70,5 +70,8 @@
     "vite-plugin-dts": "^1.7.1",
     "vue": "^3.2.40",
     "vue-tsc": "^1.0.9"
+  },
+  "dependencies": {
+    "@babel/types": "^7.20.2"
   }
 }

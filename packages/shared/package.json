@@ -19,7 +19,9 @@
     "utils",
     "shared"
   ],
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "author": "wxhccc",
   "license": "MIT",
   "bugs": {

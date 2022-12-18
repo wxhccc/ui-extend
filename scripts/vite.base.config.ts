@@ -33,10 +33,12 @@ const globals = {
 
 export default function () {
   return {
-    plugins: [vue(), dts({
-      rollupTypes: true,
-      staticImport: true
-    })],
+    plugins: [
+      vue(),
+      dts({
+        rollupTypes: true
+      })
+    ],
     build: {
       rollupOptions: {
         external,
@@ -48,4 +50,3 @@ export default function () {
     }
   } as UserConfig
 }
-

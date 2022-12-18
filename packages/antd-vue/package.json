@@ -1,6 +1,6 @@
 {
   "name": "@wxhccc/ue-antd-vue",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.9",
   "description": "a library contains some componets base on ohter ui library.",
   "type": "module",
   "scripts": {
@@ -32,9 +32,9 @@
   },
   "homepage": "https://wxhccc.github.io/ui-extend/",
   "dependencies": {
-    "cropperjs": "^1.5.3",
+    "@wxhccc/ue-shared": "workspace:^",
     "copy-to-clipboard": "^3.3.2",
-    "@wxhccc/ue-shared": "workspace:^"
+    "cropperjs": "^1.5.3"
   },
   "peerDependencies": {
     "@ant-design/icons-vue": "^6.1.0",

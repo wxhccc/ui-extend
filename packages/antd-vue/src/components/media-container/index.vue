@@ -112,7 +112,7 @@ export default { name: 'UeMediaContainer' }
 <template>
   <div
     ref="el"
-    :class="['media-container-wrapper', { 'tranparent-bg': props.showBackgroud, 'no-media': !mediaAccess }]"
+    :class="['ue-media-container-wrapper', { 'tranparent-bg': props.showBackgroud, 'no-media': !mediaAccess }]"
   >
     <template v-if="!isMediaError">
       <div
@@ -145,14 +145,13 @@ export default { name: 'UeMediaContainer' }
 </template>
 
 <style lang="scss">
-.media-container-wrapper {
+.ue-media-container-wrapper {
   display: flex;
   width: 100%;
   height: 100%;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  pointer-events: none;
   &.tranparent-bg {
     background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC');
   }

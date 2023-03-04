@@ -2,7 +2,7 @@ set -e
 
 rm -rf .vuepress/dist
 
-pnpm run build
+yarn run build
 
 cd .vuepress
 

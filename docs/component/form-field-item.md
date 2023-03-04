@@ -40,6 +40,14 @@
 @[code](@demo/form-field-item/$LIB_DIR/all-slots.vue)
 :::
 
+### Label说明
+
+通过labelTip属性可以给label文字添加额外的说明功能
+
+:::demo label-tip
+@[code](@demo/form-field-item/$LIB_DIR/label-tip.vue)
+:::
+
 ### 调用FormItem组件上的方法
 
 组件代理了根层级的`FormItem`组件上的方法，对于子层级的`FormItem`组件，请使用`$refs`获取后调用

@@ -9,7 +9,7 @@
 ### item
 
 ::: warning 提示
-**item**对象可以默认使用`FormFieldItem`组件渲染。对象内`FormFieldItem`组件支持的prop属性会自动绑定到组件上。
+**item**对象可以默认使用`FormFieldItem`组件渲染。对象内`FormFieldItem`组件支持的props属性会自动绑定到组件上。
 也可以通过`component`字段使用自定义表单项组件，使用自定义表单项组件时，只有部分字段会被传递给组件。
 :::
 
@@ -21,19 +21,19 @@
 | prop           | string/number                                | 表单项绑定值在`value`中对应的键名。使用`children`字段时可缺省，`children`数组对象中的`prop`属性会作为键名，具体见`FormFieldItem`组件。           | --     | --        |
 | key            | string/number                                | 表单项组件的`key`，缺省时使用`prop`属性。如果`prop`缺省时会使用数组索引，为了性能`prop`缺省时请设置`key`                                         | --     | --        |
 | dependencies   | string/number                                | 当前表单项需要监听的表单项的`prop`属性。                                                                                                         | --     | --        |
-| cascadeData    | object                                       | 指定结构的级联数据。具体结构说明见[级联数据结构](/wiki/data/#数据级联)                                                                                               | --     | --        |
+| cascadeData    | object                                       | 指定结构的级联数据。具体结构说明见[级联数据结构](/wiki/data/#数据级联)                                                                           | --     | --        |
 | cascadeHandler | Function(changeValue, prop, modelData, item) | 自定义级联处理逻辑。参数分别为被监听项改变后的值，当前表单项的prop，匹配到的级联数据数组，当前表单项原始数据对象。**函数会绑定组件上下文允许**。 | --     | --        |
 | spliceStart    | number                                       | `field.data`字段在更新时，开始替换的索引值                                                                                                       | --     | 0         |
 | clearValue     | object                                       | 被监听项发生变化时，监听项绑定值会被重置的值。                                                                                                   | --     | undefined |
 | --             | --                                           | 使用`FormFieldItem`组件渲染支持组件所有props参数，具体见文档。                                                                                   | --     | --        |
 | --             | --                                           | 使用自定义组件时支持的参数。                                                                                                                     | --     | --        |
 | component      | string(ComponentName)<br/>/Component         | 自定义组件对象或组件名字符串。                                                                                                                   | --     | --        |
-| fieldEvents      | object         | 自定义组件内表单域绑定的事件监听对象，会合并上级联的`change`的事件(如果有)后绑定到自定义组件上。                                                                                                                   | --     | --        |
+| slotName       | string                                       | 自定义插槽名称串。                                                                                                                               | --     | --        |
 
 ### Methods
 
-| 方法名          | 说明                                 | 参数                       |
-| :-------------- | :----------------------------------- | :------------------------- |
+| 方法名         | 说明                               | 参数                                   |
+| :------------- | :--------------------------------- | :------------------------------------- |
 | callItemMethod | 调用表单项实例上的方法，可传递参数 | (prop:String,fnName:String, ...args[]) |
 
 ::: tip 提示
@@ -42,7 +42,7 @@
 
 ### Slots
 
-| name | 说明                               | 作用域数据 |
-| :--- | :--------------------------------- | :--------- |
-| -- | 放置于表单项组后面的内容 | --         |
+| name | 说明                     | 作用域数据 |
+| :--- | :----------------------- | :--------- |
+| --   | 放置于表单项组后面的内容 | --         |
 

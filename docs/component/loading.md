@@ -32,6 +32,16 @@
 
 ### Attributes
 
+<libs-content>
+  <template #antd-vue>
+
+| 参数       | 类型    | 说明                               | 可选值 | 默认值 |
+| :--------- | :------ | :--------------------------------- | :----- | :----- |
+| body       | boolean | 是否将遮层添加到body               | --     | false  |
+
+  </template>
+  <template #element>
+
 | 参数       | 类型    | 说明                               | 可选值 | 默认值 |
 | :--------- | :------ | :--------------------------------- | :----- | :----- |
 | body       | boolean | 是否将遮层添加到body               | --     | false  |
@@ -39,4 +49,9 @@
 | text       | string  | 显示在加载图标下方的加载文案       | --     | --     |
 | spinner    | string  | 自定义加载图标类名                 | --     | --     |
 | background | string  | 遮层背景色                         | --     | --     |
+
+  </template>
+</libs-content>
+
+
 

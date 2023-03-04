@@ -8,7 +8,7 @@
     "dev:element": "vuepress dev -p 8082",
     "build:antd-vue": "vuepress build",
     "build:element": "vuepress build -d .vuepress/dist/element",
-    "build": "pnpm build:antd-vue && pnpm build:element",
+    "build": "yarn build:antd-vue && yarn build:element",
     "docs:publish": "sh deploy.sh"
   },
   "repository": {
@@ -30,16 +30,16 @@
   "homepage": "https://wxhccc.github.io/ui-extend/",
   "devDependencies": {
     "@types/markdown-it": "^12.2.3",
-    "@vuepress/client": "2.0.0-beta.53",
-    "@vuepress/plugin-container": "2.0.0-beta.53",
-    "@vuepress/plugin-docsearch": "2.0.0-beta.53",
-    "@vuepress/plugin-register-components": "2.0.0-beta.53",
+    "@vuepress/client": "2.0.0-beta.61",
+    "@vuepress/plugin-container": "2.0.0-beta.61",
+    "@vuepress/plugin-docsearch": "2.0.0-beta.61",
+    "@vuepress/plugin-register-components": "2.0.0-beta.61",
     "@wxhccc/ue-antd-vue": "workspace:^",
     "@wxhccc/ue-element": "workspace:^",
     "markdown-it": "^13.0.1",
     "markdown-it-container": "^3.0.0",
     "markdown-it-include": "^2.0.0",
-    "vuepress": "2.0.0-beta.53",
+    "vuepress": "2.0.0-beta.61",
     "vuepress-plugin-clean-urls": "^1.1.2"
   }
 }

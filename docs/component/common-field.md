@@ -6,7 +6,14 @@
 
 ### 基础用法
 
+<libs-content>
+  <template #element>
+
 组件对`ElRadioGroup`, `ElCheckboxGroup`组件内的子组件的参数进行了修正，使其**value**，**label**的表现与`Select`一致。
+
+  </template>
+</libs-content>
+
 
 ::: demo base
 @[code](@demo/common-field/$LIB_DIR/base.vue)

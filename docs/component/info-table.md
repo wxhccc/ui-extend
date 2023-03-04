@@ -30,6 +30,28 @@
 @[code](@demo/data-table/empty-cell.vue)
 :::
 
+### 作用域插槽
+
+单元格设置`slotName`就可以通过指导名称的插槽自定义内容，插槽会传入数据data。
+
+:::demo scope-slots no-limit-lib
+@[code](@demo/info-table/scope-slots.vue)
+:::
+
+### 单元格属性设置
+
+可以设置单元格为响应式属性
+
+:::demo table-props no-limit-lib
+@[code](@demo/info-table/table-props.vue)
+:::
+
+### 自带特定模式单元格
+
+:::demo cell-config
+@[code](@demo/info-table/$LIB_DIR/cell-config.vue)
+:::
+
 ### 编辑模式
 
 信息表格可以开启编辑模式，因为编辑组件使用了[FormFieldItem组件](./form-field-item)，故编辑模式的表格必须放置于`Form`组件中。

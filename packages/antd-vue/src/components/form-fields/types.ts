@@ -5,9 +5,9 @@ import { FormFieldItemOption } from '@/components/form-field-item/types'
 interface FieldsBaseOption {
   /** 当前表单项是否隐藏 */
   hide?: Functional<boolean>
-  /** 当前表单项的key，用于性能优化，有唯一prop时可省略 */
+  /** 当前表单项的key，用于性能优化，有唯一name时可省略 */
   key?: string | number
-  /** 当前表单项级联管理的其他项的prop属性 */
+  /** 当前表单项级联管理的其他项的name属性 */
   dependencies?: string
   /** 自定义级联处理逻辑，参数依此为，当前表单项表单域绑定值，当前表单项name，计算的级联数据（如果存在），当前表单项配置对象，所有表单项组件的引用映射对象 */
   cascadeHandler?: <I>(value: any, name?: NamePath, modelData?: AnyObject[], item?: I, itemRefs?: Record<string, any>) => void
@@ -23,6 +23,7 @@ export interface CustomFieldsOption
     FieldsBaseOption {
   /** 组件对象或已注册组件的名称字符串 */
   component?: string | DefineComponent
+  /** 自定义插槽名称 */
   slotName?: string
 }
 

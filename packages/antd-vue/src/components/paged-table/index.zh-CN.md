@@ -1,22 +1,30 @@
 ### Attributes
 
-| 参数              | 类型   | 说明                                                                                     | 可选值   | 默认值  |
-| :---------------- | :----- | :--------------------------------------------------------------------------------------- | :------- | :------ |
-| data-table-props  | object | `DataTable`组件绑定参数。可选传参方式                                                    | --       | --      |
-| data-table-events | object | `DataTable`组件绑定事件对象                                                              | --       | --      |
-| init-sort         | object | 远程排序数据的初始值。格式为`{orderby: 'id',order: 'desc'}`                              | --       | --      |
-| └ orderby         | string | 排序字段                                                                                 | --       | --      |
-| └ order           | string | 排序规则                                                                                 | desc/asc | --      |
-| sort-prop-keys    | object | params数据中排序参数的键名，仅控制params对象中的键名，设置初始值时仍为`orderby`和`order` | --       | --      |
-| └ orderby         | string | params中排序字段键名                                                                     | --       | orderby |
-| └ order           | string | params中排序规则键名                                                                     | --       | order   |
+组件支持PagedList组件的绝大部分属性，以下仅列举额外熟悉
+
+| 参数                   | 类型               | 说明                                                                                                                  | 可选值 | 默认值 |
+| :--------------------- | :----------------- | :-------------------------------------------------------------------------------------------------------------------- | :----- | :----- |
+| row-key                | string             | `Table`组件的rowKey属性                                                                                               | --     | --     |
+| columns                | object[]           | `Table`组件的columns对象扩展对象数组，支持最小宽度和最大宽度设置，具体参数见[PagedTbColumnProps](#PagedTbColumnProps) | --     | --     |
+| v-model:selectionValue | (string\|number)[] | 远程排序数据的初始值。格式为`{orderby: 'id',order: 'desc'}`                                                           | --     | --     |
+
 
 ### Events
 
-组件透传绑定事件给`PagedList`组件和`DataTable`组件，可直接在组件上监听对应组件事件。
+组件继承了`PagedList`组件和`Table`组件的大部分事件，可直接在组件上监听对应组件事件。
 
 ### Methods
 
-组件代理了`PagedList`组件和`DataTable`组件(包括`Table`组件)提供的所有方法，可以直接在组件实例上调用。
+组件代理了`PagedList`组件和`Table`组件提供的所有方法，可以直接在组件实例上调用。
+
+### PagedTbColumnProps
+
+| 参数     | 类型     | 说明                                   | 可选值 | 默认值 |
+| :------- | :------- | :------------------------------------- | :----- | :----- |
+| id       | string   | 列的唯一key                            | --     | --     |
+| minWidth | number   | 最小宽度                               | --     | --     |
+| maxWidth | number   | 最大宽度                               | --     | --     |
+| actions  | object[] | 操作按钮对象数组，传递给ActionBtns组件 | --     | --     |
+
 
 

@@ -39,6 +39,7 @@ export const sidebar = (lib: 'antd-vue' | 'element'): SidebarConfig => ({
             { text: 'Ticker 倒计时器', link: 'ticker' },
             { text: 'Loading 加载组件', link: 'loading' },
             { text: 'CopyClipboard 复制板', link: 'copy-clipboard' },
+            { text: 'MediaContainer 多媒体容器', link: 'media-container' },
           ]
         },
         {
@@ -58,6 +59,7 @@ export const sidebar = (lib: 'antd-vue' | 'element'): SidebarConfig => ({
           children: [
             ...(lib === 'element' ? [{ text: 'DataTable 数据表格', link: 'data-table' }] : []),
             { text: 'InfoTable 信息表格', link: 'info-table' },
+            { text: 'TreeTransfer 树型穿梭框', link: 'tree-transfer' },
             { text: 'PagedList 分页列表', link: 'paged-list' },
             { text: 'PagedTable 分页表格', link: 'paged-table' }
           ]

@@ -67,7 +67,7 @@
     "video.js": "^7.20.3",
     "viewerjs": "^1.10.5",
     "vite": "^3.1.6",
-    "vite-plugin-dts": "^1.7.1",
+    "vite-plugin-dts": "^2.0.2",
     "vue": "^3.2.40",
     "vue-tsc": "^1.0.9"
   },

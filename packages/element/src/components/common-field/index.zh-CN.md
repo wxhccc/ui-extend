@@ -12,7 +12,7 @@
 | └ ...              | ...                      | 其余属性会作为props绑定到子组件上                                                                                        | --                                                    | --     |
 | isNumber           | boolean                  | 是否将绑定值转换为数字（如果可以）                                                                                       | --                                                    | --     |
 | initValue          | any                      | 组件绑定值初始值                                                                                                         | --                                                    | --     |
-| forbidValueFixed   | boolean                  | 是否禁用对(`ElCheckboxGroup`/`ElRadioGroup`)子组件的value修正。                                                          | --                                                    | --     |
+| needTrim           | boolean                  | 是否需要去掉字符串类型的绑定值前后的空格，仅在离开焦点时过滤，以保留字符串中间的空格。                                   | --                                                    | --     |
 | childComponent     | string \| Component      | 表单域组件子组件，用于生成`data`数据列表。<br/>如果`component`使用了(`ElCheckboxGroup`/`ElRadioGroup`), 此参数可以缺省。 | --                                                    | --     |
 | dataItemRenader    | Component \| () => VNode | 表单域组件子组件默认插槽内容，可以使用组件或VNode渲染函数。                                                              | --                                                    | --     |
 | slots              | object                   | 表单域组件的插槽配置对象。对象key为插槽名称，值为配置对象，例如`{ header: Slot }`                                        | --                                                    | --     |

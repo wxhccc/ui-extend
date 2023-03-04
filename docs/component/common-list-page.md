@@ -8,16 +8,6 @@
 @[code](@demo/common-list-page/$LIB_DIR/base.vue)
 :::
 
-### 多tabs搜索表单
-
-::: warning 提醒
-各Tab表单之间数据相互独立，表单项组件是否独立取决于`items`对象数组元素是否是同一对象。对于无数据表单组件(例如Input)复用同一个表单项配置对象无太大影响，但对于Select这类的组件，如果需要Options保持独立，那么配置对象就不能使用同一个引用。
-:::
-
-::: demo mult-tabs 设置`searchForms`为包含多个表单配置对象的数组即可生成tab。可以通过设置`tabFormKey`来将tab的值合并到请求参数对象中。
-@[code](@demo/common-list-page/$LIB_DIR/mult-tabs.vue)
-:::
-
 ### 带操作行的表格
 
 操作行可以使用表单项组件来做简单的查询，复杂表单还是建议使用`searchForms`。

@@ -18,7 +18,7 @@ export default defineComponent({
     const cropper = ref()
     const isReady = ref(false)
     const message = ref('')
-    const src = ref('https://oss.sw.wxhice.com/adm/459d9f227ccbbbbaac4a429971f78461.jpg')
+    const src = ref('https://oss.sw.wxhice.com/adm/73d924459e72b343d636d3ba170b61d2.jpg')
 
     const getImageData = () => {
       message.value = cropper.value.callCropperMethod('getImageData')

@@ -17,7 +17,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   data () {
     return {
-      src: 'https://oss.sw.wxhice.com/adm/459d9f227ccbbbbaac4a429971f78461.jpg',
+      src: 'https://oss.sw.wxhice.com/adm/73d924459e72b343d636d3ba170b61d2.jpg',
       options: {
         preview: '.preview-pane'
       }

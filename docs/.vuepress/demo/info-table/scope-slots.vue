@@ -18,9 +18,9 @@ export default defineComponent({
   setup() {
 
     const cells = ref([
-      { prop: 'date', label: '日期' },
-      { prop: 'name', label: '姓名', slotName: 'name' },
-      { prop: 'address', label: '地址' }
+      { prop: 'date', label: '日期', props: { span: 12 }  },
+      { prop: 'name', label: '姓名', slotName: 'name', props: { span: 12 } },
+      { prop: 'address', label: '地址', props: { span: 24 } }
     ])
 
     const data = ref({

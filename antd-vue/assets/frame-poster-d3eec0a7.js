@@ -1,0 +1,1 @@
+import{_ as o,c as r,M as a,p as t,q as n,N as c}from"./framework-d784189f.js";const p=r({data(){return{isReady:!1,src:"https://oss.sw.wxhice.com/adm/oceans.mp4"}}});function _(e,l,d,m,f,i){const s=a("ue-video-player");return t(),n("div",null,[c(s,{src:e.src},null,8,["src"])])}const v=o(p,[["render",_],["__file","frame-poster.vue"]]);export{v as default};
